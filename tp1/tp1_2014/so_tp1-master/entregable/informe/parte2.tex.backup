@@ -1,0 +1,151 @@
+
+\subsection{Ejercicios}
+\begin{itemize}
+ \item 
+\textbf{Ejercicio 3}  Completar la implementacion del scheduler Round-Robin implementando los
+metodos de la clase SchedRR en los archivos sched rr.cpp y sched rr.h. La implementacion
+recibe como primer parametro la cantidad de nucleos y a continuacion los valores de sus
+respectivos quantums. Debe utilizar una unica cola global, permitiendo ası la migracion de
+procesos entre nucleos.
+\item \textbf{Ejercicio 4} Diseñar uno o mas lotes de tareas para ejecutar con el algoritmo del ejercicio
+anterior. Graficar las simulaciones y comentarlas, justificando brevemente por que el comportamiento 
+observado es efectivamente el esperable de un algoritmo Round-Robin.
+\item \textbf{Ejercicio 5} A partir del artıculo
+Waldspurger, C.A. and Weihl, W.E., Lottery scheduling: Flexible proportional-share re-
+source management. Proceedings of the 1st USENIX conference on Operating Systems
+Design and Implementation – 1994.
+diseñar e implementar un scheduler basado en el esquema de loterıa. El constructor de la
+clase SchedLottery debe recibir dos parametros: el quantum y la semilla de la secuencia
+pseudoaleatoria (en ese orden). Interesa implementar al menos la idea basica del algoritmo
+y la optimizacion de tickets compensatorios (compensation tickets). Otras optimizaciones y
+refinamientos que propone el artıculo seran opcionales siempre que, en cada caso, se explique
+brevemente por que la optimizacion no se considero relevante a los efectos de este trabajo.
+
+\end{itemize}
+
+
+\subsection{Resultados y Conclusiones}
+
+\subsubsection[Resolución Ejercicio 3]{Ejercicio 3}
+
+\indent \indent Para completar la implementación del scheduler Round-Robin y que su comportamiento sea correcto, hicimos uso de diversas estructuras de datos cuya composición y uso describimos a continuación.\\
+\begin{itemize}
+\item Una cola global FIFO nombrada $q$, que contiene los pid de las tareas activas no bloqueadas y cuyo tope representa a la próxima tarea a correr. 
+Utilizando una cola FIFO podemos obtener el comportamiento deseado, ya  que al desalojarse una tarea por consumir su quantum esta misma será agregada nuevamente a la cola, quedando al final de ésta y generando el ciclo que buscamos.
+Al ser además la única cola para todos los cores, no se restringe a una tarea a ser ejecutada por un único núcleo, permitiendo así la migración entre nucleos.\\
+\item El vector $cores$ contiene en su elemento $i$ y el pid correspondiente a la tarea que está corriendo en el core $i+1$. Inicializamos todos sus elementos en $-1$ (que se corresponde con la Idle Task) para reconocer que no se han cargado tareas en los núcleos de procesamiento.\\
+\item De la misma manera, el vector $quantum$ contiene en la posición $i$ el quantum definido para el núcleo y el vector $quantumActual$, contiene la cantidad de ticks que le quedan desde que se cargó la tarea en el core. 
+En conjunto, ambas estructuras nos permiten determinar cuándo se consumió el quantum de una tarea, de manera tal que podamos desalojarla.\\
+\end{itemize}
+\indent Ademas, tomamos ciertas decisiones en esta implementación las cuales detallamos a continuacion:
+\begin{itemize}
+ \item Si una tarea se encuentra bloqueada cuando se produce el tick del reloj, esta misma es desalojada de la cola global, 
+ y agregada en un lista de $bloqueados$. A su vez, sera reseteado el quantum, se le dara inicio a la proxima tarea que se encuentre
+ ready y cuando el sistema operativo, nos envie una señal de unblock, la tarea desalojada regresara al final de la cola global.
+\end{itemize}
+
+
+\subsubsection[Resolución Ejercicio 4]{Ejercicio 4}
+
+\indent El algoritmo de scheduling Round-Robin se basa en asignar a las tareas un tiempo determinado de procesamiento en porciones equitativas  con un orden ciclico, llamado
+$quantum$. 
+Esto se hace definiendo para cada núcleo de procesamiento un valor de $quantum$ y cada tarea que corre en ese núcleo lo hará a lo sumo por un tiempo igual a éste. 
+Si la tarea consume su quantum pero no terminó su ejecución, se la envia a la cola global y se asigna el procesador a la siguiente tarea, en 
+caso de que hubiese, que correrá a lo sumo por la cantidad de $quantum$ indicada. 
+Una vez que todas las tareas corrieron, se vuelve a asignar tiempo de procesamiento a la primera tarea, 
+de ahí el comportamiento ciclico circular del algoritmo.\\
+\indent A su vez, puede ocurrir que una tarea no consuma todo su $quantum$. Ya sea porque 
+la tarea terminó su ejecución o bien se bloqueó haciendo uso de entrada/salida.\\
+\indent En caso de haber terminado, el algoritmo se pone a correr la tarea siguiente de acuerdo al orden circular que se 
+establecio y la tarea que terminó se desalojara por completo y no sera nuevamente considerada.\\
+\indent En caso que se haya bloqueado, esta mimsa dejará de ser considerada hasta que se desbloquee. Mientras tanto,
+seguiran corriendo las demas tareas que no esten bloqueadas respetando el orden ciclico.
+Cuando esta tarea se desbloquee puede no respetar el orden que se habia establecido. Por ej. en nuestra implementacion
+si la tarea esta bloqueada al recibir un tick, esta misma se la quita de la ejecucion y una ves desbloqueada pasara al final de
+la cola global.\\
+
+\indent Para poder verificar si el comportamiento era el deseado de nuestra implementacion del algoritmo en cuestion, 
+desarrollamos 3 disversos lotes de tareas ($taskCPU$ y $taskConsola$), los cuales fueron chequeados con 1,2 y 3 cores.\\
+Trabajando con los mismos $quantum$ cada core.
+\indent
+
+Nuestro primer lote de tareas fue el siguiente:
+\begin{verbatim}
+                                     TaskCPU 70
+                                     TaskConsola 2 4 5
+                                     TaskCPU 40
+                                     TaskConsola 3 2 3
+                                     TaskCPU 30
+\end{verbatim}
+
+Utilizando este lote, obtuvimos los siguientes graficos de simulación:\\
+\begin{center}
+
+    
+	\includegraphics[width=450pt]{./EJ4_RR/ejercicio4-1nucleo.png}
+	{$Lote 1$ - Scheduler RR - 1 core}	
+ 
+\end{center}
+
+
+\indent Con esta simulacion, trabajamos con 2 ticks de cambio de contexto y 5 de cambio de procesador, el cual no presta importancia
+en la simulacion trabajando con un core.\\
+\\
+\indent Se puede observar el cambio de tareas ciclico tanto porque terminaron su quantum o porque se bloquearon.\\
+
+\begin{center}
+  	\includegraphics[width=450pt]{./EJ4_RR/ejercicio4-2nucleo.png}
+	  {$Lote 1$ - Scheduler RR - 2 core}	
+\end{center}
+
+\begin{center}
+  	\includegraphics[width=450pt]{./EJ4_RR/ejercicio4-3nucleo.png}
+	  {$Lote 1$ - Scheduler RR - 3 core}	
+\end{center}
+
+\indent Se ha podido notar, ademas del la ejecucion circular de las tareas, un cierto paralelismo al estar trabajando con
+2 o 3 cores.\\
+
+\indent Luego, de esta simulacion probamos con un lote con tareas que se bloqueen por mas tiempo:
+ \begin{verbatim}
+                                     TaskCPU 70
+                                     TaskConsola 5 6 7
+                                     TaskCPU 40
+                                     TaskConsola 10 9 8
+                                     TaskCPU 30
+ \end{verbatim}
+
+\indent Manteniendo la misma cantidad de tick para cambio de contexto y core. Y manteniendo los mismos valores
+de $quantum$ obtuvimos los siguientes graficos:
+
+\begin{center}
+    	\includegraphics[width=450pt]{./EJ4_RR/ejercicio4-2lote1nucleo.png}
+	{$Lote 2$ - Scheduler RR - 1 core}	
+ \end{center}
+
+ \begin{center}
+    	\includegraphics[width=450pt]{./EJ4_RR/ejercicio4-2lote2nucleo.png}
+	{$Lote 2$ - Scheduler RR - 2 core}	
+ \end{center}
+ 
+ \begin{center}
+    	\includegraphics[width=450pt]{./EJ4_RR/ejercicio4-2lote3nucleo.png}
+	{$Lote 2$ - Scheduler RR - 3 core}	
+ \end{center}
+
+ \indent Con este lote, ademas de lo observador anteriormente pudimos ver que, al tener una tarea bloqueada
+ por un largo tiempo, el scheduler directamente la ignora.\\
+ 
+\indent Luego de los gráficos pudimos observar lo siguiente sobre el comportamiento  del Round-Robin:\\
+\begin{itemize}
+\item 1 - Carácter circular del algoritmo.
+\item 2 - Desalojo de las tareas cuando se bloquean o terminan y la inmediata asignación del núcleo a la siguiente tarea en caso de existir alguna.
+\item 3 - Una tarea bloqueada es ignorada por el scheduler hasta que se desbloquee.
+\item 4 - Libre de inanición.
+\end{itemize}
+
+\indent Finalmente, dado su carácter circular y equitativo, podemos afirmar que todas las tareas que 
+estén en condiciones de correr serán ejecutadas y ninguna será negada de tiempo de procesamiento.\\
+
+\subsubsection[Resolución Ejercicio 5]{Ejercicio 5}
+

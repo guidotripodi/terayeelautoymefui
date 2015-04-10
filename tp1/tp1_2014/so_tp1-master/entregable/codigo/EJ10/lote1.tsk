@@ -1,0 +1,10 @@
+$5:
+TaskCPU 40
+$25:
+TaskConsola 4 5 8
+$25:
+TaskCPU 100
+$25:
+TaskConsola 3 2 9
+$35:
+TaskConsola 5 1 7

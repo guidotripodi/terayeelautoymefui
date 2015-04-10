@@ -1,0 +1,57 @@
+
+\subsubsection{Introduccion}
+
+\subsubsection{Ejercicios}
+\begin{itemize}
+ 
+\item \textbf{Ejercicio 6}  Programar un tipo de tarea TaskBatch que reciba dos parametros: total cpu y
+cant bloqueos. Una tarea de este tipo debera realizar cant bloqueos llamadas bloqueantes, en
+momentos elegidos pseudoaleatoriamente. En cada tal ocasion, la tarea debera permanecer
+bloqueada durante exactamente un (1) ciclo de reloj. El tiempo de CPU total que utilice una
+tarea TaskBatch debera ser de total cpu ciclos de reloj (incluyendo el tiempo utilizado para
+lanzar las llamadas bloqueantes; no ası el tiempo en que la tarea permanezca bloqueada).
+
+\item \textbf{Ejercicio 7} Elegir al menos dos metricas diferentes, definirlas y explicar la semantica de
+su definicion. Diseñar un lote de tareas TaskBatch, todas ellas con igual uso de CPU, pero
+con diversas cantidades de bloqueos. Simular este lote utilizando el algoritmo SchedRR y una
+variedad apropiada de valores de quantum. Mantener fijo en un (1) ciclo de reloj el costo de
+cambio de contexto y dos (2) ciclos el de migracion. Deben variar la cantidad de nucleos de
+procesamiento. Para cada una de las metricas elegidas, concluir cual es el valor optimo de
+quantum a los efectos de dicha metrica.
+
+\item \textbf{Ejercicio 8} Implemente un scheduler Round-Robin que no permita la migracion de procesos
+entre nucleos (SchedRR2). La asignacion de CPU se debe realizar en el momento en que se produce la carga 
+de un proceso (load). El nucleo correspondiente a un nuevo proceso sera aquel
+con menor cantidad de procesos activos totales (RUNNING + BLOCKED + READY). Diseñe y realice un conjunto 
+de experimentos que permita evaluar comparativamente las dos implementaciones de Round-Robin.
+
+\item \textbf{Ejercicio 9} Diseñar y llevar a cabo un experimento que permita poner a prueba la ecuanimidad 
+(fairness) del algoritmo SchedLottery implementado. Tener en cuenta que, debido
+al factor pseudoaleatorio involucrado, cualquier corrida puntual podrıa ser arbitrariamente
+injusta; sin embargo, si se repite un mismo experimento n veces y se observan los resultados acumulativos, 
+tales anomalıas deberıan ir desapareciendo conforme n aumenta. En otras
+palabras, interesa mostrar en base a evidencia empırica que el algoritmo implementado efectivamente tiende 
+a ser totalmente ecuanime a medida que n tiende a infinito.
+
+\item \textbf{Ejercicio 10} Los autores del artıculo sobre lottery scheduling alegan que la optimizacion de
+compensation tickets es necesaria para compensar una posible falencia del algoritmo inicial-
+mente propuesto en ciertos escenarios. Diseñar y llevar a cabo un experimento apropiado para
+comprobar esta afirmacion (provocar un escenario donde se manifieste el problema, comparar
+simulaciones ejecutadas con y sin compensation tickets y discutir los resultados obtenidos).
+
+\end{itemize}
+\subsubsection{Resultados y Conclusiones}
+
+\subsection*{Ejercicio 8}
+\indent \indent La idea central de esta version de Round-Robin es que no permita migración entre núcleos y esto se basa en utilizar una cola FIFO por cada núcleo, donde se encolarán aquellas tareas a las que se asignó el core correspondiente. \\ 
+\indent Para implementar este algoritmo, el Round-Robin 2, utilizamos varias estructuras. Estas son:\\
+\begin{itemize}
+\item Los vectores $quantum$ y $quantumActual$, que cumplen la misma función que en nuestra implementación de Round-Robin.\\
+\item El vector de colas $colas$, donde en la posición $i$ se encontrará la cola de tareas correspondiente a ese núcleo de procesamiento.\\
+\item El diccionario $bloqueados$, donde mantenemos aquellas tareas que se bloquearon con su número de core correspondiente y que nos permitirá, cuando la tarea se desbloquee, reubicarla en la cola del core que le corresponde.\\ 
+\item El vector de enteros $cantidad$, cuya única función será tener en la posición $i$ la cantidad de tareas bloqueadas, activas o en estado ready que están asignadas al core $i$ y que nos servirá para determinar a qué núcleo se asignará una tarea al momento de cargarla.\\
+\end{itemize}
+
+\indent \indent Cuando se carga una tarea, se chequea cuál es el core que menor cantidad de procesos activos totales tiene asignados(haciendo uso de la posición respectiva del vector $cantidad$). Una vez que se obtiene dicho núcleo, se agrega la tarea a la cola de tareas correspondiente al core y se actualiza la cantidad de tareas activas para ese núcleo sumándole uno.\\
+\indent \indent Al bloquearse una tarea, se define una entrada en el diccionario $bloqueados$ con el pid y el núcleo correspondiente. De esta manera, al desbloquearse, obtenemos el core en el que debe correr, eliminamos la entrada del diccionario y encolamos nuevamente el pid a la cola del núcleo en cuestión. De esta manera resolvemos parcialmente el problema de no permitir la migración entre cores.\\
+\indent \indent Finalmente, cuando una tarea termina, se actualiza la cantidad correspondiente al núcleo restándole uno. Solamente a la hora de cargar la tarea y cuando una tarea termina se modifica dicha variable. De esta manera, aunque una tarea se bloquee seguirá reflejada en la cantidad del núcleo, lo que nos permitirá seguir el criterio que nos pidieron en la consigna a la hora de asignarle un core a la tarea.\\
