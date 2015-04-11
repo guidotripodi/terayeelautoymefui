@@ -15,6 +15,12 @@ class SchedRR2 : public SchedBase {
 		virtual int tick(int cpu, const enum Motivo m);
 
 	private:
+		std::vector<int> quantum;
+		std::vector<int> quantumActual;
+		std::vector<std::queue<int> > colas;
+		std::vector<int> cantidadPorCore;
+		std::map<int,int> bloqueados; // key : tarea, sign: core
+		int coreMenosProcesos();
 		int next(int cpu);
 };
 
