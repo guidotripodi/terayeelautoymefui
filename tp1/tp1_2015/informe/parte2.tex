@@ -10,17 +10,21 @@ procesos entre nucleos.
 \item \textbf{Ejercicio 4} Diseñar uno o mas lotes de tareas para ejecutar con el algoritmo del ejercicio
 anterior. Graficar las simulaciones y comentarlas, justificando brevemente por que el comportamiento 
 observado es efectivamente el esperable de un algoritmo Round-Robin.
-\item \textbf{Ejercicio 5} A partir del artıculo
-Waldspurger, C.A. and Weihl, W.E., Lottery scheduling: Flexible proportional-share re-
-source management. Proceedings of the 1st USENIX conference on Operating Systems
-Design and Implementation – 1994.
-diseñar e implementar un scheduler basado en el esquema de loterıa. El constructor de la
-clase SchedLottery debe recibir dos parametros: el quantum y la semilla de la secuencia
-pseudoaleatoria (en ese orden). Interesa implementar al menos la idea basica del algoritmo
-y la optimizacion de tickets compensatorios (compensation tickets). Otras optimizaciones y
-refinamientos que propone el artıculo seran opcionales siempre que, en cada caso, se explique
-brevemente por que la optimizacion no se considero relevante a los efectos de este trabajo.
-
+\item \textbf{Ejercicio 5} A partir del articulo:\\
+\begin{itemize}
+ \item Liu, Chung Laung, and James W. Layland. Scheduling algorithms for multiprogramming
+in a hard-real-time environment. Journal of the ACM (JACM) 20.1 (1973): 46-61.
+\end{itemize}
+1. Responda:
+\begin{enumerate}
+ \item ¿Que problema estan intentando resolver los autores?
+ \item ¿Por que introducen el algoritmo de la seccion 7? ¿Que problema buscan resolver
+con esto?
+\item Explicar coloquialmente el significado del teorema 7.
+\end{enumerate}
+2. Disenar e implementar un scheduler basado en prioridades fijas y otro en prioridades
+dinamicas. Para eso complete las clases $SchedFixed$ y $SchedDynamic$ que se encuentran
+en los archivos $sched$\_$fixed.[h|cpp]$ y $sched$\_$dynamic.[h|cpp]$ respectivamente.
 \end{itemize}
 
 
