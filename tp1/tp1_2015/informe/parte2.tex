@@ -31,6 +31,35 @@ en los archivos $sched$\_$fixed.[h|cpp]$ y $sched$\_$dynamic.[h|cpp]$ respectiva
 \subsection{Resultados y Conclusiones}
 
 \subsubsection[Resolución Ejercicio 3]{Ejercicio 3}
+Para desarrollar la implementacion del scheduler $Round-Robin$ y que este funcione de una forma correcta
+utilizamos una serie de estructuras puntuales. \\
+Las mismas son las siguientes:\\
+\begin{enumerate}
+ \item Una cola global, la cual nombramos $q$, esta contiene los $PID$ de los procesos activos que no estan
+ bloqueados y en el tope de la misma se encuentra el proximo proceso a correr. Esta cola,
+ fue desarrollada para que cuando se desaloje un proceso por finalizar su $quantum$ la misma pase al final de
+ la cola y generando el ciclo acorde al comportamiento de este scheduler.
+ \item Un vector denominado $cores$, este tiene en su elemento $i$ el pid correspondiente a
+al proceso que está corriendo en el core $i+1$. Inicializamos todos los elementos en -1, esto
+corresponde a la Idle Task, de esta forma reconocemos que no se cargaron procesos en los núcleos.
+\item Un vector $quantum$ guarda en la posicion $i$ el quantum que se dispuso a cada núcleo.
+\item Un vector $quantumActual$ aqui guardaremos la cantidad de ticks que le quedan al proceso
+desde que fue cargado en el core.
+\item Una lista de $bloqueados$ esta tendra procesos que se bloquearon cuando estaban corriendo.
+\end{enumerate}
+
+De esta manera, con estas estructuras nos permiten determinar para cada tarea, cuando, y cuanto 
+de su quantum consumio de forma que podamos desalojarla correctamente.\\
+
+A su vez, tomamos ciertas decisiones en esta implementación:
+\begin{itemize}
+ \item Si una tarea se encuentra bloqueada cuando se produce el tick del reloj, esta misma es desalojada
+de la cola global, y agregada en un lista de bloqueados. A su vez, sera reseteado el quantum, se le
+dara inicio a la proxima tarea que se encuentre ready y cuando el sistema operativo, nos envie una
+señal de unblock, la tarea desalojada regresara al final de la cola global.
+
+\end{itemize}
+
 
 \subsubsection[Resolución Ejercicio 4]{Ejercicio 4}
 
