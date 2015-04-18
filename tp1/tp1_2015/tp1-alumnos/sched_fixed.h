@@ -1,11 +1,19 @@
 #ifndef __SCHED_FIXED_
 #define __SCHED_FIXED_
 
+#include <stdio.h>
 #include <vector>
 #include <queue>
+#include <list>
 #include "basesched.h"
 
+
 using namespace std;
+typedef struct tarea {
+    int pid;
+    int run_time_actual;
+    int periodo;
+} tarea_t;
 
 class SchedFixed : public SchedBase {
 	public:
@@ -18,6 +26,10 @@ class SchedFixed : public SchedBase {
 
 	private:
 		std::queue<int> q;
+		std::list<tarea_t> tareas; //mayor periodo menor prioridad!
+		int mayor; // guardamos el pid del mayor prioridad
+		int indice;
+		void insertarOrdenado(tarea_t tarea);
 };
 
 #endif
