@@ -23,6 +23,12 @@ de un proceso (load). El nucleo correspondiente a un nuevo proceso sera aquel
 con menor cantidad de procesos activos totales (RUNNING + BLOCKED + READY). Diseñe y realice un conjunto 
 de experimentos que permita evaluar comparativamente las dos implementaciones de Round-Robin.
 
+\item \textbf{Ejercicio 9} Disenar un lote de tareas cuyo scheduling no sea factible para el algoritmo de
+prioridades fijas pero sı para el algoritmo de prioridades dinamicas.
+
+\item \textbf{Ejercicio 10} Disenar un lote de tareas, cuyo scheduling sı sea factible con el algoritmo de
+prioridades fijas, donde se observe un mejor uso del CPU por parte del algoritmo de prioridades
+dinamicas.
 \end{itemize}
 \subsection{Resultados y Conclusiones}
 
@@ -239,6 +245,25 @@ su quantum si seguimos aumentando el valor.
  
  
 \subsubsection[Resolución Ejercicio 8]{Ejercicio 8}
+La idea principal de esta nueva version de $Round-Robin$ se centraliza en que no permita migracion entre
+cores, esto se basa principalmente en utilizar una cola para cada nucleo por separado, y en cada
+cola respectiva se encolaran las tareas que fueron asignadas inicialmente a cada nucleo.\\
+Para desarrollar este tipo de algoritmo, el cual denominaremos $RR2$, utilizamos estructuras
+puntuales, enunciadas a continuacion:\\
+\begin{itemize}
+ \item Un vector $quantum$ y otro $quantumActual$, los cuales siguen cumpliendo la misma funcion que
+ en Round-Robin 1.
+ \item Un vector de colas denominado $colas$, en el cual la posicion $i$ encontraremos la cola correspondiente
+ a ese nucleo de procesamiento.
+ \item Un diccionario de $Bloqueados$, donde la clave contendra el numero de core, y en definicion
+ la tareas bloqueadas de ese core. Esto nos beneficiara cuando haya que reubicarla en la cola de procesos ready.
+ \item Un vector de enteros $cantidad$, que como la palabra lo define, tendra en cada posicion $i$ 
+ la totalidad de las tareas, ya sea bloqueadas, activas o en estado ready que tiene asignado ese core, beneficiandonos
+ la determinacion del nucleo al que se asignara la tarea al momento de cargarla.
+\end{itemize}
+Cuando se carga una tarea, previamente, se chequeara que core tiene menor cantidad de procesos totales asignados (
+aqui es donde el vector $cantidad$ entra en juego). Una vez que se obtiene este nucleo, se agrega 
+la tarea a la cola correspondiente y se actualiza la cantidad sumando una unidad.\\
 
   
 \subsubsection[Resolución Ejercicio 9]{Ejercicio 9}
