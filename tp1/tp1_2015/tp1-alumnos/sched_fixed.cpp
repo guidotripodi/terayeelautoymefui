@@ -37,8 +37,9 @@ void SchedFixed::unblock(int pid) {
 }
 
 int SchedFixed::tick(int cpu, const enum Motivo m) {
-	int sig;
 	std::list<tarea_t>::iterator it;
+	std::list<tarea_t>::iterator it2;
+	//tarea_t tarea;
 	switch (m) {
 		case EXIT:
 			it = tareas.begin();
@@ -48,7 +49,8 @@ int SchedFixed::tick(int cpu, const enum Motivo m) {
 			for (it=tareas.begin(); it!=tareas.end(); ++it)	{
 				if (it->pid == current_pid(cpu)){
 					if (it->repeticiones == 0){
-						//tareas.remove(nueva_tarea);
+						it2 = it;
+						tareas.erase(it,it2);
 					}else{
 						it->repeticiones = it->repeticiones-1;
 						it->periodo = period(it->pid);
@@ -67,7 +69,8 @@ int SchedFixed::tick(int cpu, const enum Motivo m) {
 				if (it->pid == current_pid(cpu)){
 					if (it->run_time_actual == 0){
 						if (it->repeticiones == 0){
-							//tareas.remove(*it);
+							it2 = it;
+							tareas.erase(it,it2);
 						}else{
 							it->repeticiones = it->repeticiones-1;
 							it->periodo = period(it->pid);
@@ -89,7 +92,8 @@ int SchedFixed::tick(int cpu, const enum Motivo m) {
 				if (it->pid == current_pid(cpu)){
 					if (it->run_time_actual == 0){
 						if (it->repeticiones == 0){
-							//tareas.remove(*it);
+							it2 = it;
+							tareas.erase(it,it2);
 						}else{
 							it->repeticiones = it->repeticiones-1;
 							it->periodo = period(it->pid);
