@@ -17,6 +17,7 @@ SchedFixed::~SchedFixed() {
 
 void SchedFixed::initialize() {
 	mayor = 0;
+	tareas.clear();
 }
 
 void SchedFixed::load(int pid) {
@@ -25,11 +26,16 @@ void SchedFixed::load(int pid) {
 	nueva_tarea.run_time_actual = declared_cputime(pid);
 	nueva_tarea.periodo = 0;// el periodo este va en 0 la tomamos q entra en ready
 	//cuando corra una vez ahi si el periodo pasa al valor real
-	if (period(mayor) < period(pid))	{
+	if (!tareas.empty()){
+		if (period(mayor) < period(pid)){
+			mayor = pid;
+			tareas.push_back(nueva_tarea);
+		}else{
+			insertarOrdenado(nueva_tarea);
+		}
+	}else{
 		mayor = pid;
 		tareas.push_back(nueva_tarea);
-	}else{
-		insertarOrdenado(nueva_tarea);
 	}
 }
 
@@ -48,16 +54,19 @@ int SchedFixed::tick(int cpu, const enum Motivo m) {
 			PERIODO EN SU VALOR INICIAL */
 			for (it=tareas.begin(); it!=tareas.end(); ++it)	{
 				if (it->pid == current_pid(cpu)){
+
+					//NO ENCONTRE LA FORMA DE CONSEGUIR LAS REPETICIONES
 					if (it->repeticiones == 0){
 						it2 = it;
 						tareas.erase(it,it2);
 					}else{
 						it->repeticiones = it->repeticiones-1;
-						it->periodo = period(it->pid);
+						//it->periodo = period(it->pid);
 					}
+					return next(cpu);
+					printf("LLEGO aca? %s\n");
 				}
 			}
-			return next(cpu);
 			break;
 		case BLOCK:
 			/* SI TERMINO EL RUN TIME DE LA TAREA ESTANDO BLOQUEADA CHEQUEO 
@@ -73,13 +82,12 @@ int SchedFixed::tick(int cpu, const enum Motivo m) {
 							tareas.erase(it,it2);
 						}else{
 							it->repeticiones = it->repeticiones-1;
-							it->periodo = period(it->pid);
+							//it->periodo = period(it->pid);
 						}
 					}
 
 				}
 			}
-			printf("estoy aca? %s\n");
 			return next(cpu);
 			break;
 		case TICK:
@@ -97,7 +105,7 @@ int SchedFixed::tick(int cpu, const enum Motivo m) {
 							tareas.erase(it,it2);
 						}else{
 							it->repeticiones = it->repeticiones-1;
-							it->periodo = period(it->pid);
+							//it->periodo = period(it->pid);
 						}
 						next(cpu);
 					}else{
@@ -117,7 +125,7 @@ void SchedFixed::insertarOrdenado(tarea_t tarea){
 	std::list<tarea_t>::iterator it;
 	it = tareas.begin();
 	for (it=tareas.begin(); it!=tareas.end(); ++it)	{
-		if (period(it->pid) < period(tarea.pid)){
+		if (period(it->pid) <= period(tarea.pid)){
 			tareas.insert(it, tarea);
 		}
 	}
@@ -150,7 +158,7 @@ int SchedFixed::next(int cpu){
 		for (it=tareas.begin(); it!=tareas.end(); ++it)	{
 			if (it->periodo == 0){
 				pid = it->pid;
-				it = tareas.end();
+				break;
 			}
 		}
 		cores[cpu] = pid;
