@@ -38,10 +38,9 @@ void SchedFixed::unblock(int pid) {
 
 int SchedFixed::tick(int cpu, const enum Motivo m) {
 	int sig;
-
+	std::list<tarea_t>::iterator it;
 	switch (m) {
 		case EXIT:
-			std::list<tarea_t>::iterator it;
 			it = tareas.begin();
 			/* SI TERMINO LA TAREA CHEQUEO SI FUE SU ULTIMA REPETICION O NO
 			SI NO FUE LA ULTIMA DESCUENTO UNA REPETICION Y PONGO EL
@@ -58,12 +57,11 @@ int SchedFixed::tick(int cpu, const enum Motivo m) {
 			}
 			return next(cpu);
 			break;
-		case BLOCK:
+		/*case BLOCK:
 			/* SI TERMINO EL RUN TIME DE LA TAREA ESTANDO BLOQUEADA CHEQUEO 
 			SI FUE SU ULTIMA REPETICION O NO
 			SI NO FUE LA ULTIMA DESCUENTO UNA REPETICION Y PONGO EL
-			PERIODO EN SU VALOR INICIAL */
-			std::list<tarea_t>::iterator it;
+			PERIODO EN SU VALOR INICIAL 
 			it = tareas.begin();
 			for (it=tareas.begin(); it!=tareas.end(); ++it)	{
 				if (it->pid == current_pid(cpu)){
@@ -79,14 +77,13 @@ int SchedFixed::tick(int cpu, const enum Motivo m) {
 				}
 			}
 			return next(cpu);
-			break;
+			break;*/
 		case TICK:
 			/* SI TERMINO EL RUN TIME DE LA TAREA ESTANDO BLOQUEADA CHEQUEO 
 			SI FUE SU ULTIMA REPETICION O NO
 			SI NO FUE LA ULTIMA DESCUENTO UNA REPETICION Y PONGO EL
 			PERIODO EN SU VALOR INICIAL 
 			ADEMAS RESTO EL PERIODO DE LAS QUE YA CORRIERON ALGUNA VEZ*/
-			std::list<tarea_t>::iterator it;
 			it = tareas.begin();
 			for (it=tareas.begin(); it!=tareas.end(); ++it)	{
 				if (it->pid == current_pid(cpu)){
