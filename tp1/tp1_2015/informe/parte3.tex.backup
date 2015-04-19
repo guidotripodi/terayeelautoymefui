@@ -264,6 +264,182 @@ puntuales, enunciadas a continuacion:\\
 Cuando se carga una tarea, previamente, se chequeara que core tiene menor cantidad de procesos totales asignados (
 aqui es donde el vector $cantidad$ entra en juego). Una vez que se obtiene este nucleo, se agrega 
 la tarea a la cola correspondiente y se actualiza la cantidad sumando una unidad.\\
+\indent Al bloquearse un proceso, se define una nueva entrada en el diccionario $bloqueados$ con el
+pid y el nucleo correspondiente. De esta forma, al desbloquearse, colocamos la tarea en la cola del core
+correspondiente y eliminamos la entrada del diccionario. Así logramos resolver el inconveniente de la nula
+migracion entre nucleos.\\
+\indent Finalmente, cuando una tarea finaliza, la quitamos y descontamos una unidad a la posicion $i$ del vector
+$cantidad$. Esta es la unica vez, en la cual se descuenta. Aunque una tarea se bloquee, la misma
+seguira contando en el vector. De esta forma se cumplira, que las tareas son asignadas a los cores
+con menor cantidad de tareas.\\
+Luego de realizar dicha implementacion, en comparacion al Round-Robin original, hemos conjeturado 
+las siguientes hipotesis:
+
+\begin{enumerate}
+ \item Dados un mismo lote de tareas y una misma configuracion del scheduler (mismos costo en cambio
+de contexto y quantum) un unico nucleo de procesamiento, ambos algoritmos deben comportarse
+de la misma manera.
+\item Comportamiento menos eficiente en el RR2 con respecto al paralelismo, ya que al no permitir
+migracion de nucleos este lo pierde.
+\item Comportamiento mas eficiente en el RR2 con lotes de tareas que se bloquean un gran numero
+de veces. Esto surge ya que el Round-Robin original, es mas proclive a realizar cambios de contexto con la posibilidad
+de darse un cambio de core.
+\end{enumerate}
+
+Por consiguiente, procederemos a demostrar lo conjeturado.\\
+
+Iniciando con nuestra primer conjetura:\\
+
+\textbf{Dados un mismo lote de tareas y una misma configuracion del scheduler 
+ (mismos costo en cambio de contexto y quantum)
+un unico nucleo de procesamiento, ambos algoritmos deben comportarse
+de la misma manera.}\\
+
+Trabajando con el lote que mencionamos a continuacion:
+    
+    \begin{verbatim}
+                                     TaskCPU 70
+                                     TaskConsola 2 4 5
+                                     TaskCPU 40
+                                     TaskConsola 3 2 3
+                                     TaskCPU 30
+    \end{verbatim}
+
+Utilizando un $quantum$ igual a 5 y un cambio de contexto igual a 1 obtuvimos 
+resultados muy marcados, viendose notoriamente lo que queremos demostrar.\\
+
+\begin{center}
+    	\includegraphics[width=450pt]{./EJ8_RR2/dif1corerr.png}
+	{$Lote 1$ - Round Robin - 1 core - Quantum = 5 - cambio de contexto = 1}	
+ \end{center}
+ 
+ \begin{center}
+    	\includegraphics[width=450pt]{./EJ8_RR2/dif1corerr2.png}
+	{$Lote 1$ - Round Robin 2 - 1 core - Quantum = 5 - cambio de contexto = 1}	
+ \end{center}
+
+Continuando con un lote distinto para ser mas precisos:
+
+ \begin{verbatim}
+                                     TaskCPU 70
+                                     TaskConsola 5 6 7
+                                     TaskCPU 40
+                                     TaskConsola 10 9 8
+                                     TaskCPU 30
+ \end{verbatim}
+ 
+Llegamos a lo siguiente:\\
+
+ \begin{center}
+    	\includegraphics[width=450pt]{./EJ8_RR2/dif2corerr.png}
+	{$Lote 2$ - Round Robin - 1 core - Quantum = 10 - cambio de contexto = 5}	
+ \end{center}
+ 
+ \begin{center}
+    	\includegraphics[width=450pt]{./EJ8_RR2/dif2corerr2.png}
+	{$Lote 2$ - Round Robin 2 - 1 core - Quantum = 10 - cambio de contexto = 5}	
+ \end{center}
+ 
+ Viendose nuevamente, la igualdad que mencionamos. Hemos podido ver a su vez, que la unica
+ forma en la que los resultados sean distintos con el mismo lote seria modificando o la
+ cantidad de $quantum$ o la unidad de cambio de contexto entre uno y otro.\\
+ 
+ Aqui, un ejemplo para mayor precision:\\
+ 
+  \begin{center}
+    	\includegraphics[width=450pt]{./EJ8_RR2/dif3corerr.png}
+	{$Lote 2$ - Round Robin - 1 core - Quantum = 10 - cambio de contexto = 5}	
+ \end{center}
+ 
+ \begin{center}
+    	\includegraphics[width=450pt]{./EJ8_RR2/dif3corerr2.png}
+	{$Lote 2$ - Round Robin 2 - 1 core - Quantum = 10 - cambio de contexto = 10}	
+ \end{center}
+ 
+ Concluimos entonces que, al trabajar con colas globales o no, utilizando un unico nucleo y
+ mismo lote quantum y cambio de contexto, ambos schedulers se comportan de la misma
+ manera.\\
+ 
+ Procedemos a demostrar la segunda conjetura:\\
+ 
+ \textbf{Comportamiento menos eficiente en el RR2 con respecto al paralelismo, ya que al no permitir
+migracion de nucleos este lo pierde}\\
+
+Para demostrar esta conjetura trabajamos con procesos que demanden mas uso del cpu como 
+lo son las $taskCPU$\\
+
+Un ejemplo de los lotes utilizados fue el siguiente:\\
+
+\begin{verbatim}
+                                     TaskCPU 40
+                                     TaskCPU 15
+                                     TaskCPU 50
+                                     TaskCPU 30
+                                     TaskCPU 50
+\end{verbatim}
+
+Obteniendo los siguientes datos relevantes:\\
+
+\begin{center}
+    	\includegraphics[width=450pt]{./EJ8_RR2/dif10corerr.png}
+	{$Lote 3$ - Round Robin - 2 core - Quantum = 5 - cambio de contexto = 1}	
+ \end{center}
+ 
+ \begin{center}
+    	\includegraphics[width=450pt]{./EJ8_RR2/dif10corerr2.png}
+	{$Lote 3$ - Round Robin 2 - 2 core - Quantum = 5 - cambio de contexto = 1}	
+ \end{center}
+ 
+ Se puede ver en estos diagramas como la implementacion del Round Robin original trabaja
+ mejor finalizando la ejecución de las tareas hasta 50 milisegundos antes.\\
+ Esto se da por la falta de paralelismo de el RR2 ya que al ser asignados los procesos
+ a cada core, cuando uno de los dos finaliza, este queda ocioso ya que no existe la
+ posibilidad de migrar  procesos.\\
+ 
+ Por ultimo, nuestra tercer y ultima conjetura:\\
+ 
+ \textbf{Comportamiento mas eficiente en el RR2 con lotes de tareas que se bloquean un gran numero
+de veces}
+
+Para esta conjetura, trabajamos con lotes de tareas que utilicen el CPU y se bloqueen muchas
+veces para poder demostrar la mejor performance del RR2.\\
+
+A continuacion un ejemplo, con el siguiente lote:
+
+\begin{verbatim}
+                                     TaskCPU 40
+                                     TaskBatch 10  5
+                                     TaskCPU 50
+                                     TaskBatch 15 8
+                                     TaskCPU 10
+
+\end{verbatim}
+
+
+   \begin{center}
+    	\includegraphics[width=450pt]{./EJ8_RR2/dif5corerr.png}
+	{$Lote 3$ - Round Robin - 2 core - Quantum = 3 - cambio de contexto = 1}	
+ \end{center}
+ 
+ \begin{center}
+    	\includegraphics[width=450pt]{./EJ8_RR2/dif5corerr2.png}
+	{$Lote 3$ - Round Robin 2 - 2 core - Quantum = 3 - cambio de contexto = 1}	
+ \end{center}
+
+ Se puede observar por los diagramas como el RR2 tiene una mejor performance en este estilo
+ de lotes llegando a finalizar las ejecuciones hasta 50 milisegundos antes que el Round-Robin
+ original.\\
+ Como para el Round-Robin original tiene perdida de tiempo con el cambio de contexto y
+ migracion de tareas este empeora su performance en comparacion al RR2 que no admite
+ este tipo de migracion es notorio la superioridad en relacion a nuestra conjetura.\\
+ 
+ Podemos concluir luego de estas demostraciones que, el Round-Robin original es ampliamente
+ superior desde el punto de vista de la performance que obtiene al trabajar con tareas
+ que demanden mucho uso del CPU, mientras que el RR2 sera mejor para cuando se utilicen
+ tareas que se bloqueen por un tiempo considerable.\\
+ 
+ 
+
 
   
 \subsubsection[Resolución Ejercicio 9]{Ejercicio 9}

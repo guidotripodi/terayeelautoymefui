@@ -74,15 +74,18 @@ explicaremos ciertos puntos de la misma.\\
 
 \indent \indent Como las tareas TaskBatch se bloquean pseudoaleatoriamente, 
 para obtener datos relevantes tomamos un promedio de las mediciones.\\
-\indent A la hora de encarar la experimentación, lo que realizamos fue simular corridas con 
-varios quantum para poder obtener una aproximación del efecto del $quantum$ en la ejecución del lote de tareas. 
+\indent A la hora de encarar la experimentación, lo que realizamos trabajar con
+varios quantum distintos para poder obtener una mejor apreciacion 
+del efecto del $quantum$ en la ejecución de este tipo de tareas. 
 
-\indent De esta aproximación, se confeccionaron gráficos de turnaround time en función del quantum, 
-referente al estudio con 2 y 3 núcleos, los cuales se proveerán a continuación:\\
+\indent A partir de este resultado, desarrollamos los siguientes gráficos de turnaround time 
+en función del quantum, utilizando 2 y 3 núcleos
 
-\indent Luego de realizar mediciones con distintos $quantum$, tomamos la decisión de trabajar con los mismos $quantum$ para cada nucleo
-al trabajar con más de 1 core. (Se muestra acontinuación un gráfico para demostrar que no era una decisión acertada trabajar
-con disversos $quantum$ para cada core).
+\indent Luego de realizar mediciones con distintos $quantum$,
+tomamos la decisión de trabajar con los mismos $quantum$ para cada nucleo
+al trabajar con más de 1 core. Igualmente, mostraremos a continuacion un grafico
+ejemplificando la diferencia que se produce al trabajar con distintos $quantums$ por
+core.\\
 
 \begin{center}
     	\includegraphics[width=1\textwidth]{./EJ7/turnarounddistquan.png}
@@ -90,11 +93,13 @@ con disversos $quantum$ para cada core).
 	{$Eje X = Quantum; $\\$ Eje Y = Tiempo$}\\
  \end{center}
 
-\indent Al realizar, este gráfico y varias mediciones con distintos $quantum$ por core, nos dimos cuenta que no terminaban
-siendo mediciones rigurosas, ya que una tarea podia estar corriendo con distintos tiempos por la migracion de procesos por core.\\
-\indent Por ende, optamos por realizar mediciones con igualdad de $quantum$ por core para obtener la mejor performance posible.\\
- 
- \indent Por consiguiente, al trabajar con las nuevas mediciones, conjeturamos las siguientes hipótesis:
+\indent Al realizar este gráfico y varias mediciones con distintos $quantum$ 
+por core, observamos que no eran mediciones rigurosas, 
+ya que una proceso podria estar corriendo con distintos tiempos por la
+migracion de procesos por core.\\
+
+ \indent Por consiguiente, al trabajar con las nuevas mediciones, 
+ concluimos con 2 hipotesis:
  
  \begin{itemize}
   \item Con 2 nucleos las mediciones de tiempo tienden a estabilizarse a partir de un $quantum$ igual a 9.
@@ -128,8 +133,11 @@ siendo mediciones rigurosas, ya que una tarea podia estar corriendo con distinto
  \end{center}
 
   
-   \indent La performance sigue mejorando,a partir de este valor, el desempeño comienza a estabilizarse, como muestran los siguiente dos gráficos. 
-   Las pequeñas diferencias en los valores responden a la pseudoaleatoridad de las tareas TaskBatch.\\
+   \indent La performance sigue mejorando,a partir de este valor, el desempeño 
+   comienza a estabilizarse, como muestran los siguiente dos gráficos. 
+   
+   Las pequeñas diferencias en los valores se deben a que este tipo de tarea presenta
+   una pseudoaleatoridad notoria.\\
   
    \begin{center}
     	\includegraphics[width=450pt]{./EJ7/ej7tour2core5quan.png}
@@ -142,13 +150,13 @@ siendo mediciones rigurosas, ya que una tarea podia estar corriendo con distinto
 	{$Lote 1$ - Turnaround - 2 core - Quantum igual a 13}	
  \end{center}
 
- \indent Como mencionamos, las mediciones tienden a estabilizarse con un $quantum$ igual a 9, pero la mejor performance
- obtenida es con un $quantum$ igual a 13, teniendo en cuenta la pseudoaleatoridad del tipo de tarea utilizada.
- \indent Se puede observar en la primer figura que a pesar de trabajar con 2 cores, al tener un quantum bajo (igual a 2) 
- el costo es alto.\\
+ \indent Como mencionamos, las mediciones tienden a estabilizarse con un $quantum$ 
+ igual a 9, pero la mejor performance obtenida es con un $quantum$ igual a 13,
+ teniendo en cuenta como mencionamos la pseudoaleatoridad de este tipo de tarea.\\
+ \indent Se puede observar en la primer figura que a pesar de trabajar con 2 cores, 
+ al tener un quantum bajo (igual a 2)  el costo es alto.
   
-  
- \begin{center}
+   \begin{center}
     	\includegraphics[width=1\textwidth]{./EJ7/tour2core.png}
 	{Turnaround - 2 core}	\\
 	{$Eje X = Quantum$\\$ Eje Y = Tiempo$}\\
@@ -164,21 +172,21 @@ siendo mediciones rigurosas, ya que una tarea podia estar corriendo con distinto
 	{$Eje X = Quantum$\\$Eje Y = Tiempo$}\\
  \end{center} 
  
- \indent Con este tipo de metrica, se comienza a estabilizar a partir del $quantum$ igual a 5, obteniendo su mejor
- performance con el $quantum$ igual a 13.\\
+ \indent Con este tipo de metrica, se comienza a estabilizar a partir del $quantum$ igual
+ a 5, obteniendo su mejor  performance con el $quantum$ igual a 13.\\
  
    \begin{center}
    \textbf{3 Core}
    \end{center}
-   \indent A continuación, al igual que con 2 cores, mostraremos los Diagramas de Gantt mas relevantes:
+   \indent A continuación, al igual que con 2 cores, mostraremos los resultados mas relevantes:
    
    \begin{center}
     	\includegraphics[width=450pt]{./EJ7/ej7tour3core1quan.png}
 	{$Lote 1$ - Turnaround - 3 core - Quantum igual a 2}	
  \end{center}
 
- \indent Se observa que al tener otro core mas,a diferencia de con 2, a pesar de estar con un $quantum$ bajo,
- la performance mejora bastante.\\ 
+ \indent Se observa que al tener otro core mas,a diferencia de con 2, 
+ a pesar de estar con un $quantum$ bajo, la performance va en alto.\\ 
  
    \begin{center}
     	\includegraphics[width=450pt]{./EJ7/ej7tour3core4quan.png}
@@ -203,9 +211,10 @@ siendo mediciones rigurosas, ya que una tarea podia estar corriendo con distinto
 	{$Lote 1$ - Turnaround - 3 core - Quantum igual a 15}	
  \end{center}
  
- \indent A diferencia que en nuestra hipótesis conjeturada para con dos cores, con un $quantum$ igual a 11 se obtiene la mejor
- performance, pero teniendo en cuenta la pseudoaleatoridad del tipo de tarea con la que se trabajo, a partir del $quantum$ igual
- a 9 ya se estabiliza notoriamente.\\
+ \indent A diferencia que en nuestra hipótesis conjeturada para con dos cores, 
+ con un $quantum$ igual a 11 se obtiene la mejor  performance, 
+ pero teniendo en cuenta el tipo de tarea con la 
+ que se estuvo trabajando, a partir del $quantum$ igual a 9 ya se estabiliza notoriamente.\\
    
     \begin{center}
     	\includegraphics[width=1\textwidth]{./EJ7/tour3core.png}
@@ -223,24 +232,29 @@ siendo mediciones rigurosas, ya que una tarea podia estar corriendo con distinto
 	{$Eje X = Quantum $\\$Eje Y = Tiempo$}\\
  \end{center} 
  
-   \indent Con este tipo de metrica,se obteniene a diferencia de con Turnaround  su mejor
-   performance con el $quantum$ igual a 15.\\
+   \indent Con este tipo de metrica,se obteniene a diferencia de con Turnaround  
+   su mejor performance con el $quantum$ igual a 15.\\
   
  \begin{center}
   \textbf{Conclusiones}
  \end{center}
 
 
-\indent \indent La diferencia entre los valores de quantum entre los casos se puede atribuir a que cada vez que 
-agregamos un núcleo aumentamos la posibilidad de una migración de la tareas.\\
-\indent \indent En todos lo casos se observa la influencia negativa que proviene de elegir un quantum con valores pequeños.\\
-\indent \indent Agregar núcleos de procesamiento mejora significativamente la performance de acuerdo a la métricas con las que
-trabajamos, al permitir más procesamiento en pararelo y disminuyendo los waiting time de las tareas.\\
-\indent \indent  Fijada una cantidad de núcleos, aumentar el valor del quantum también mejora la performance, 
-especialmente los tiempos referidos a las tareas que menos cantidad de bloqueos tienen. 
-Igualmente, a partir de cierto valor de quantum, las mejoras en la performance dejan de ser muy significativas. 
-Esto se produce a que las tareas con mas cantidad de bloqueos en algun momento dejan de consumir todo
-su quantum si seguimos aumentando el valor. 
+\indent \indent La diferencia entre los valores de quantum entre los casos 
+se puede presumir a que cada vez que agregamos un núcleo aumentamos 
+la posibilidad de una migración de la tareas.\\
+\indent \indent En todos lo casos se observa la influencia negativa que proviene 
+de elegir un quantum con valores pequeños.\\
+\indent \indent Agregar núcleos de procesamiento mejora significativamente 
+la performance de acuerdo a la métricas con las que
+trabajamos, al permitir más procesamiento en pararelo y disminuyendo 
+los waiting time de las tareas.\\
+\indent \indent  Fijada una cantidad de núcleos puntual, aumentar el valor del
+quantum también mejora la performance, igualmente, como vimos, a partir de cierto valor 
+de quantum, las mejoras en la performance tienden a estabilizarse y dejan de ser 
+muy significativas. 
+Esto se produce a que las tareas con mas cantidad de bloqueos en 
+algun momento dejan de consumir todo el quantum otorgado si este es aumentado en su valor. 
  
  
  
@@ -285,6 +299,160 @@ migracion de nucleos este lo pierde.
 de veces. Esto surge ya que el Round-Robin original, es mas proclive a realizar cambios de contexto con la posibilidad
 de darse un cambio de core.
 \end{enumerate}
+
+Por consiguiente, procederemos a demostrar lo conjeturado.\\
+
+Iniciando con nuestra primer conjetura:\\
+
+\textbf{Dados un mismo lote de tareas y una misma configuracion del scheduler 
+ (mismos costo en cambio de contexto y quantum)
+un unico nucleo de procesamiento, ambos algoritmos deben comportarse
+de la misma manera.}\\
+
+Trabajando con el lote que mencionamos a continuacion:
+    
+    \begin{verbatim}
+                                     TaskCPU 70
+                                     TaskConsola 2 4 5
+                                     TaskCPU 40
+                                     TaskConsola 3 2 3
+                                     TaskCPU 30
+    \end{verbatim}
+
+Utilizando un $quantum$ igual a 5 y un cambio de contexto igual a 1 obtuvimos 
+resultados muy marcados, viendose notoriamente lo que queremos demostrar.\\
+
+\begin{center}
+    	\includegraphics[width=450pt]{./EJ8_RR2/dif1corerr.png}
+	{$Lote 1$ - Round Robin - 1 core - Quantum = 5 - cambio de contexto = 1}	
+ \end{center}
+ 
+ \begin{center}
+    	\includegraphics[width=450pt]{./EJ8_RR2/dif1corerr2.png}
+	{$Lote 1$ - Round Robin 2 - 1 core - Quantum = 5 - cambio de contexto = 1}	
+ \end{center}
+
+Continuando con un lote distinto para ser mas precisos:
+
+ \begin{verbatim}
+                                     TaskCPU 70
+                                     TaskConsola 5 6 7
+                                     TaskCPU 40
+                                     TaskConsola 10 9 8
+                                     TaskCPU 30
+ \end{verbatim}
+ 
+Llegamos a lo siguiente:\\
+
+ \begin{center}
+    	\includegraphics[width=450pt]{./EJ8_RR2/dif2corerr.png}
+	{$Lote 2$ - Round Robin - 1 core - Quantum = 10 - cambio de contexto = 5}	
+ \end{center}
+ 
+ \begin{center}
+    	\includegraphics[width=450pt]{./EJ8_RR2/dif2corerr2.png}
+	{$Lote 2$ - Round Robin 2 - 1 core - Quantum = 10 - cambio de contexto = 5}	
+ \end{center}
+ 
+ Viendose nuevamente, la igualdad que mencionamos. Hemos podido ver a su vez, que la unica
+ forma en la que los resultados sean distintos con el mismo lote seria modificando o la
+ cantidad de $quantum$ o la unidad de cambio de contexto entre uno y otro.\\
+ 
+ Aqui, un ejemplo para mayor precision:\\
+ 
+  \begin{center}
+    	\includegraphics[width=450pt]{./EJ8_RR2/dif3corerr.png}
+	{$Lote 2$ - Round Robin - 1 core - Quantum = 10 - cambio de contexto = 5}	
+ \end{center}
+ 
+ \begin{center}
+    	\includegraphics[width=450pt]{./EJ8_RR2/dif3corerr2.png}
+	{$Lote 2$ - Round Robin 2 - 1 core - Quantum = 10 - cambio de contexto = 10}	
+ \end{center}
+ 
+ Concluimos entonces que, al trabajar con colas globales o no, utilizando un unico nucleo y
+ mismo lote quantum y cambio de contexto, ambos schedulers se comportan de la misma
+ manera.\\
+ 
+ Procedemos a demostrar la segunda conjetura:\\
+ 
+ \textbf{Comportamiento menos eficiente en el RR2 con respecto al paralelismo, ya que al no permitir
+migracion de nucleos este lo pierde}\\
+
+Para demostrar esta conjetura trabajamos con procesos que demanden mas uso del cpu como 
+lo son las $taskCPU$\\
+
+Un ejemplo de los lotes utilizados fue el siguiente:\\
+
+\begin{verbatim}
+                                     TaskCPU 40
+                                     TaskCPU 15
+                                     TaskCPU 50
+                                     TaskCPU 30
+                                     TaskCPU 50
+\end{verbatim}
+
+Obteniendo los siguientes datos relevantes:\\
+
+\begin{center}
+    	\includegraphics[width=450pt]{./EJ8_RR2/dif10corerr.png}
+	{$Lote 3$ - Round Robin - 2 core - Quantum = 5 - cambio de contexto = 1}	
+ \end{center}
+ 
+ \begin{center}
+    	\includegraphics[width=450pt]{./EJ8_RR2/dif10corerr2.png}
+	{$Lote 3$ - Round Robin 2 - 2 core - Quantum = 5 - cambio de contexto = 1}	
+ \end{center}
+ 
+ Se puede ver en estos diagramas como la implementacion del Round Robin original trabaja
+ mejor finalizando la ejecución de las tareas hasta 50 milisegundos antes.\\
+ Esto se da por la falta de paralelismo de el RR2 ya que al ser asignados los procesos
+ a cada core, cuando uno de los dos finaliza, este queda ocioso ya que no existe la
+ posibilidad de migrar  procesos.\\
+ 
+ Por ultimo, nuestra tercer y ultima conjetura:\\
+ 
+ \textbf{Comportamiento mas eficiente en el RR2 con lotes de tareas que se bloquean un gran numero
+de veces}
+
+Para esta conjetura, trabajamos con lotes de tareas que utilicen el CPU y se bloqueen muchas
+veces para poder demostrar la mejor performance del RR2.\\
+
+A continuacion un ejemplo, con el siguiente lote:
+
+\begin{verbatim}
+                                     TaskCPU 40
+                                     TaskBatch 10  5
+                                     TaskCPU 50
+                                     TaskBatch 15 8
+                                     TaskCPU 10
+
+\end{verbatim}
+
+
+   \begin{center}
+    	\includegraphics[width=450pt]{./EJ8_RR2/dif5corerr.png}
+	{$Lote 3$ - Round Robin - 2 core - Quantum = 3 - cambio de contexto = 1}	
+ \end{center}
+ 
+ \begin{center}
+    	\includegraphics[width=450pt]{./EJ8_RR2/dif5corerr2.png}
+	{$Lote 3$ - Round Robin 2 - 2 core - Quantum = 3 - cambio de contexto = 1}	
+ \end{center}
+
+ Se puede observar por los diagramas como el RR2 tiene una mejor performance en este estilo
+ de lotes llegando a finalizar las ejecuciones hasta 50 milisegundos antes que el Round-Robin
+ original.\\
+ Como para el Round-Robin original tiene perdida de tiempo con el cambio de contexto y
+ migracion de tareas este empeora su performance en comparacion al RR2 que no admite
+ este tipo de migracion es notorio la superioridad en relacion a nuestra conjetura.\\
+ 
+ Podemos concluir luego de estas demostraciones que, el Round-Robin original es ampliamente
+ superior desde el punto de vista de la performance que obtiene al trabajar con tareas
+ que demanden mucho uso del CPU, mientras que el RR2 sera mejor para cuando se utilicen
+ tareas que se bloqueen por un tiempo considerable.\\
+ 
+ 
 
 
   

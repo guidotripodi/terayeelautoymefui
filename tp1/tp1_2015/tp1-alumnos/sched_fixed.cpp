@@ -25,7 +25,7 @@ void SchedFixed::load(int pid) {
 	nueva_tarea.run_time_actual = declared_cputime(pid);
 	nueva_tarea.periodo = 0;// el periodo este va en 0 la tomamos q entra en ready
 	//cuando corra una vez ahi si el periodo pasa al valor real
-	if (period(mayor)< period(pid))	{
+	if (period(mayor) < period(pid))	{
 		mayor = pid;
 		tareas.push_back(nueva_tarea);
 	}else{
@@ -48,7 +48,7 @@ int SchedFixed::tick(int cpu, const enum Motivo m) {
 			for (it=tareas.begin(); it!=tareas.end(); ++it)	{
 				if (it->pid == current_pid(cpu)){
 					if (it->repeticiones == 0){
-						tareas.remove(*it);
+						//tareas.remove(nueva_tarea);
 					}else{
 						it->repeticiones = it->repeticiones-1;
 						it->periodo = period(it->pid);
@@ -57,17 +57,17 @@ int SchedFixed::tick(int cpu, const enum Motivo m) {
 			}
 			return next(cpu);
 			break;
-		/*case BLOCK:
+		case BLOCK:
 			/* SI TERMINO EL RUN TIME DE LA TAREA ESTANDO BLOQUEADA CHEQUEO 
 			SI FUE SU ULTIMA REPETICION O NO
 			SI NO FUE LA ULTIMA DESCUENTO UNA REPETICION Y PONGO EL
-			PERIODO EN SU VALOR INICIAL 
+			PERIODO EN SU VALOR INICIAL*/ 
 			it = tareas.begin();
 			for (it=tareas.begin(); it!=tareas.end(); ++it)	{
 				if (it->pid == current_pid(cpu)){
 					if (it->run_time_actual == 0){
 						if (it->repeticiones == 0){
-							tareas.remove(*it);
+							//tareas.remove(*it);
 						}else{
 							it->repeticiones = it->repeticiones-1;
 							it->periodo = period(it->pid);
@@ -77,7 +77,7 @@ int SchedFixed::tick(int cpu, const enum Motivo m) {
 				}
 			}
 			return next(cpu);
-			break;*/
+			break;
 		case TICK:
 			/* SI TERMINO EL RUN TIME DE LA TAREA ESTANDO BLOQUEADA CHEQUEO 
 			SI FUE SU ULTIMA REPETICION O NO
@@ -89,7 +89,7 @@ int SchedFixed::tick(int cpu, const enum Motivo m) {
 				if (it->pid == current_pid(cpu)){
 					if (it->run_time_actual == 0){
 						if (it->repeticiones == 0){
-							tareas.remove(*it);
+							//tareas.remove(*it);
 						}else{
 							it->repeticiones = it->repeticiones-1;
 							it->periodo = period(it->pid);
@@ -105,6 +105,7 @@ int SchedFixed::tick(int cpu, const enum Motivo m) {
 			}
 			break;
 	}
+			return 0;
 }
 
 void SchedFixed::insertarOrdenado(tarea_t tarea){
@@ -146,7 +147,8 @@ int SchedFixed::next(int cpu){
 				pid = it->pid;
 				it = tareas.end();
 			}
+		}
+		cores[cpu] = pid;
+		return pid;
 	}
-	cores[cpu] = pid;
-	return pid;
 }

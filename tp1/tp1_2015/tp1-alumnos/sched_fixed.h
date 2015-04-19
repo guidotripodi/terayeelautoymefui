@@ -34,7 +34,7 @@ class SchedFixed : public SchedBase {
 		int indice;
 		int next(int cpu);
 		void insertarOrdenado(tarea_t tarea);
-		void SchedFixed::restarPeriodo();
+		void restarPeriodo();
 };
 
 #endif
