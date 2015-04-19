@@ -79,6 +79,7 @@ int SchedFixed::tick(int cpu, const enum Motivo m) {
 
 				}
 			}
+			printf("estoy aca? %s\n");
 			return next(cpu);
 			break;
 		case TICK:
@@ -140,7 +141,7 @@ void SchedFixed::restarPeriodo(){
 int SchedFixed::next(int cpu){
 	/* SI LA LISTA DE TAREAS SE VACIO VOY A LA IDLE SINO RECORRO Y ME FIJO
 	CUAL ES EL PRIMERO CON PERIODO = 0*/
-	int pid ;
+	int pid =0;
 	if (tareas.empty()){ 
 		pid= IDLE_TASK;  //no hay mas tareas -.-> idle_task
 	}else {
@@ -153,6 +154,6 @@ int SchedFixed::next(int cpu){
 			}
 		}
 		cores[cpu] = pid;
-		return pid;
 	}
+	return pid;
 }
