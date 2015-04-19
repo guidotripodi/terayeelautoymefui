@@ -38,8 +38,7 @@ void SchedFixed::insertarOrdenado(tarea_t tarea){
 	std::list<tarea_t>::iterator it;
 	it = tareas.begin();
 	for (it=tareas.begin(); it!=tareas.end(); ++it)	{
-		printf("it\n", it->pid);
-		if (period((unsigned int) it->pid) < period(tarea)){
+		if (period(it->pid) < period(tarea.pid)){
 			tareas.insert(it, tarea);
 		}
 	}

@@ -13,6 +13,8 @@ typedef struct tarea {
     int pid;
     int run_time_actual;
     int periodo;
+    int repeticiones;
+    int cant_repeticiones_total;
 } tarea_t;
 
 class SchedFixed : public SchedBase {
