@@ -61,10 +61,9 @@ int SchedFixed::tick(int cpu, const enum Motivo m) {
 						tareas.erase(it,it2);
 					}else{
 						it->repeticiones = it->repeticiones-1;
-						//it->periodo = period(it->pid);
+						it->periodo = period(it->pid);
 					}
-					return next(cpu);
-					printf("LLEGO aca? %s\n");
+					return next(cpu); //MURIO ACA!!
 				}
 			}
 			break;
@@ -82,7 +81,7 @@ int SchedFixed::tick(int cpu, const enum Motivo m) {
 							tareas.erase(it,it2);
 						}else{
 							it->repeticiones = it->repeticiones-1;
-							//it->periodo = period(it->pid);
+							it->periodo = period(it->pid);
 						}
 					}
 
@@ -105,7 +104,7 @@ int SchedFixed::tick(int cpu, const enum Motivo m) {
 							tareas.erase(it,it2);
 						}else{
 							it->repeticiones = it->repeticiones-1;
-							//it->periodo = period(it->pid);
+							it->periodo = period(it->pid);
 						}
 						next(cpu);
 					}else{
@@ -125,7 +124,7 @@ void SchedFixed::insertarOrdenado(tarea_t tarea){
 	std::list<tarea_t>::iterator it;
 	it = tareas.begin();
 	for (it=tareas.begin(); it!=tareas.end(); ++it)	{
-		if (period(it->pid) <= period(tarea.pid)){
+		if (period(it->pid) >= period(tarea.pid)){
 			tareas.insert(it, tarea);
 		}
 	}
@@ -156,6 +155,7 @@ int SchedFixed::next(int cpu){
 		std::list<tarea_t>::iterator it;
 		it = tareas.begin();
 		for (it=tareas.begin(); it!=tareas.end(); ++it)	{
+			printf("cuantos tiene en la lista%d\n", tareas.size() );
 			if (it->periodo == 0){
 				pid = it->pid;
 				break;
