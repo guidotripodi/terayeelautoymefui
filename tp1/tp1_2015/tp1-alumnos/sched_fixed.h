@@ -32,6 +32,7 @@ class SchedFixed : public SchedBase {
 		std::vector<int> cores;
 		int mayor; // guardamos el pid del mayor prioridad
 		int indice;
+		int primera_pasada;
 		int next(int cpu);
 		void insertarOrdenado(tarea_t tarea);
 		void restarPeriodo();
