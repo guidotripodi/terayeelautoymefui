@@ -64,3 +64,36 @@ señal de unblock, la tarea desalojada regresara al final de la cola global.
 \subsubsection[Resolución Ejercicio 4]{Ejercicio 4}
 
 \subsubsection[Resolución Ejercicio 5]{Ejercicio 5}
+
+\textbf{PARTE 2}\\
+
+\textbf{Algoritmo Scheduler Fixed - Explicacion de Implementacion}\\
+
+Luego del estudio del Paper solicitado se realizo la implementacion del dicho algoritmo,
+utilizando una serie de estructuras para que este funcione acorde a lo pedido:
+
+\begin{itemize}
+ \item Un struct denominado $tarea$ el cual contiene el pid, el run\_time\_actual, periodo dandonos
+ informacion de la tarea cargada.
+ \item Una lista de $tarea$ nombrada $tareas$, esta es ordenada segun el periodo de las tareas
+ de menor a mayor, obteniendo la prioridad del algoritmo.
+ \item Una variable global llamada $mayor$ en la cual guardamos el pid de la tarea con mayor
+ periodo.
+ \item Una variable global $primera\_pasada$ con la cual podemos realizar nuestra primer 
+ comparacion de periodos entre tareas.
+\end{itemize}
+
+Ademas de estas estructuras utilizamos una funcion privada $insertarOrdenado$ la cual como el
+nombre lo dice va guardando en nuestra lista de tareas, las tareas a corde se van cargando en su
+respectivo lugar comparando los periodos de las mismas.\\
+De esta forma, la secuencia del algoritmo fue la siguiente:
+
+\begin{enumerate}
+ \item Llega una nueva tarea se la carga e inserta ordenadamente en la lista.
+ \item La tarea corre hasta finalizar.
+ \item Una vez que finaliza se chequea en la lista cual es la primera en orden de prioridad queda
+ esta ready para correr.
+ \end{enumerate}
+
+De esta forma, con las estructuras y funciones logramos que nuestro scheduler trabaje de la forma
+deseada.
