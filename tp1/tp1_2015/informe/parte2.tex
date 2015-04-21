@@ -64,6 +64,20 @@ señal de unblock, la tarea desalojada regresara al final de la cola global.
 \subsubsection[Resolución Ejercicio 4]{Ejercicio 4}
 
 \subsubsection[Resolución Ejercicio 5]{Ejercicio 5}
+\textbf{PARTE 1}\\
+En el paper "Scheduling algorithms for multiprogramming
+in a hard-real-time environment" los autores están intentando mostrar y resolver un problema que estaba surgiendo en esa época (1973). El uso de computadoras que controlaban y monitoreaban procesos industriales había empezado a incrementarse notablemente. Con esto aparecen los sistemas que tienen un "tiempo crítico" para procesar. Es decir, sistemas en donde el procesamiento estaba sujeto a un tiempo máximo al cual ejecutarse.\\
+Por lo tanto necesitaban maximizar la eficiencia del uso del procesamiento, y para eso afirman que eso es posible mediante un algoritmo de schedulling que asegure procesar antes de ese tiempo crítico.\\
+Por eso en el paper proponen dos algoritmos que manejan prioridades: prioridades fijas y dinámicas.\\
+
+\\
+En la sección 7 introducen el algoritmo de prioridades dinámicas tratando de resolver un problema que muestra el algoritmo de prioridades fijas descripto en las secciones anteriores.\\
+Al tener prioridades fijas, puede ocurrir inanición. Es decir, puede pasar que siempre lleguen tareas con prioridades más altas de las que se están por corriendo o por correr, dejándolas en espera y nunca atendiéndolas.\\
+El algoritmo que presenta en esta sección tiene el nombre de "The deadline driven scheduling algorithm", explicando que se trata de un algoritmo que da más prioridad a las tareas en las que su deadline esté mas cercano. 
+
+
+
+
 
 \textbf{PARTE 2}\\
 
