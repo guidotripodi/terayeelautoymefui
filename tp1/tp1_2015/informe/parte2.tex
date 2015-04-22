@@ -63,25 +63,137 @@ señal de unblock, la tarea desalojada regresara al final de la cola global.
 
 \subsubsection[Resolución Ejercicio 4]{Ejercicio 4}
 
+\indent El algoritmo de scheduler \textbf{Round-Robin} tiene como caracter\'istica asignar a todas las tareas 
+un determinado tiempo m\'aximo de procesamiento, a esto se lo llama $quantum$. \\
+\indent Este tiempo esta definido para cada n\'ucleo en particular, dependiendo de en cu\'al de ellos est\'en 
+ejecutando los procesos, se les asignar\'a el respectivo tiempo m\'aximo.\\
+\indent Otra caracter\'istica del \textbf{Round-Robin} es que las tareas se encolan y se ejecutan c\'iclicamente. 
+Osea que cuando se deja de ejecutar, si no termin\'o su ejecuci\'on, la tarea se encolar\'a al final de la lista. 
+Como elecci\'on de diseño, elegimos que se use una cola global para todos los procesadores, aunque tambi\'en
+se podr\'ia tener una cola para cada n\'ucleo. \\
+\indent A su vez, tambi\'en puede ocurrir una tarea no consuma todo su $quantum$. 
+Ya sea porque la tarea se bloquea (haciendo uso de dispositivos de entrada/salida) o porque termine su ejecuci\'on.\\
+\indent En caso de haber terminado, nuestro algoritmo pone a correr directamente la pr\'oxima tarea de acuerdo al orden 
+circular que se estableci\'o y la tarea que finaliz\'o se desalojar\'a por completo y no sera considerada nuevamente. \\
+\indent En caso de haberse bloqueado, esta misma dejar\'a de ser considerada hasta que se desbloquee, 
+perdiendo el quantum que le quedaba si hubiere. 
+Autom\'aticamente, seguir\'a corriendo la pr\'oxima tarea que se encuentre en la cola global. 
+Cuando el proceso se desbloquee, ser\'a encolada nuevamente al final de dicha cola.   \\
+
+\indent Para corroborar que el comportamiento era el deseado, desarrollamos 3 disversos lotes de tareas compuestos por tareas
+del tipo $taskConsola$ y $taskCpu$, trabajando con 1, 2 y 3 cores y utilizando el mismo $quantum$ para cada uno de los mismos.\\
+
+Nuestro primer lote de tareas fue el siguiente:
+\begin{verbatim}
+                                     TaskCPU 70
+                                     TaskConsola 2 4 5
+                                     TaskCPU 40
+                                     TaskConsola 3 2 3
+                                     TaskCPU 30
+\end{verbatim}
+
+Obteniendo los siguientes resultados:
+
+\begin{center}
+
+    
+	\includegraphics[width=450pt]{./EJ4_RR/ejercicio4-1nucleo.png}
+	{$Lote 1$ - Scheduler RR - 1 core}	
+ 
+\end{center}
+
+
+\indent Con esta simulación, trabajamos con 2 ticks de cambio de contexto.\\
+\\
+\indent Se puede observar el cambio de tareas cíclico tanto porque terminaron su quantum o porque se bloquearon.\\
+
+\begin{center}
+  	\includegraphics[width=450pt]{./EJ4_RR/ejercicio4-2nucleo.png}
+	  {$Lote 1$ - Scheduler RR - 2 core}	
+\end{center}
+
+\begin{center}
+  	\includegraphics[width=450pt]{./EJ4_RR/ejercicio4-3nucleo.png}
+	  {$Lote 1$ - Scheduler RR - 3 core}	
+\end{center}
+
+\indent Es notorio, ademas del la ejecuciòn circular de las tareas, un cierto paralelismo al estar trabajando con
+2 o 3 cores.\\
+
+\indent Luego, de esta simulación probamos con un lote con tareas que se bloqueen por más tiempo:
+ \begin{verbatim}
+                                     TaskCPU 70
+                                     TaskConsola 5 6 7
+                                     TaskCPU 40
+                                     TaskConsola 10 9 8
+                                     TaskCPU 30
+ \end{verbatim}
+
+\indent Manteniendo la misma cantidad de tick para cambio de contexto y core. También, nos parecio prudente, mantener
+los mismos valores de $quantum$ obteniendo los siguientes gráficos:
+
+\begin{center}
+    	\includegraphics[width=450pt]{./EJ4_RR/ejercicio4-2lote1nucleo.png}
+	{$Lote 2$ - Scheduler RR - 1 core}	
+ \end{center}
+
+ \begin{center}
+    	\includegraphics[width=450pt]{./EJ4_RR/ejercicio4-2lote2nucleo.png}
+	{$Lote 2$ - Scheduler RR - 2 core}	
+ \end{center}
+ 
+ \begin{center}
+    	\includegraphics[width=450pt]{./EJ4_RR/ejercicio4-2lote3nucleo.png}
+	{$Lote 2$ - Scheduler RR - 3 core}	
+ \end{center}
+
+ \indent Con este lote, además de lo observado anteriormente pudimos ver que, al tener una tarea bloqueada
+ por un largo tiempo, el scheduler directamente la ignora.\\
+ 
+\indent Luego de estos experimentos pudimos observar ciertos puntos del comportamiento del Round-Robin:\\
+\begin{itemize}
+\item  Carácter circular del algoritmo.
+\item  Desalojo de las tareas cuando se bloquean o terminan y la inmediata asignación del núcleo a la siguiente tarea en caso de existir alguna.
+\item  Libre de inanición.
+\item  Una tarea bloqueada es ignorada por el scheduler hasta que se desbloquee.
+\end{itemize}
+
+\indent Finalmente, dado su carácter circular y equitativo, podemos afirmar que todas las tareas que 
+estén en condiciones de correr serán ejecutadas y ninguna será negada de tiempo de procesamiento.\\
+
+
 \subsubsection[Resolución Ejercicio 5]{Ejercicio 5}
-\textbf{PARTE 1}\\
+\begin{center}
+\textbf{PARTE 1}\\ 
+\end{center}
+
+
+
 En el paper "Scheduling algorithms for multiprogramming
 in a hard-real-time environment" los autores están intentando mostrar y resolver un problema que estaba surgiendo en esa época (1973). El uso de computadoras que controlaban y monitoreaban procesos industriales había empezado a incrementarse notablemente. Con esto aparecen los sistemas que tienen un "tiempo crítico" para procesar. Es decir, sistemas en donde el procesamiento estaba sujeto a un tiempo máximo al cual ejecutarse.\\
 Por lo tanto necesitaban maximizar la eficiencia del uso del procesamiento, y para eso afirman que eso es posible mediante un algoritmo de schedulling que asegure procesar antes de ese tiempo crítico.\\
 Por eso en el paper proponen dos algoritmos que manejan prioridades: prioridades fijas y dinámicas.\\
 
-\\
-En la sección 7 introducen el algoritmo de prioridades dinámicas tratando de resolver un problema que muestra el algoritmo de prioridades fijas descripto en las secciones anteriores.\\
+
+En la sección 7 introducen el algoritmo de prioridades dinamicas tratando de resolver un problema que muestra el algoritmo de prioridades fijas descripto en las secciones anteriores.\\
 Al tener prioridades fijas, puede ocurrir inanición. Es decir, puede pasar que siempre lleguen tareas con prioridades más altas de las que se están por corriendo o por correr, dejándolas en espera y nunca atendiéndolas.\\
-El algoritmo que presenta en esta sección tiene el nombre de "The deadline driven scheduling algorithm", explicando que se trata de un algoritmo que da más prioridad a las tareas en las que su deadline esté mas cercano. 
+El algoritmo que presenta en esta sección tiene el nombre de "The deadline driven scheduling algorithm", explicando que se trata de un algoritmo que da más prioridad a las tareas en las que su deadline esté mas cercano. \\
 
 
 
-
-
+\begin{center}
+ 
 \textbf{PARTE 2}\\
 
-\textbf{Algoritmo Scheduler Fixed - Explicacion de Implementacion}\\
+\end{center}
+\hspace{3pt}
+\begin{center}
+\textbf{Algoritmo Scheduler Fixed - Explicacion de Implementacion}\\ 
+\end{center}
+
+
+
+
 
 Luego del estudio del Paper solicitado se realizo la implementacion del dicho algoritmo,
 utilizando una serie de estructuras para que este funcione acorde a lo pedido:
