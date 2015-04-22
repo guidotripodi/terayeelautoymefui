@@ -85,6 +85,7 @@ void SchedFixed::insertarOrdenado(tarea_t tarea){
 		for (it=tareas.begin(); it!=tareas.end(); ++it)	{
 			if (period(it->pid) >= period(tarea.pid)){
 				tareas.insert(it, tarea);
+				inserto = true;
 				break;
 			}
 		}

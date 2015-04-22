@@ -74,15 +74,18 @@ explicaremos ciertos puntos de la misma.\\
 
 \indent \indent Como las tareas TaskBatch se bloquean pseudoaleatoriamente, 
 para obtener datos relevantes tomamos un promedio de las mediciones.\\
-\indent A la hora de encarar la experimentación, lo que realizamos fue simular corridas con 
-varios quantum para poder obtener una aproximación del efecto del $quantum$ en la ejecución del lote de tareas. 
+\indent A la hora de encarar la experimentación, lo que realizamos trabajar con
+varios quantum distintos para poder obtener una mejor apreciacion 
+del efecto del $quantum$ en la ejecución de este tipo de tareas. 
 
-\indent De esta aproximación, se confeccionaron gráficos de turnaround time en función del quantum, 
-referente al estudio con 2 y 3 núcleos, los cuales se proveerán a continuación:\\
+\indent A partir de este resultado, desarrollamos los siguientes gráficos de turnaround time 
+en función del quantum, utilizando 2 y 3 núcleos
 
-\indent Luego de realizar mediciones con distintos $quantum$, tomamos la decisión de trabajar con los mismos $quantum$ para cada nucleo
-al trabajar con más de 1 core. (Se muestra acontinuación un gráfico para demostrar que no era una decisión acertada trabajar
-con disversos $quantum$ para cada core).
+\indent Luego de realizar mediciones con distintos $quantum$,
+tomamos la decisión de trabajar con los mismos $quantum$ para cada nucleo
+al trabajar con más de 1 core. Igualmente, mostraremos a continuacion un grafico
+ejemplificando la diferencia que se produce al trabajar con distintos $quantums$ por
+core.\\
 
 \begin{center}
     	\includegraphics[width=1\textwidth]{./EJ7/turnarounddistquan.png}
@@ -90,11 +93,13 @@ con disversos $quantum$ para cada core).
 	{$Eje X = Quantum; $\\$ Eje Y = Tiempo$}\\
  \end{center}
 
-\indent Al realizar, este gráfico y varias mediciones con distintos $quantum$ por core, nos dimos cuenta que no terminaban
-siendo mediciones rigurosas, ya que una tarea podia estar corriendo con distintos tiempos por la migracion de procesos por core.\\
-\indent Por ende, optamos por realizar mediciones con igualdad de $quantum$ por core para obtener la mejor performance posible.\\
- 
- \indent Por consiguiente, al trabajar con las nuevas mediciones, conjeturamos las siguientes hipótesis:
+\indent Al realizar este gráfico y varias mediciones con distintos $quantum$ 
+por core, observamos que no eran mediciones rigurosas, 
+ya que una proceso podria estar corriendo con distintos tiempos por la
+migracion de procesos por core.\\
+
+ \indent Por consiguiente, al trabajar con las nuevas mediciones, 
+ concluimos con 2 hipotesis:
  
  \begin{itemize}
   \item Con 2 nucleos las mediciones de tiempo tienden a estabilizarse a partir de un $quantum$ igual a 9.
@@ -128,8 +133,11 @@ siendo mediciones rigurosas, ya que una tarea podia estar corriendo con distinto
  \end{center}
 
   
-   \indent La performance sigue mejorando,a partir de este valor, el desempeño comienza a estabilizarse, como muestran los siguiente dos gráficos. 
-   Las pequeñas diferencias en los valores responden a la pseudoaleatoridad de las tareas TaskBatch.\\
+   \indent La performance sigue mejorando,a partir de este valor, el desempeño 
+   comienza a estabilizarse, como muestran los siguiente dos gráficos. 
+   
+   Las pequeñas diferencias en los valores se deben a que este tipo de tarea presenta
+   una pseudoaleatoridad notoria.\\
   
    \begin{center}
     	\includegraphics[width=450pt]{./EJ7/ej7tour2core5quan.png}
@@ -142,13 +150,13 @@ siendo mediciones rigurosas, ya que una tarea podia estar corriendo con distinto
 	{$Lote 1$ - Turnaround - 2 core - Quantum igual a 13}	
  \end{center}
 
- \indent Como mencionamos, las mediciones tienden a estabilizarse con un $quantum$ igual a 9, pero la mejor performance
- obtenida es con un $quantum$ igual a 13, teniendo en cuenta la pseudoaleatoridad del tipo de tarea utilizada.
- \indent Se puede observar en la primer figura que a pesar de trabajar con 2 cores, al tener un quantum bajo (igual a 2) 
- el costo es alto.\\
+ \indent Como mencionamos, las mediciones tienden a estabilizarse con un $quantum$ 
+ igual a 9, pero la mejor performance obtenida es con un $quantum$ igual a 13,
+ teniendo en cuenta como mencionamos la pseudoaleatoridad de este tipo de tarea.\\
+ \indent Se puede observar en la primer figura que a pesar de trabajar con 2 cores, 
+ al tener un quantum bajo (igual a 2)  el costo es alto.
   
-  
- \begin{center}
+   \begin{center}
     	\includegraphics[width=1\textwidth]{./EJ7/tour2core.png}
 	{Turnaround - 2 core}	\\
 	{$Eje X = Quantum$\\$ Eje Y = Tiempo$}\\
@@ -164,21 +172,21 @@ siendo mediciones rigurosas, ya que una tarea podia estar corriendo con distinto
 	{$Eje X = Quantum$\\$Eje Y = Tiempo$}\\
  \end{center} 
  
- \indent Con este tipo de metrica, se comienza a estabilizar a partir del $quantum$ igual a 5, obteniendo su mejor
- performance con el $quantum$ igual a 13.\\
+ \indent Con este tipo de metrica, se comienza a estabilizar a partir del $quantum$ igual
+ a 5, obteniendo su mejor  performance con el $quantum$ igual a 13.\\
  
    \begin{center}
    \textbf{3 Core}
    \end{center}
-   \indent A continuación, al igual que con 2 cores, mostraremos los Diagramas de Gantt mas relevantes:
+   \indent A continuación, al igual que con 2 cores, mostraremos los resultados mas relevantes:
    
    \begin{center}
     	\includegraphics[width=450pt]{./EJ7/ej7tour3core1quan.png}
 	{$Lote 1$ - Turnaround - 3 core - Quantum igual a 2}	
  \end{center}
 
- \indent Se observa que al tener otro core mas,a diferencia de con 2, a pesar de estar con un $quantum$ bajo,
- la performance mejora bastante.\\ 
+ \indent Se observa que al tener otro core mas,a diferencia de con 2, 
+ a pesar de estar con un $quantum$ bajo, la performance va en alto.\\ 
  
    \begin{center}
     	\includegraphics[width=450pt]{./EJ7/ej7tour3core4quan.png}
@@ -203,9 +211,10 @@ siendo mediciones rigurosas, ya que una tarea podia estar corriendo con distinto
 	{$Lote 1$ - Turnaround - 3 core - Quantum igual a 15}	
  \end{center}
  
- \indent A diferencia que en nuestra hipótesis conjeturada para con dos cores, con un $quantum$ igual a 11 se obtiene la mejor
- performance, pero teniendo en cuenta la pseudoaleatoridad del tipo de tarea con la que se trabajo, a partir del $quantum$ igual
- a 9 ya se estabiliza notoriamente.\\
+ \indent A diferencia que en nuestra hipótesis conjeturada para con dos cores, 
+ con un $quantum$ igual a 11 se obtiene la mejor  performance, 
+ pero teniendo en cuenta el tipo de tarea con la 
+ que se estuvo trabajando, a partir del $quantum$ igual a 9 ya se estabiliza notoriamente.\\
    
     \begin{center}
     	\includegraphics[width=1\textwidth]{./EJ7/tour3core.png}
@@ -223,24 +232,29 @@ siendo mediciones rigurosas, ya que una tarea podia estar corriendo con distinto
 	{$Eje X = Quantum $\\$Eje Y = Tiempo$}\\
  \end{center} 
  
-   \indent Con este tipo de metrica,se obteniene a diferencia de con Turnaround  su mejor
-   performance con el $quantum$ igual a 15.\\
+   \indent Con este tipo de metrica,se obteniene a diferencia de con Turnaround  
+   su mejor performance con el $quantum$ igual a 15.\\
   
  \begin{center}
   \textbf{Conclusiones}
  \end{center}
 
 
-\indent \indent La diferencia entre los valores de quantum entre los casos se puede atribuir a que cada vez que 
-agregamos un núcleo aumentamos la posibilidad de una migración de la tareas.\\
-\indent \indent En todos lo casos se observa la influencia negativa que proviene de elegir un quantum con valores pequeños.\\
-\indent \indent Agregar núcleos de procesamiento mejora significativamente la performance de acuerdo a la métricas con las que
-trabajamos, al permitir más procesamiento en pararelo y disminuyendo los waiting time de las tareas.\\
-\indent \indent  Fijada una cantidad de núcleos, aumentar el valor del quantum también mejora la performance, 
-especialmente los tiempos referidos a las tareas que menos cantidad de bloqueos tienen. 
-Igualmente, a partir de cierto valor de quantum, las mejoras en la performance dejan de ser muy significativas. 
-Esto se produce a que las tareas con mas cantidad de bloqueos en algun momento dejan de consumir todo
-su quantum si seguimos aumentando el valor. 
+\indent \indent La diferencia entre los valores de quantum entre los casos 
+se puede presumir a que cada vez que agregamos un núcleo aumentamos 
+la posibilidad de una migración de la tareas.\\
+\indent \indent En todos lo casos se observa la influencia negativa que proviene 
+de elegir un quantum con valores pequeños.\\
+\indent \indent Agregar núcleos de procesamiento mejora significativamente 
+la performance de acuerdo a la métricas con las que
+trabajamos, al permitir más procesamiento en pararelo y disminuyendo 
+los waiting time de las tareas.\\
+\indent \indent  Fijada una cantidad de núcleos puntual, aumentar el valor del
+quantum también mejora la performance, igualmente, como vimos, a partir de cierto valor 
+de quantum, las mejoras en la performance tienden a estabilizarse y dejan de ser 
+muy significativas. 
+Esto se produce a que las tareas con mas cantidad de bloqueos en 
+algun momento dejan de consumir todo el quantum otorgado si este es aumentado en su valor. 
  
  
  
@@ -443,5 +457,96 @@ A continuacion un ejemplo, con el siguiente lote:
 
   
 \subsubsection[Resolución Ejercicio 9]{Ejercicio 9}
+
+\indent Luego del estudio de la relacion de ambos algoritmos pudimos conjeturar las siguientes hipotesis:
+
+\begin{itemize}
+\item El Scheduler SchedFixed da prioridad a las tareas que menor periodo tengan.
+\item El Scheduler SchedDynamic da prioridad a las tareas que esten proximas a terminar su deadline.
+ \item El Scheduler SchedFixed al dar prioridad a tareas con menor periodo, puede producir inanicion sin importar las
+ tareas que lleguen con un deadline alto y necesidad de correr de inmediato.
+\end{itemize}
+
+Iniciando con nuestra primer conjetura:
+
+\textbf{El Scheduler SchedFixed da prioridad a las tareas que menor periodo tengan.}
+
+Trabajando con el lote:\\
+
+\begin{verbatim}
+                                    &A2,5,2
+                                    &B3,10,5
+                                    &C3,13,5
+\end{verbatim}
+
+LLegamos a los siguientes resultados:\\
+
+\begin{center}
+    	\includegraphics[width=450pt]{fixedej8a.png}
+	{$Lote 1$ - SchedFixed - 1 core }	
+ \end{center}
+
+Se puede observar como las tareas de familia A que presentan un menor periodo en comparacion son ejecutadas mas rapidamente.\\
+
+Continuando con nuestra segunda conjetura:
+
+\textbf{El Scheduler SchedDynamic da prioridad a las tareas que esten proximas a terminar su deadline}
+
+Para demostrar esta conjetura, trabajamos tanto con periodos como con tiempo de ejecucion mas largos.\\
+
+Un ejemplo de uno de los lotes que utilizamos fue:\\
+\begin{verbatim}
+&B3,10,5
+&C3,7,5
+@5: 
+&A2,20,19
+\end{verbatim}
+
+Con lo que, recibimos ciertos datos relevantes:
+
+\begin{center}
+    	\includegraphics[width=450pt]{Dynamicej8b.png}
+	{$Lote 2$ - SchedDynamic - 1 core }	
+ \end{center}
+
+Aqui, podemos observar como tareas con periodo mas largo en comparacion pero con mayor tiempo de ejecucion a su vez, tienen
+mayor prioridad y hasta posibilidad de desalojar otra tarea para ser ejecutada de inmediato. Se puede ver en este ejemplo
+como la tarea A que ingresa en un tiempo @5 con un periodo alto pero tambien un run time alto hace que el scheduler, desaloje
+la que esta corriendo y ejecute esta familia de tareas.\\
+
+Con estas dos hipotesis demostradas, nos llevo a la conclusion de nuestra 3º, en la cual como mencionamos, el Scheduler SchedFixed
+al dar prioridad a tareas con periodo mas corto, puede dejar de lado tareas con necesidad de ejecucion inmediata por tener un deadline
+proximo a terminar, mientras que, el Scheduler SchedDynamic optimiza esta situación dando prioridad a las tareas que esten
+proximas a finalizar su deadline.\\
+
+Un ejemplo de lote de lo conjeturado sería el siguiente:
+
+\begin{verbatim}
+&B3,10,5
+&C3,7,5
+&A2,20,19
+
+\end{verbatim}
+
+Como vemos, tenemos tareas con periodo relativamente corto, y otras con periodo mas largo, pero con su tiempo de ejecucion mas grande
+también.\\
+
+Con este tipo de lote llegamos a los siguientes resultados:\\
+
+\begin{center}
+    	\includegraphics[width=450pt]{Fixed8c.png}
+	{$Lote 3$ - SchedFixed - 1 core }	
+ \end{center}
+
+
+\begin{center}
+    	\includegraphics[width=450pt]{Dynamic8c.png}
+	{$Lote 3$ - SchedDynamic - 1 core }	
+ \end{center}
+
+Se puede observar lo que hemos enunciado y la negatividad que presenta el SchedFixed en comparacion al realizar ejecuciones
+con tareas con periodos cortos y otras con periodos mas amplios pero con tiempos de ejecucion similares al valor de su periodo. Dandole
+el privilegio de ejecucion a las mas cortas que a las otras.\\
+
 
 \subsubsection[Resolución Ejercicio 10]{Ejercicio 10}

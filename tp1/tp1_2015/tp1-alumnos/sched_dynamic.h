@@ -29,7 +29,7 @@ class SchedDynamic : public SchedBase {
 
 	private:
 		std::queue<int> q;
-		std::list<tarea_d> tareas; //mayor periodo menor prioridad!
+		std::list<tarea_d> tareas; 
 		int primera_pasada;
 		int next(int cpu);
 		void insertarOrdenado(tarea_d tarea);

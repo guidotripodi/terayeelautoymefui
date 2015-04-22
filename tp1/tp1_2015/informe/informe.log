@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.3)  21 APR 2015 21:36
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.3)  22 APR 2015 00:38
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -932,7 +932,114 @@ Underfull \hbox (badness 10000) in paragraph at lines 450--454
 
  []
 
-) [22 <./EJ8_RR2/dif5corerr2.png (PNG copy)>]
+
+Underfull \hbox (badness 10000) in paragraph at lines 461--462
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 470--471
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 472--473
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 474--475
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 482--483
+
+ []
+
+<fixedej8a.png, id=117, 1030.85126pt x 308.15125pt>
+File: fixedej8a.png Graphic file (type png)
+ <use fixedej8a.png>
+Package pdftex.def Info: fixedej8a.png used on input line 485.
+(pdftex.def)             Requested size: 450.0pt x 134.5149pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 489--490
+
+ []
+
+[22 <./EJ8_RR2/dif5corerr2.png (PNG copy)> <./fixedej8a.png (PNG copy)>]
+Underfull \hbox (badness 10000) in paragraph at lines 491--492
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 493--494
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 495--496
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 497--498
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 505--506
+
+ []
+
+<Dynamicej8b.png, id=121, 1030.85126pt x 308.15125pt>
+File: Dynamicej8b.png Graphic file (type png)
+ <use Dynamicej8b.png>
+Package pdftex.def Info: Dynamicej8b.png used on input line 508.
+(pdftex.def)             Requested size: 450.0pt x 134.5149pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 512--516
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 517--521
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 522--523
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 535--537
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 538--539
+
+ []
+
+<Fixed8c.png, id=122, 1030.85126pt x 308.15125pt>
+File: Fixed8c.png Graphic file (type png)
+ <use Fixed8c.png>
+Package pdftex.def Info: Fixed8c.png used on input line 541.
+(pdftex.def)             Requested size: 450.0pt x 134.5149pt.
+ [23 <./Dynamicej8b.png (PNG copy)>] <Dynamic8c.png, id=127, 1030.85126pt x 308
+.15125pt>
+File: Dynamic8c.png Graphic file (type png)
+
+<use Dynamic8c.png>
+Package pdftex.def Info: Dynamic8c.png used on input line 547.
+(pdftex.def)             Requested size: 450.0pt x 134.5149pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 551--555
+
+ []
+
+) [24 <./Fixed8c.png (PNG copy)> <./Dynamic8c.png (PNG copy)>]
 Overfull \hbox (50.16331pt too wide) in paragraph at lines 143--145
 \OT1/cmr/m/n/10 (\OML/cmm/m/it/10 https \OT1/cmr/m/n/10 : \OML/cmm/m/it/10 ==ev
 a:fing:edu:uy=pluginfile:php=\OT1/cmr/m/n/10 75120\OML/cmm/m/it/10 =mod[]resour
@@ -941,12 +1048,12 @@ ce=content=\OT1/cmr/m/n/10 1\OML/cmm/m/it/10 =\OT1/cmr/m/n/10 6 \OMS/cmsy/m/n/1
 /n/10 ^^@ \OML/cmm/m/it/10 Planificacion:pdf\OT1/cmr/m/n/10 )$ 
  []
 
-AED: lastpage setting LastPage [23] (./informe.aux) ) 
+AED: lastpage setting LastPage [25] (./informe.aux) ) 
 Here is how much of TeX's memory you used:
- 2520 strings out of 495028
- 36915 string characters out of 6181498
+ 2540 strings out of 495028
+ 37251 string characters out of 6181498
  101921 words of memory out of 5000000
- 5658 multiletter control sequences out of 15000+600000
+ 5674 multiletter control sequences out of 15000+600000
  5978 words of font info for 22 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  37i,11n,43p,476b,336s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -961,10 +1068,10 @@ msfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
 /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb></usr/s
 hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/t
 exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on informe.pdf (23 pages, 1363953 bytes).
+Output written on informe.pdf (25 pages, 1412864 bytes).
 PDF statistics:
- 160 PDF objects out of 1000 (max. 8388607)
- 86 compressed objects within 1 object stream
+ 171 PDF objects out of 1000 (max. 8388607)
+ 91 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 181 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 201 words of extra memory for PDF output out of 10000 (max. 10000000)
 

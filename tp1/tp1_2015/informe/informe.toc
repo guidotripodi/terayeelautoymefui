@@ -18,5 +18,5 @@
 \contentsline {subsubsection}{\numberline {5.2.2}Resoluci\IeC {\'o}n Ejercicio 7}{12}
 \contentsline {subsubsection}{\numberline {5.2.3}Resoluci\IeC {\'o}n Ejercicio 8}{18}
 \contentsline {subsubsection}{\numberline {5.2.4}Resoluci\IeC {\'o}n Ejercicio 9}{22}
-\contentsline {subsubsection}{\numberline {5.2.5}Resoluci\IeC {\'o}n Ejercicio 10}{22}
-\contentsline {section}{\numberline {6}Bibliograf\IeC {\'\i }a}{23}
+\contentsline {subsubsection}{\numberline {5.2.5}Resoluci\IeC {\'o}n Ejercicio 10}{24}
+\contentsline {section}{\numberline {6}Bibliograf\IeC {\'\i }a}{25}

@@ -458,4 +458,100 @@ A continuacion un ejemplo, con el siguiente lote:
   
 \subsubsection[Resolución Ejercicio 9]{Ejercicio 9}
 
+\indent Luego del estudio de la relacion de ambos algoritmos pudimos conjeturar las siguientes hipotesis:\\
+
+\begin{itemize}
+\item El Scheduler SchedFixed da prioridad a las tareas que menor periodo tengan.
+\item El Scheduler SchedDynamic da prioridad a las tareas que esten proximas a terminar su deadline.
+ \item El Scheduler SchedFixed al dar prioridad a tareas con menor periodo, puede producir inanicion sin importar las
+ tareas que lleguen con un deadline alto y necesidad de correr de inmediato.
+\end{itemize}
+
+Iniciando con nuestra primer conjetura:\\
+
+\textbf{El Scheduler SchedFixed da prioridad a las tareas que menor periodo tengan.}\\
+
+Trabajando con el lote:\\
+
+\begin{verbatim}
+                                    &A2,5,2
+                                    &B3,10,5
+                                    &C3,13,5
+\end{verbatim}
+
+LLegamos a los siguientes resultados:\\
+
+\begin{center}
+    	\includegraphics[width=450pt]{fixedej8a.png}
+	{$Lote 1$ - SchedFixed - 1 core }	
+ \end{center}
+
+Se puede observar como las tareas de familia A que presentan un menor periodo en comparacion son ejecutadas mas rapidamente.\\
+
+Continuando con nuestra segunda conjetura:\\
+
+\textbf{El Scheduler SchedDynamic da prioridad a las tareas que esten proximas a terminar su deadline}\\
+
+Para demostrar esta conjetura, trabajamos tanto con periodos como con tiempo de ejecucion mas largos.\\
+
+Un ejemplo de uno de los lotes que utilizamos fue:\\
+\begin{verbatim}
+                                     &B3,10,5
+                                     &C3,7,5
+                                     @5: 
+                                     &A2,20,19
+\end{verbatim}
+
+Con lo que, recibimos ciertos datos relevantes:\\
+
+\begin{center}
+    	\includegraphics[width=450pt]{Dynamicej8b.png}
+	{$Lote 2$ - SchedDynamic - 1 core }	
+ \end{center}
+
+Aqui, podemos observar como tareas con periodo mas largo en comparacion pero con mayor tiempo de ejecucion a su vez, tienen
+mayor prioridad y hasta posibilidad de desalojar otra tarea para ser ejecutada de inmediato. Se puede ver en este ejemplo
+como la tarea A que ingresa en un tiempo @5 con un periodo alto pero tambien un run time alto hace que el scheduler, desaloje
+la que esta corriendo y ejecute esta familia de tareas.\\
+
+Con estas dos hipotesis demostradas, nos llevo a la conclusion de nuestra 3º, en la cual como mencionamos,\textbf{el Scheduler SchedFixed
+al dar prioridad a tareas con periodo mas corto, puede dejar de lado tareas con necesidad de ejecucion inmediata por tener un deadline
+proximo a terminar, mientras que, el Scheduler SchedDynamic optimiza esta situación dando prioridad a las tareas que esten
+proximas a finalizar su deadline}\\
+
+Un ejemplo de lote de lo conjeturado sería el siguiente:\\
+
+
+\begin{verbatim}
+                                     &B3,10,5
+                                     &C3,7,5
+                                     &A2,20,19
+
+\end{verbatim}
+ 
+
+
+
+Como vemos, tenemos tareas con periodo relativamente corto, y otras con periodo mas largo, pero con su tiempo de ejecucion mas grande
+también.\\
+
+Con este tipo de lote llegamos a los siguientes resultados:\\
+
+\begin{center}
+    	\includegraphics[width=450pt]{Fixed8c.png}
+	{$Lote 3$ - SchedFixed - 1 core }	
+ \end{center}
+
+
+\begin{center}
+    	\includegraphics[width=450pt]{Dynamic8c.png}
+	{$Lote 3$ - SchedDynamic - 1 core }	
+ \end{center}
+
+Se puede observar lo que hemos enunciado y la negatividad que presenta el SchedFixed en comparacion al realizar ejecuciones
+con tareas con periodos cortos y otras con periodos mas amplios pero con tiempos de ejecucion similares al valor de su periodo. Dandole
+el privilegio de ejecucion a las mas cortas que a las otras. En este ejemplo puntualmente, el SchedFixed deja a la tarea de familia
+A perder hasta 3 veces su periodo a pesar de estar proxima a finalizar su deadline, dando prioridad a las de menor periodo.\\
+
+
 \subsubsection[Resolución Ejercicio 10]{Ejercicio 10}

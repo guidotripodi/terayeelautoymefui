@@ -38,16 +38,12 @@ void SchedDynamic::unblock(int pid) {
 int SchedDynamic::tick(int cpu, const enum Motivo m) {
 	std::list<tarea_d>::iterator it;
 	std::list<tarea_d>::iterator it2;
-	//tarea_d tarea;
 	switch (m) {
 		case EXIT:
 			it = tareas.begin();
 			/* SI TERMINO LA TAREA CHEQUEO SI FUE SU ULTIMA REPETICION O NO
 			SI NO FUE LA ULTIMA DESCUENTO UNA REPETICION Y PONGO EL
 			PERIODO EN SU VALOR INICIAL */
-			for (it=tareas.begin(); it!=tareas.end(); ++it){
-				//printf("tarea: %i\n", it->pid);
-			}
 			for (it=tareas.begin(); it!=tareas.end(); ++it)	{
 				if (it->pid == current_pid(cpu)){
 
@@ -85,9 +81,7 @@ int SchedDynamic::tick(int cpu, const enum Motivo m) {
 						it->deadline--;
 					}
 				}
-				printf("ANTES DE CHEQUEAR, DEADLINE: %i\n", tareas.begin()->deadline);
 				if(chequearPeriodos()){
-				//	printf("entro %s\n");
 					if (current_pid(cpu) != -1){
 							return next(cpu);
 					}else{
@@ -152,9 +146,4 @@ void SchedDynamic::insertarOrdenado(tarea_d tarea){
 		if (!inserto) {
 			tareas.push_back(tarea);
 		}
-it = tareas.begin();
-for (it=tareas.begin(); it!=tareas.end(); ++it){
-				printf("tarea: %i\n", it->pid);
-				printf("Deadline: %i\n", it->deadline);
-			}
 }	
