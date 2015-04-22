@@ -167,19 +167,46 @@ estén en condiciones de correr serán ejecutadas y ninguna será negada de tiem
 \textbf{PARTE 1}\\ 
 \end{center}
 
-
+\begin{center}
+ \textbf{¿Qué problema están intentando resolver los autores?}
+\end{center}
 
 En el paper "Scheduling algorithms for multiprogramming
 in a hard-real-time environment" los autores están intentando mostrar y resolver un problema que estaba surgiendo en esa época (1973). El uso de computadoras que controlaban y monitoreaban procesos industriales había empezado a incrementarse notablemente. Con esto aparecen los sistemas que tienen un "tiempo crítico" para procesar. Es decir, sistemas en donde el procesamiento estaba sujeto a un tiempo máximo al cual ejecutarse.\\
 Por lo tanto necesitaban maximizar la eficiencia del uso del procesamiento, y para eso afirman que eso es posible mediante un algoritmo de schedulling que asegure procesar antes de ese tiempo crítico.\\
 Por eso en el paper proponen dos algoritmos que manejan prioridades: prioridades fijas y dinámicas.\\
 
+\begin{center}
+ \textbf{¿Por qué introducen el algoritmo de la sección 7?\\¿Qué problema buscan resolver
+ con esto?}
+\end{center}
 
 En la sección 7 introducen el algoritmo de prioridades dinamicas tratando de resolver un problema que muestra el algoritmo de prioridades fijas descripto en las secciones anteriores.\\
 Al tener prioridades fijas, puede ocurrir inanición. Es decir, puede pasar que siempre lleguen tareas con prioridades más altas de las que se están por corriendo o por correr, dejándolas en espera y nunca atendiéndolas.\\
 El algoritmo que presenta en esta sección tiene el nombre de "The deadline driven scheduling algorithm", explicando que se trata de un algoritmo que da más prioridad a las tareas en las que su deadline esté mas cercano. \\
 
+\begin{center}
+ \textbf{Explicar coloquialmente el significado del teorema 7}
+\end{center}
 
+El teorema 7 enuncia lo siguiente:\\
+
+\textbf{For a given set of m task, the deadline driven scheduling algorithm is feasible if
+and only if}
+\begin{center}
+ \[(C_{1}/T_{1})+(C_{2}/T_{2})+......+(C_{m}/T_{m}) \leq 1\]
+
+\end{center}
+
+Dicho teorema habla sobre la factibilidad y uso de las tareas en el algoritmo que 
+se utilice como solución a la particular dificultad del algoritmo del scheduler fixed. \\
+Puntualmente el lote de tareas m deberá cumplir una precondición en donde la 
+suma de cada una de las relaciones entre el run time o tiempo de ejecución de la tarea, sobre el período de 
+la misma de todas las tareas sea igual o menor a 1.\\
+
+Esto quiere decir que el tiempo de ejecución de una tarea deberá ser considerablemente
+menor al período de la misma para que el desarrollo y comportamiento del scheduler sea el deseado
+y pudiese resolver la dificultad que se había generado por el anterior.\\
 
 \begin{center}
  
@@ -188,28 +215,26 @@ El algoritmo que presenta en esta sección tiene el nombre de "The deadline driv
 \end{center}
 \hspace{3pt}
 \begin{center}
-\textbf{Algoritmo Scheduler Fixed - Explicacion de Implementacion}\\ 
+\textbf{Algoritmo Scheduler Fixed - Explicación de Implementación}\\ 
 \end{center}
 
 
 
 
 
-Luego del estudio del Paper solicitado se realizo la implementacion del dicho algoritmo,
+Luego del estudio del Paper solicitado se realizo la implementación del dicho algoritmo,
 utilizando una serie de estructuras para que este funcione acorde a lo pedido:
 
 \begin{itemize}
- \item Un struct denominado $tarea$ el cual contiene el pid, el run\_time\_actual, periodo dandonos
+ \item Un struct denominado  \textbf{tarea} el cual contiene el pid, el run\_time\_actual, periodo dandonos
  informacion de la tarea cargada.
- \item Una lista de $tarea$ nombrada $tareas$, esta es ordenada segun el periodo de las tareas
+ \item Una lista de $tarea$ nombrada \textbf{tareas}, esta es ordenada segun el periodo de las tareas
  de menor a mayor, obteniendo la prioridad del algoritmo.
- \item Una variable global llamada $mayor$ en la cual guardamos el pid de la tarea con mayor
- periodo.
- \item Una variable global $primera\_pasada$ con la cual podemos realizar nuestra primer 
+  \item Una variable global \textbf{primera\_pasada} con la cual podemos realizar nuestra primer 
  comparacion de periodos entre tareas.
 \end{itemize}
 
-Ademas de estas estructuras utilizamos una funcion privada $insertarOrdenado$ la cual como el
+Ademas de estas estructuras utilizamos una funcion privada \textbf{insertarOrdenado} la cual como el
 nombre lo dice va guardando en nuestra lista de tareas, las tareas a corde se van cargando en su
 respectivo lugar comparando los periodos de las mismas.\\
 De esta forma, la secuencia del algoritmo fue la siguiente:
@@ -222,4 +247,63 @@ De esta forma, la secuencia del algoritmo fue la siguiente:
  \end{enumerate}
 
 De esta forma, con las estructuras y funciones logramos que nuestro scheduler trabaje de la forma
-deseada.
+deseada.\\
+
+Vale aclarar que, para que el scheduler funcione correctamente, es recomendable que los lotes de tareas
+cumplan la factibilidad enunciada en el paper estudiado.\\
+
+
+\hspace{3pt}
+\begin{center}
+\textbf{Algoritmo Scheduler Dynamic - Explicación de Implementación}\\ 
+\end{center}
+
+Una vez finalizado el estudio del paper, y habiendo notado las dificultades puntuales que enuncia el mismo
+sobre el anterior Scheduler, se solicito desarrollar uno nuevo que solucione dichos problemas.\\
+
+Para el desarrollo del mismo trabajamos con ciertas estructuras puntuales, las cuales enunciamos
+a continuación:\\
+
+\begin{itemize}
+ \item Un struct denominado\textbf{tarea}  el cual contiene el pid, el run\_time\_actual, periodo y el deadline para tener
+ informacion de la tarea cargada.
+ \item Una lista de $tarea$ nombrada \textbf{tareas}, esta es ordenada segun el deadline de las tareas
+ de menor a mayor, obteniendo la prioridad del algoritmo.
+  \item Una variable global \textbf{primera\_pasada} con la cual podemos realizar nuestra primer 
+ comparacion de periodos entre tareas.
+\end{itemize}
+
+Además de estas estructuras puntuales, definimos unas funciones de forma privada para poder
+desarrollar el Scheduler en cuestión:
+
+\begin{itemize}
+ \item Función \textbf{insertarOrdenado}  
+ \item Función  \textbf{chequearPeriodos}
+  \end{itemize}
+  
+La función \textbf{insertarOrdenado}  como el nombre lo dice va guardando en nuestra lista $tareas$ las tareas
+acorde van siendo cargadas respetando un orden, dicho orden se basa en la prioridad dada por los
+deadline de las tareas. A menor deadline la tarea quedara en los primeros lugares de la lista.\\
+
+La función \textbf{chequearPeriodos}, la cual revisa si la tarea que se encuentra al principio de la lista
+tiene su deadline menor o igual a cero.\\
+
+A partir de estas estructuras y funciones procedemos a explicar la secuencia de nuestro algoritmo:
+
+\begin{enumerate}
+ \item Llega una nueva tarea, se chequea si es la primera en llegar y en caso de no serlo se la inserta ordenadamente.
+ \item Empieza a correr una tarea, y en cada Tick de reloj del cpu se va disminuyendo en uno el periodo y deadline
+ de todas las demas tareas que no estan corriendo, mientras que la que se encuentra ejecutando
+ se le disminuye en uno su run\_time y su periodo.
+ \item En caso de que nuestra función booleana $chequearPeriodos$ de True en un tick de reloj
+ y la tarea que este corriendo no haya finalizado esta sera desalojada guardando su run\_time actual y su deadline
+ insertandola ordenadamente en la lista para que luego pueda finalizar su ejecución.
+ \item Si $chequearPeriodos$ no dio nunca True durante la ejecución de la tarea, esta podra finalizar sin
+ inconvenientes y posteriormente se cargará la primer tarea de la lista en orden de prioridad.
+\end{enumerate}
+
+De esta forma, nuestro Scheduler continua hasta finalizar todas las tareas manteniendo esta secuencia.\\
+
+Vale aclarar, como en el anterior algoritmo, que para un correcto funcionamiento de nuestro
+Scheduler es recomendable que el lote de tareas a utilizar cumpla la factibilidad enunciada
+en el paper.\\
