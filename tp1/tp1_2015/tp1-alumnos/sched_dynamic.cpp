@@ -20,6 +20,9 @@ void SchedDynamic::load(int pid) {
 	nueva_tarea.pid = pid;
 	nueva_tarea.run_time_actual = declared_cputime(pid);
 	nueva_tarea.deadline = period(pid) - declared_cputime(pid);
+	//printf("Tarea: %i\n", pid);
+	//printf("Deadline: %i\n", nueva_tarea.deadline);
+	//printf("ESPACIOOOO%s\n");
 	nueva_tarea.periodo = period(pid);
 	if (!tareas.empty()){
 		insertarOrdenado(nueva_tarea);
@@ -42,6 +45,9 @@ int SchedDynamic::tick(int cpu, const enum Motivo m) {
 			/* SI TERMINO LA TAREA CHEQUEO SI FUE SU ULTIMA REPETICION O NO
 			SI NO FUE LA ULTIMA DESCUENTO UNA REPETICION Y PONGO EL
 			PERIODO EN SU VALOR INICIAL */
+			for (it=tareas.begin(); it!=tareas.end(); ++it){
+				//printf("tarea: %i\n", it->pid);
+			}
 			for (it=tareas.begin(); it!=tareas.end(); ++it)	{
 				if (it->pid == current_pid(cpu)){
 
@@ -79,8 +85,10 @@ int SchedDynamic::tick(int cpu, const enum Motivo m) {
 						it->deadline--;
 					}
 				}
+				printf("ANTES DE CHEQUEAR, DEADLINE: %i\n", tareas.begin()->deadline);
 				if(chequearPeriodos()){
-						if (current_pid(cpu) != -1){
+				//	printf("entro %s\n");
+					if (current_pid(cpu) != -1){
 							return next(cpu);
 					}else{
 							it = tareas.begin();
@@ -100,6 +108,8 @@ int SchedDynamic::tick(int cpu, const enum Motivo m) {
 					}
 			}
 			break;
+	
+	
 		}
 	return 0;
 }
@@ -142,6 +152,9 @@ void SchedDynamic::insertarOrdenado(tarea_d tarea){
 		if (!inserto) {
 			tareas.push_back(tarea);
 		}
-}
-
-
+it = tareas.begin();
+for (it=tareas.begin(); it!=tareas.end(); ++it){
+				printf("tarea: %i\n", it->pid);
+				printf("Deadline: %i\n", it->deadline);
+			}
+}	

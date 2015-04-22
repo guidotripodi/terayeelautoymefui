@@ -5,6 +5,9 @@
 using namespace std;
 
 SchedFixed::SchedFixed(vector<int> argn) {
+	for (int i = 0; i < argn[0]; i++){
+		cores.push_back(-1); //todos los cores arrancan vacíos
+	}
 }
 
 
@@ -45,10 +48,7 @@ int SchedFixed::tick(int cpu, const enum Motivo m) {
 						it2 = it;
 						it2++;
 						tareas.erase(it,it2);
-					
-			for (it=tareas.begin(); it!=tareas.end(); ++it){
-				}
-					return next(cpu); 
+						return next(cpu); 
 				}
 			}
 			break;
@@ -57,7 +57,7 @@ int SchedFixed::tick(int cpu, const enum Motivo m) {
 			SI FUE SU ULTIMA REPETICION O NO
 			SI NO FUE LA ULTIMA DESCUENTO UNA REPETICION Y PONGO EL
 			PERIODO EN SU VALOR INICIAL*/ 
-		case TICK:
+			case TICK:
 		/* SI TERMINO EL RUN TIME DE LA TAREA ESTANDO BLOQUEADA CHEQUEO 
 			SI FUE SU ULTIMA REPETICION O NO
 			SI NO FUE LA ULTIMA DESCUENTO UNA REPETICION Y PONGO EL
@@ -85,15 +85,13 @@ void SchedFixed::insertarOrdenado(tarea_t tarea){
 		for (it=tareas.begin(); it!=tareas.end(); ++it)	{
 			if (period(it->pid) >= period(tarea.pid)){
 				tareas.insert(it, tarea);
-				inserto =true;
 				break;
 			}
 		}
-	}	
 		if (!inserto) {
 			tareas.push_back(tarea);
 		}
-
+	}	
 }
 
 int SchedFixed::next(int cpu){

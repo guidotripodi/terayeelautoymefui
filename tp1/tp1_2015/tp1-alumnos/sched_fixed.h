@@ -29,9 +29,13 @@ class SchedFixed : public SchedBase {
 	private:
 		std::queue<int> q;
 		std::list<tarea_t> tareas; //mayor periodo menor prioridad!
+		std::vector<int> cores;
+		int mayor; // guardamos el pid del mayor prioridad
+		int indice;
 		int primera_pasada;
 		int next(int cpu);
 		void insertarOrdenado(tarea_t tarea);
-	};
+		void restarPeriodo();
+};
 
 #endif
