@@ -5,9 +5,6 @@
 using namespace std;
 
 SchedFixed::SchedFixed(vector<int> argn) {
-	for (int i = 0; i < argn[0]; i++){
-		cores.push_back(-1); //todos los cores arrancan vacíos
-	}
 }
 
 
@@ -17,7 +14,6 @@ SchedFixed::~SchedFixed() {
 
 void SchedFixed::initialize() {
 	primera_pasada =1;
-	mayor = 0;
 	tareas.clear();
 }
 
@@ -27,17 +23,6 @@ void SchedFixed::load(int pid) {
 	nueva_tarea.run_time_actual = declared_cputime(pid);
 	nueva_tarea.periodo = 0;// el periodo este va en 0 la tomamos q entra en ready
 	//cuando corra una vez ahi si el periodo pasa al valor real
-	/*if (!tareas.empty()){
-		if (period(mayor) < period(pid)){
-			mayor = pid;
-			tareas.push_back(nueva_tarea);
-		}else{
-			insertarOrdenado(nueva_tarea);
-		}
-	}else{
-		mayor = pid;
-		tareas.push_back(nueva_tarea);
-	*/
 	insertarOrdenado(nueva_tarea);	
 }
 
@@ -54,9 +39,6 @@ int SchedFixed::tick(int cpu, const enum Motivo m) {
 			/* SI TERMINO LA TAREA CHEQUEO SI FUE SU ULTIMA REPETICION O NO
 			SI NO FUE LA ULTIMA DESCUENTO UNA REPETICION Y PONGO EL
 			PERIODO EN SU VALOR INICIAL */
-			for (it=tareas.begin(); it!=tareas.end(); ++it){
-				//printf("tarea: %i\n", it->pid);
-			}
 			for (it=tareas.begin(); it!=tareas.end(); ++it)	{
 				if (it->pid == current_pid(cpu)){
 
@@ -75,21 +57,6 @@ int SchedFixed::tick(int cpu, const enum Motivo m) {
 			SI FUE SU ULTIMA REPETICION O NO
 			SI NO FUE LA ULTIMA DESCUENTO UNA REPETICION Y PONGO EL
 			PERIODO EN SU VALOR INICIAL*/ 
-			
-		/*
-			it = tareas.begin();
-			for (it=tareas.begin(); it!=tareas.end(); ++it)	{
-				if (it->pid == current_pid(cpu)){
-					if (it->run_time_actual == 0){
-							it2 = it;
-							tareas.erase(it,it2);
-						}
-
-				}
-			}
-			return next(cpu);
-			break;
-		*/	
 		case TICK:
 		/* SI TERMINO EL RUN TIME DE LA TAREA ESTANDO BLOQUEADA CHEQUEO 
 			SI FUE SU ULTIMA REPETICION O NO
@@ -100,18 +67,7 @@ int SchedFixed::tick(int cpu, const enum Motivo m) {
 				primera_pasada = 0;
 				return next(cpu);
 			}else{
-			/*it = tareas.begin();
-			for (it=tareas.begin(); it!=tareas.end(); ++it)	{
-				if (it->pid == current_pid(cpu)){
-					if (it->run_time_actual == 0){
-							it2 = it;
-							tareas.erase(it,it2);
-						return next(cpu);
-					}else{
-						it->run_time_actual = it->run_time_actual -1;
-					*/	//restarPeriodo(); //resto periodo de las que ya corrieron alguna vez
-					
-						return current_pid(cpu);					
+				return current_pid(cpu);					
 					
 		}
 			break;
@@ -120,6 +76,7 @@ int SchedFixed::tick(int cpu, const enum Motivo m) {
 }
 
 void SchedFixed::insertarOrdenado(tarea_t tarea){
+	bool inserto = false;
 	if(tareas.empty()){
 		tareas.push_back(tarea);
 	}else{
@@ -128,25 +85,15 @@ void SchedFixed::insertarOrdenado(tarea_t tarea){
 		for (it=tareas.begin(); it!=tareas.end(); ++it)	{
 			if (period(it->pid) >= period(tarea.pid)){
 				tareas.insert(it, tarea);
+				inserto =true;
 				break;
 			}
 		}
 	}	
-}
-
-void SchedFixed::restarPeriodo(){
-	/* SI LA TAREA YA CORRIO ALGUNA VEZ LE RESTO PERIODO SIEMPRE
-	QUE NO ESTE YA EN 0 PARA Q NO PASE A NEGATIVO*/
-	std::list<tarea_t>::iterator it;
-	it = tareas.begin();
-	for (it=tareas.begin(); it!=tareas.end(); ++it)	{
-		if (it->repeticiones < it->cant_repeticiones_total){
-			if (it->periodo > 0) {
-				it->periodo--;
-			}
-					
+		if (!inserto) {
+			tareas.push_back(tarea);
 		}
-	}
+
 }
 
 int SchedFixed::next(int cpu){
@@ -157,15 +104,7 @@ int SchedFixed::next(int cpu){
 	if (tareas.empty()){ 
 		pid= IDLE_TASK;  //no hay mas tareas -.-> idle_task
 	}else {
-		std::list<tarea_t>::iterator it;
-		it = tareas.begin();
-		for (it=tareas.begin(); it!=tareas.end(); ++it)	{
-			if (it->periodo == 0){
-				pid = it->pid;
-				break;
-			}
-		}
-		cores[cpu] = pid;
+		pid = tareas.begin()->pid;
 	}
 	return pid;
 }
