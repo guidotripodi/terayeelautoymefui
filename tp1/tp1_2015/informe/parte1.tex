@@ -14,9 +14,9 @@ para 1, 2 y 3 nucleos.
 
 \subsubsection[Resolución Ejercicio 1]{Ejercicio 1}
 
-\indent Dada la simpleza del código, optamos por mostrar nuestra implementación, en vez de comentarlo detalladamente.\\
+\indent Dada la simpleza del código, optamos por mostrar nuestra ximplementación, en vez de comentarlo detalladamente.\\
 \indent Realizamos un ciclo de i < params[0], donde utilizamos la función dada por la catedra, uso\_IO a la cual le pasamos
-el pid correspondiente y un entero ciclos que es el valor random obtenido entre $bmin$ y $bmax$ 
+el pid correspondiente y un entero ciclos que es el valor random obtenido entre $bmin$ y $bmax$. Esa función uso\_IO simula una llamada bloqueante.
 \begin{center}
  \begin{verbatim}
                      ciclos = rand() % (params[2] - params[1] + 1) + params[1];
@@ -51,7 +51,7 @@ el pid correspondiente y un entero ciclos que es el valor random obtenido entre 
 
 \indent El mismo, presenta una tarea de uso intensivo $TaskCPU$ que dura unos 4 ticks, y otras dos interactivas, las cuales se
 bloquean 1 y 5 ticks respectivamente con una duración de entre 4 y 8 para la primera y 3 y 6 para la segunda.\\
-A continuacion, los respectivos graficos de mediciones
+A continuación, los respectivos gráficos de mediciones.
 
 
 \vspace*{0.3cm} \vspace*{0.3cm}
@@ -79,6 +79,6 @@ A continuacion, los respectivos graficos de mediciones
 \indent Debido a las tareas de tipo TaskConsola, se observa que en los tres casos la duración 
 de cada bloqueo es distinta.\\
 \indent A modo de análisis, se puede observar por medio de los gráficos como aumenta el paralelismo a mayor cantidad de núcleos. 
-En este scheduler en particular esto ayuda de gran manera al rendimiento del sistema, puesto que un nucleo podrá ejecutar otra tarea 
+En este scheduler en particular, esto ayuda de gran manera al rendimiento del sistema, puesto que un núcleo podrá ejecutar otra tarea 
 recién cuando haya terminado la anterior. Las consecuencias de este comportamiento son visibles en los 3 graficos. Agregando un core más, 
 el tiempo que se tarda en ejecutar por completo todas las tareas de reduce casi a la mitad.\\
