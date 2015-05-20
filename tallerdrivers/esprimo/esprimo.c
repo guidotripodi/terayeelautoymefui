@@ -12,11 +12,15 @@ MODULE_DESCRIPTION("Es primo?");
 // Variables globales
 int number;
 
-char * es_primo() {
+char * es_primo(void) {
     unsigned int i;
 
+    if (number == 0) {
+        return "0";
+    }
+
     for (i = 2; i < number; i++) {
-	if (number % i) {
+        if (number % i == 0) {
             return "0";
         }
     }
@@ -26,15 +30,17 @@ char * es_primo() {
 
 //Funciones de lectura invocada por /dev fs
 static ssize_t esprimo_read(struct file *file, char *buf, size_t count, loff_t *ppos) {
-	printk(KERN_ALERT "Mi numero %d", number);
+	printk(KERN_INFO "Mi numero %d\n", number);
+    printk(KERN_INFO "Es primo %s\n", es_primo());
     copy_to_user(buf, es_primo(), 1);
     return 1;
 }
 
 static ssize_t esprimo_write(struct file *file, const char *buf, size_t count, loff_t *ppos) {
-    number = 0;
-    copy_from_user(&number, buf, count);
-    printk(KERN_INFO "esprimo: Se ha cambiado el numero\n");
+    char input[1024];
+    copy_from_user(&input, buf, count);
+    sscanf(&input, "%d", &number);
+    printk(KERN_INFO "esprimo: Se ha cambiado el numero por %d\n", number);
     return count;
 }
 
@@ -53,7 +59,7 @@ static struct miscdevice esprimo_dev = {
 
 // Funciones utilizadas por la creacion y destruccion del modulo
 static int __init esprimo_init(void) {
-    int ret, prec_random;
+    int ret;
     // Registración del device
     ret = misc_register(&esprimo_dev);
     if (ret) {
