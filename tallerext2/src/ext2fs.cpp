@@ -288,39 +288,40 @@ struct Ext2FSInode * Ext2FS::load_inode(unsigned int inode_number)
 
 unsigned int Ext2FS::get_block_address(struct Ext2FSInode * inode, unsigned int block_number)
 {
+	// direct
 	if (block_number < 12) {
 		return inode->block[block_number];
 	}
 
 	unsigned int block_size = 1024 << _superblock->log_block_size;
 	unsigned int cant_dir = block_size/sizeof(unsigned int);
+	unsigned int buffer_block[cant_dir];
+
 	// single indirect
-	if (block_number < 12+cant_dir) {
-		unsigned char * buffer;
-		read_block(inode->block[12], buffer);
-		return (unsigned int) buffer[block_number - 12];
+	if (block_number < 12 + cant_dir) {
+		read_block(inode->block[12], (unsigned char *) buffer_block);
+		return buffer_block[block_number - 12];
 	}
 
 	//double indirect
-	if (block_number < 12+(cant_dir^2)) {
-		unsigned char * buffer[cant_dir];
-		read_block(inode->block[13], buffer);
-		unsigned int contador_tabla_indirecta = cant_dir;
-		for (int i = 1; i < block_number; ++i) {
-			if (block_number <  contador_tabla_indirecta + (cant_dir * i)){
-				unsigned char * buffer[cant_dir];
-				read_block(inode->block[contador_tabla_indirecta + (cant_dir * i)], buffer);
-				block_number = block_number - (contador_tabla_indirecta + (cant_dir * (i-1)));
-				return buffer[block_number];
-			}
-			
-		}
+	if (block_number < 12 + cant_dir + (cant_dir * cant_dir)) {
+		read_block(inode->block[13], (unsigned char *) buffer_block);
+		unsigned int indirection = buffer_block[(block_number - 12 - cant_dir) / cant_dir];
+		read_block(indirection, (unsigned char *) buffer_block);
+		return buffer_block[(block_number - 12 - cant_dir) % cant_dir];
 	}
 
 	// triple indirect
-	if (block_number < 12+(cant_dir^3)) {
-		
-	}
+	block_number = block_number - 12 - cant_dir - (cant_dir * cant_dir);
+	read_block(inode->block[14], (unsigned char *) buffer_block);
+	unsigned int indirection = buffer_block[block_number / (cant_dir * cant_dir)];
+
+	read_block(indirection, (unsigned char *) buffer_block);
+	block_number = block_number % (cant_dir * cant_dir);
+	indirection = buffer_block[block_number / cant_dir];
+
+	read_block(indirection, (unsigned char *) buffer_block);
+	return buffer_block[block_number % cant_dir];
 }
 
 void Ext2FS::read_block(unsigned int block_address, unsigned char * buffer)
