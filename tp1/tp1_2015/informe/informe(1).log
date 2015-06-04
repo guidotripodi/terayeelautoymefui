@@ -1,14 +1,14 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.12.30)  11 APR 2015 14:46
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2014.7.15)  22 APR 2015 21:11
 entering extended mode
- restricted \write18 enabled.
  %&-line parsing enabled.
 **informe(1).tex
 (./informe(1).tex
-LaTeX2e <2011/06/27>
-Babel <3.9f> and hyphenation patterns for 2 languages loaded.
-(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+LaTeX2e <2009/09/24>
+Babel <v3.8l> and hyphenation patterns for english, usenglishmax, dumylang, noh
+yphenation, loaded.
+(/usr/share/texmf-texlive/tex/latex/base/article.cls
 Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
-(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
+(/usr/share/texmf-texlive/tex/latex/base/size10.clo
 File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 )
 \c@part=\count79
@@ -23,23 +23,20 @@ File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
 )
-(/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
-Package: geometry 2010/09/12 v5.6 Page Geometry
+(/usr/share/texmf-texlive/tex/latex/geometry/geometry.sty
+Package: geometry 2008/12/21 v4.2 Page Geometry
 
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+(/usr/share/texmf-texlive/tex/latex/graphics/keyval.sty
 Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
 \KV@toks@=\toks14
 )
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty
-Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
-Package ifpdf Info: pdfTeX in PDF mode is detected.
+(/usr/share/texmf-texlive/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2009/04/10 v2.0 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in pdf mode detected.
 )
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifvtex.sty
-Package: ifvtex 2010/03/01 v1.5 Detect VTeX and its facilities (HO)
+(/usr/share/texmf-texlive/tex/generic/oberdiek/ifvtex.sty
+Package: ifvtex 2008/11/04 v1.4 Switches for detecting VTeX and its modes (HO)
 Package ifvtex Info: VTeX not detected.
-)
-(/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty
-Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 )
 \Gm@cnth=\count87
 \Gm@cntv=\count88
@@ -48,25 +45,21 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 \Gm@wd@mp=\dimen104
 \Gm@odd@mp=\dimen105
 \Gm@even@mp=\dimen106
-\Gm@layoutwidth=\dimen107
-\Gm@layoutheight=\dimen108
-\Gm@layouthoffset=\dimen109
-\Gm@layoutvoffset=\dimen110
 \Gm@dimlist=\toks15
 )
-(/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
+(/usr/share/texmf-texlive/tex/latex/base/inputenc.sty
 Package: inputenc 2008/03/30 v1.1d Input encoding file
 \inpenc@prehook=\toks16
 \inpenc@posthook=\toks17
 
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+(/usr/share/texmf-texlive/tex/latex/base/utf8.def
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 Now handling font encoding OML ...
 ... no UTF-8 mapping file for font encoding OML
 Now handling font encoding T1 ...
 ... processing UTF-8 mapping file for font encoding T1
 
-(/usr/share/texlive/texmf-dist/tex/latex/base/t1enc.dfu
+(/usr/share/texmf-texlive/tex/latex/base/t1enc.dfu
 File: t1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
    defining Unicode char U+00A1 (decimal 161)
    defining Unicode char U+00A3 (decimal 163)
@@ -216,7 +209,7 @@ File: t1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
 Now handling font encoding OT1 ...
 ... processing UTF-8 mapping file for font encoding OT1
 
-(/usr/share/texlive/texmf-dist/tex/latex/base/ot1enc.dfu
+(/usr/share/texmf-texlive/tex/latex/base/ot1enc.dfu
 File: ot1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
    defining Unicode char U+00A1 (decimal 161)
    defining Unicode char U+00A3 (decimal 163)
@@ -247,7 +240,7 @@ File: ot1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
 Now handling font encoding OMS ...
 ... processing UTF-8 mapping file for font encoding OMS
 
-(/usr/share/texlive/texmf-dist/tex/latex/base/omsenc.dfu
+(/usr/share/texmf-texlive/tex/latex/base/omsenc.dfu
 File: omsenc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
    defining Unicode char U+00A7 (decimal 167)
    defining Unicode char U+00B6 (decimal 182)
@@ -271,7 +264,7 @@ Now handling font encoding U ...
    defining Unicode char U+2122 (decimal 8482)
    defining Unicode char U+2423 (decimal 9251)
 ))
-(/usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
+(/usr/share/texmf-texlive/tex/latex/fancyhdr/fancyhdr.sty
 \fancy@headwidth=\skip43
 \f@ncyO@elh=\skip44
 \f@ncyO@erh=\skip45
@@ -284,35 +277,28 @@ Now handling font encoding U ...
 ) (./lastpage.sty
 Package: lastpage 1994/06/25 v0.1b LaTeX2e package for refs to last page number
  (JPG)
-) (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+)
+(/usr/share/texmf-texlive/tex/latex/graphics/graphicx.sty
 Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
 
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+(/usr/share/texmf-texlive/tex/latex/graphics/graphics.sty
 Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
 
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+(/usr/share/texmf-texlive/tex/latex/graphics/trig.sty
 Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
 )
-(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/graphics.cfg
-File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
+(/etc/texmf/tex/latex/config/graphics.cfg
+File: graphics.cfg 2009/08/28 v1.8 graphics configuration of TeX Live
 )
 Package graphics Info: Driver file: pdftex.def on input line 91.
 
-(/usr/share/texlive/texmf-dist/tex/latex/pdftex-def/pdftex.def
-File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
-
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty
-Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
-)
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
-Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
-)
+(/usr/share/texmf-texlive/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2010/03/12 v0.04p Graphics/color for pdfTeX
 \Gread@gobject=\count90
 ))
-\Gin@req@height=\dimen111
-\Gin@req@width=\dimen112
-)
-(./informe(1).aux)
+\Gin@req@height=\dimen107
+\Gin@req@width=\dimen108
+) (./informe(1).aux)
 \openout1 = `informe(1).aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 29.
@@ -327,109 +313,65 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 29.
 LaTeX Font Info:    ... okay on input line 29.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 29.
 LaTeX Font Info:    ... okay on input line 29.
-
-*geometry* driver: auto-detecting
-*geometry* detected driver: pdftex
-*geometry* verbose mode - [ preamble ] result:
-* driver: pdftex
-* paper: a4paper
-* layout: <same size as paper>
-* layoutoffset:(h,v)=(0.0pt,0.0pt)
-* modes: twoside 
-* h-part:(L,W,R)=(72.26999pt, 452.9679pt, 72.26999pt)
-* v-part:(T,H,B)=(72.26999pt, 700.50687pt, 72.26999pt)
-* \paperwidth=597.50787pt
-* \paperheight=845.04684pt
-* \textwidth=452.9679pt
-* \textheight=700.50687pt
-* \oddsidemargin=0.0pt
-* \evensidemargin=0.0pt
-* \topmargin=-37.0pt
-* \headheight=12.0pt
-* \headsep=25.0pt
-* \topskip=10.0pt
-* \footskip=30.0pt
-* \marginparwidth=111.0pt
-* \marginparsep=11.0pt
-* \columnsep=10.0pt
-* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
-* \hoffset=0.0pt
-* \voffset=0.0pt
-* \mag=1000
-* \@twocolumnfalse
-* \@twosidetrue
-* \@mparswitchtrue
-* \@reversemarginfalse
-* (1in=72.27pt=25.4mm, 1cm=28.453pt)
-
-(/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
+*geometry auto-detecting driver*
+*geometry detected driver: pdftex*
+-------------------- Geometry parameters
+paper: a4paper
+landscape: --
+twocolumn: --
+twoside: true
+asymmetric: --
+h-parts: 72.26999pt, 452.9679pt, 72.26999pt
+v-parts: 72.26999pt, 700.50687pt, 72.26999pt
+hmarginratio: --
+vmarginratio: --
+lines: --
+heightrounded: --
+bindingoffset: 0.0pt
+truedimen: --
+includehead: --
+includefoot: --
+includemp: --
+driver: pdftex
+-------------------- Page layout dimensions and switches
+\paperwidth  597.50787pt
+\paperheight 845.04684pt
+\textwidth  452.9679pt
+\textheight 700.50687pt
+\oddsidemargin  0.0pt
+\evensidemargin 0.0pt
+\topmargin  -37.0pt
+\headheight 12.0pt
+\headsep    25.0pt
+\footskip   30.0pt
+\marginparwidth 111.0pt
+\marginparsep   11.0pt
+\columnsep  10.0pt
+\skip\footins  9.0pt plus 4.0pt minus 2.0pt
+\hoffset 0.0pt
+\voffset 0.0pt
+\mag 1000
+\@twosidetrue \@mparswitchtrue 
+(1in=72.27pt, 1cm=28.45pt)
+-----------------------
+(/usr/share/texmf-texlive/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count91
-\scratchdimen=\dimen113
+\scratchdimen=\dimen109
 \scratchbox=\box26
 \nofMPsegments=\count92
 \nofMParguments=\count93
 \everyMPshowfont=\toks18
 \MPscratchCnt=\count94
-\MPscratchDim=\dimen114
+\MPscratchDim=\dimen110
 \MPnumerator=\count95
-\makeMPintoPDFobject=\count96
 \everyMPtoPDFconversion=\toks19
-) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
-Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
-)
-
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifluatex.sty
-Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
-Package ifluatex Info: LuaTeX not detected.
-)
-Package pdftexcmds Info: LuaTeX not detected.
-Package pdftexcmds Info: \pdf@primitive is available.
-Package pdftexcmds Info: \pdf@ifprimitive is available.
-Package pdftexcmds Info: \pdfdraftmode found.
-)
-(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
-Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
-
-(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/grfext.sty
-Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
-
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
-Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
-))
-(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty
-Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
-
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
-Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
-
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/etexcmds.sty
-Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
-Package etexcmds Info: Could not find \expanded.
-(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
-(etexcmds)             that some package has redefined \expanded.
-(etexcmds)             In the latter case, load this package earlier.
-)))
-Package grfext Info: Graphics extension search list:
-(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
-G,.JBIG2,.JB2,.eps]
-(grfext)             \AppendGraphicsExtensions on input line 452.
-
-(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
-File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
-e
-))
-<DC.png, id=1, 802.9197pt x 287.6346pt>
+) <DC.png, id=1, 802.9197pt x 287.6346pt>
 File: DC.png Graphic file (type png)
  <use DC.png>
-Package pdftex.def Info: DC.png used on input line 41.
-(pdftex.def)             Requested size: 158.84137pt x 56.9055pt.
-
 <UBA.jpg, id=3, 233.4321pt x 233.9139pt>
 File: UBA.jpg Graphic file (type jpg)
  <use UBA.jpg>
-Package pdftex.def Info: UBA.jpg used on input line 43.
-(pdftex.def)             Requested size: 56.78708pt x 56.9055pt.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 71.
 LaTeX Font Info:    External font `cmex10' loaded for size
@@ -443,13 +385,13 @@ informe(1).toc)
 
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 103--109
+Underfull \hbox (badness 10000) in paragraph at lines 103--110
 
  []
 
 [3] (./parte1.tex
 LaTeX Font Info:    Try loading font information for OMS+cmr on input line 4.
- (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
+ (/usr/share/texmf-texlive/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
@@ -460,41 +402,32 @@ Overfull \hbox (9.02808pt too wide) in paragraph at lines 39--39
  params[1] + 1) + params[1];[] 
  []
 
-<ejercicio2-1nucleo.png, id=22, 1030.85126pt x 157.58875pt>
+<ejercicio2-1nucleo.png, id=21, 1030.85126pt x 157.58875pt>
 File: ejercicio2-1nucleo.png Graphic file (type png)
 
 <use ejercicio2-1nucleo.png>
-Package pdftex.def Info: ejercicio2-1nucleo.png used on input line 59.
-(pdftex.def)             Requested size: 515.42436pt x 78.79417pt.
-
 Overfull \hbox (62.45647pt too wide) in paragraph at lines 59--61
  [] 
  []
 
-[4] <ejercicio2-2nucleo.png, id=29, 1030.85126pt x 187.70125pt>
+[4] <ejercicio2-2nucleo.png, id=28, 1030.85126pt x 187.70125pt>
 File: ejercicio2-2nucleo.png Graphic file (type png)
 
 <use ejercicio2-2nucleo.png>
-Package pdftex.def Info: ejercicio2-2nucleo.png used on input line 67.
-(pdftex.def)             Requested size: 515.42436pt x 93.85039pt.
-
 Overfull \hbox (62.45647pt too wide) in paragraph at lines 67--69
  [] 
  []
 
-<ejercicio2-3nucleo.png, id=30, 1030.85126pt x 187.70125pt>
+<ejercicio2-3nucleo.png, id=29, 1030.85126pt x 187.70125pt>
 File: ejercicio2-3nucleo.png Graphic file (type png)
 
 <use ejercicio2-3nucleo.png>
-Package pdftex.def Info: ejercicio2-3nucleo.png used on input line 74.
-(pdftex.def)             Requested size: 515.42436pt x 93.85039pt.
-
 Overfull \hbox (62.45647pt too wide) in paragraph at lines 74--76
  [] 
  []
 
 )
-Underfull \hbox (badness 10000) in paragraph at lines 79--120
+Underfull \hbox (badness 10000) in paragraph at lines 79--121
 
  []
 
@@ -504,164 +437,488 @@ Underfull \hbox (badness 10000) in paragraph at lines 13--14
 
  []
 
-) [6] (./parte3.tex
-Underfull \hbox (badness 10000) in paragraph at lines 37--39
 
- []
-
-[7]
-Underfull \hbox (badness 10000) in paragraph at lines 63--67
+Underfull \hbox (badness 10000) in paragraph at lines 34--37
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 80--82
+Underfull \hbox (badness 10000) in paragraph at lines 51--53
 
  []
 
-<./EJ7/turnarounddistquan.png, id=41, 577.15625pt x 327.2225pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 66--82
+
+ []
+
+[6]
+Underfull \hbox (badness 10000) in paragraph at lines 83--85
+
+ []
+
+<./EJ4_RR/ejercicio4-1nucleo.png, id=36, 1030.85126pt x 217.81375pt>
+File: ./EJ4_RR/ejercicio4-1nucleo.png Graphic file (type png)
+
+<use ./EJ4_RR/ejercicio4-1nucleo.png>
+Underfull \hbox (badness 10000) in paragraph at lines 106--109
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 106--109
+
+ []
+
+<./EJ4_RR/ejercicio4-2nucleo.png, id=37, 1030.85126pt x 247.92625pt>
+File: ./EJ4_RR/ejercicio4-2nucleo.png Graphic file (type png)
+
+<use ./EJ4_RR/ejercicio4-2nucleo.png>
+<./EJ4_RR/ejercicio4-3nucleo.png, id=38, 1030.85126pt x 247.92625pt>
+File: ./EJ4_RR/ejercicio4-3nucleo.png Graphic file (type png)
+
+<use ./EJ4_RR/ejercicio4-3nucleo.png> [7 <./EJ4_RR/ejercicio4-1nucleo.png (PNG 
+copy)> <./EJ4_RR/ejercicio4-2nucleo.png (PNG copy)>]
+Underfull \hbox (badness 10000) in paragraph at lines 120--122
+
+ []
+
+<./EJ4_RR/ejercicio4-2lote1nucleo.png, id=43, 1030.85126pt x 217.81375pt>
+File: ./EJ4_RR/ejercicio4-2lote1nucleo.png Graphic file (type png)
+
+<use ./EJ4_RR/ejercicio4-2lote1nucleo.png>
+<./EJ4_RR/ejercicio4-2lote2nucleo.png, id=44, 1030.85126pt x 217.81375pt>
+File: ./EJ4_RR/ejercicio4-2lote2nucleo.png Graphic file (type png)
+
+<use ./EJ4_RR/ejercicio4-2lote2nucleo.png>
+<./EJ4_RR/ejercicio4-2lote3nucleo.png, id=45, 1030.85126pt x 217.81375pt>
+File: ./EJ4_RR/ejercicio4-2lote3nucleo.png Graphic file (type png)
+
+<use ./EJ4_RR/ejercicio4-2lote3nucleo.png>
+Underfull \hbox (badness 10000) in paragraph at lines 150--152
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 153--154
+
+ []
+
+[8 <./EJ4_RR/ejercicio4-3nucleo.png (PNG copy)> <./EJ4_RR/ejercicio4-2lote1nucl
+eo.png (PNG copy)> <./EJ4_RR/ejercicio4-2lote2nucleo.png (PNG copy)> <./EJ4_RR/
+ejercicio4-2lote3nucleo.png (PNG copy)>]
+Underfull \hbox (badness 10000) in paragraph at lines 161--163
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 174--178
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 184--187
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 192--193
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 201--206
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 207--210
+
+ []
+
+[9]
+Underfull \hbox (badness 10000) in paragraph at lines 249--251
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 252--254
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 261--263
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 264--266
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 284--287
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 288--290
+
+ []
+
+[10]
+Underfull \hbox (badness 10000) in paragraph at lines 305--306
+
+ []
+
+)
+Underfull \hbox (badness 10000) in paragraph at lines 307--127
+
+ []
+
+[11] (./parte3.tex
+Underfull \hbox (badness 10000) in paragraph at lines 34--36
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 60--64
+
+ []
+
+[12]
+Underfull \hbox (badness 10000) in paragraph at lines 81--86
+
+ []
+
+<./EJ7/turnarounddistquan.png, id=63, 577.15625pt x 327.2225pt>
 File: ./EJ7/turnarounddistquan.png Graphic file (type png)
 
 <use ./EJ7/turnarounddistquan.png>
-Package pdftex.def Info: ./EJ7/turnarounddistquan.png used on input line 88.
-(pdftex.def)             Requested size: 452.9679pt x 256.82529pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 93--96
+Underfull \hbox (badness 10000) in paragraph at lines 93--97
 
  []
 
-[8 <./EJ7/turnarounddistquan.png>]
-<./EJ7/ej7tour2core1quan.png, id=46, 1030.85126pt x 247.92625pt>
+[13 <./EJ7/turnarounddistquan.png>]
+<./EJ7/ej7tour2core1quan.png, id=68, 1030.85126pt x 247.92625pt>
 File: ./EJ7/ej7tour2core1quan.png Graphic file (type png)
 
 <use ./EJ7/ej7tour2core1quan.png>
-Package pdftex.def Info: ./EJ7/ej7tour2core1quan.png used on input line 113.
-(pdftex.def)             Requested size: 450.0pt x 108.22534pt.
-
-<./EJ7/ej7tour2core3quan.png, id=47, 1030.85126pt x 247.92625pt>
+<./EJ7/ej7tour2core3quan.png, id=69, 1030.85126pt x 247.92625pt>
 File: ./EJ7/ej7tour2core3quan.png Graphic file (type png)
 
 <use ./EJ7/ej7tour2core3quan.png>
-Package pdftex.def Info: ./EJ7/ej7tour2core3quan.png used on input line 118.
-(pdftex.def)             Requested size: 450.0pt x 108.22534pt.
-
-<./EJ7/ej7tour2core4quan.png, id=48, 1030.85126pt x 247.92625pt>
+<./EJ7/ej7tour2core4quan.png, id=70, 1030.85126pt x 247.92625pt>
 File: ./EJ7/ej7tour2core4quan.png Graphic file (type png)
 
 <use ./EJ7/ej7tour2core4quan.png>
-Package pdftex.def Info: ./EJ7/ej7tour2core4quan.png used on input line 126.
-(pdftex.def)             Requested size: 450.0pt x 108.22534pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 131--133
+Underfull \hbox (badness 10000) in paragraph at lines 136--138
 
  []
 
-<./EJ7/ej7tour2core5quan.png, id=49, 1030.85126pt x 247.92625pt>
+<./EJ7/ej7tour2core5quan.png, id=71, 1030.85126pt x 247.92625pt>
 File: ./EJ7/ej7tour2core5quan.png Graphic file (type png)
 
 <use ./EJ7/ej7tour2core5quan.png>
-Package pdftex.def Info: ./EJ7/ej7tour2core5quan.png used on input line 135.
-(pdftex.def)             Requested size: 450.0pt x 108.22534pt.
- [9 <./EJ7/ej7tour2core1quan.png (PNG copy)> <./EJ7/ej7tour2core3quan.png (PNG 
-copy)> <./EJ7/ej7tour2core4quan.png (PNG copy)>] <./EJ7/ej7tour2core8quan.png, 
-id=53, 1030.85126pt x 247.92625pt>
+<./EJ7/ej7tour2core8quan.png, id=72, 1030.85126pt x 247.92625pt>
 File: ./EJ7/ej7tour2core8quan.png Graphic file (type png)
 
-<use ./EJ7/ej7tour2core8quan.png>
-Package pdftex.def Info: ./EJ7/ej7tour2core8quan.png used on input line 141.
-(pdftex.def)             Requested size: 450.0pt x 108.22534pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 145--149
-
- []
-
-<./EJ7/tour2core.png, id=54, 575.14874pt x 358.33875pt>
+<use ./EJ7/ej7tour2core8quan.png> [14 <./EJ7/ej7tour2core1quan.png (PNG copy)> 
+<./EJ7/ej7tour2core3quan.png (PNG copy)> <./EJ7/ej7tour2core4quan.png (PNG copy
+)> <./EJ7/ej7tour2core5quan.png (PNG copy)>]
+<./EJ7/tour2core.png, id=76, 575.14874pt x 358.33875pt>
 File: ./EJ7/tour2core.png Graphic file (type png)
 
 <use ./EJ7/tour2core.png>
-Package pdftex.def Info: ./EJ7/tour2core.png used on input line 152.
-(pdftex.def)             Requested size: 452.9679pt x 282.22606pt.
-
-<./EJ7/waiting2core.jpg, id=55, 565.11125pt x 342.27875pt>
+<./EJ7/waiting2core.jpg, id=77, 565.11125pt x 342.27875pt>
 File: ./EJ7/waiting2core.jpg Graphic file (type jpg)
 
 <use ./EJ7/waiting2core.jpg>
-Package pdftex.def Info: ./EJ7/waiting2core.jpg used on input line 162.
-(pdftex.def)             Requested size: 452.9679pt x 274.3613pt.
- [10 <./EJ7/ej7tour2core5quan.png (PNG copy)> <./EJ7/ej7tour2core8quan.png (PNG
- copy)> <./EJ7/tour2core.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 167--169
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [15 <./EJ7/ej7tour2core8quan.png (PNG copy)> <./EJ7/tour2core.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 172--174
 
  []
 
-<./EJ7/ej7tour3core1quan.png, id=59, 1030.85126pt x 247.92625pt>
+<./EJ7/ej7tour3core1quan.png, id=81, 1030.85126pt x 247.92625pt>
 File: ./EJ7/ej7tour3core1quan.png Graphic file (type png)
 
 <use ./EJ7/ej7tour3core1quan.png>
-Package pdftex.def Info: ./EJ7/ej7tour3core1quan.png used on input line 176.
-(pdftex.def)             Requested size: 450.0pt x 108.22534pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 180--182
+Underfull \hbox (badness 10000) in paragraph at lines 185--187
 
  []
 
-<./EJ7/ej7tour3core4quan.png, id=60, 1030.85126pt x 247.92625pt>
+<./EJ7/ej7tour3core4quan.png, id=82, 1030.85126pt x 247.92625pt>
 File: ./EJ7/ej7tour3core4quan.png Graphic file (type png)
 
 <use ./EJ7/ej7tour3core4quan.png>
-Package pdftex.def Info: ./EJ7/ej7tour3core4quan.png used on input line 184.
-(pdftex.def)             Requested size: 450.0pt x 108.22534pt.
-
-<./EJ7/ej7tour3core5quan.png, id=61, 1030.85126pt x 247.92625pt>
+<./EJ7/ej7tour3core5quan.png, id=83, 1030.85126pt x 247.92625pt>
 File: ./EJ7/ej7tour3core5quan.png Graphic file (type png)
 
-<use ./EJ7/ej7tour3core5quan.png>
-Package pdftex.def Info: ./EJ7/ej7tour3core5quan.png used on input line 192.
-(pdftex.def)             Requested size: 450.0pt x 108.22534pt.
- [11 <./EJ7/waiting2core.jpg> <./EJ7/ej7tour3core1quan.png (PNG copy)> <./EJ7/e
-j7tour3core4quan.png (PNG copy)>]
-<./EJ7/ej7tour7core6quan.png, id=65, 1030.85126pt x 247.92625pt>
+<use ./EJ7/ej7tour3core5quan.png> [16 <./EJ7/waiting2core.jpg> <./EJ7/ej7tour3c
+ore1quan.png (PNG copy)> <./EJ7/ej7tour3core4quan.png (PNG copy)>]
+<./EJ7/ej7tour7core6quan.png, id=87, 1030.85126pt x 247.92625pt>
 File: ./EJ7/ej7tour7core6quan.png Graphic file (type png)
 
 <use ./EJ7/ej7tour7core6quan.png>
-Package pdftex.def Info: ./EJ7/ej7tour7core6quan.png used on input line 197.
-(pdftex.def)             Requested size: 450.0pt x 108.22534pt.
-
-<./EJ7/ej7tour8core6quan.png, id=66, 1030.85126pt x 247.92625pt>
+<./EJ7/ej7tour8core6quan.png, id=88, 1030.85126pt x 247.92625pt>
 File: ./EJ7/ej7tour8core6quan.png Graphic file (type png)
 
 <use ./EJ7/ej7tour8core6quan.png>
-Package pdftex.def Info: ./EJ7/ej7tour8core6quan.png used on input line 202.
-(pdftex.def)             Requested size: 450.0pt x 108.22534pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 206--209
+Underfull \hbox (badness 10000) in paragraph at lines 211--215
 
  []
 
-<./EJ7/tour3core.png, id=67, 566.115pt x 322.20375pt>
+<./EJ7/tour3core.png, id=89, 566.115pt x 322.20375pt>
 File: ./EJ7/tour3core.png Graphic file (type png)
 
 <use ./EJ7/tour3core.png>
-Package pdftex.def Info: ./EJ7/tour3core.png used on input line 211.
-(pdftex.def)             Requested size: 452.9679pt x 257.8125pt.
-
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [12 <./EJ7/ej7tour3core5quan.png (PNG copy)> <./EJ7/ej7tour7core6quan.png (PNG
+ [17 <./EJ7/ej7tour3core5quan.png (PNG copy)> <./EJ7/ej7tour7core6quan.png (PNG
  copy)> <./EJ7/ej7tour8core6quan.png (PNG copy)>]
-<./EJ7/waintin3core.jpg, id=71, 570.13pt x 301.125pt>
+<./EJ7/waintin3core.jpg, id=93, 570.13pt x 301.125pt>
 File: ./EJ7/waintin3core.jpg Graphic file (type jpg)
 
 <use ./EJ7/waintin3core.jpg>
-Package pdftex.def Info: ./EJ7/waintin3core.jpg used on input line 221.
-(pdftex.def)             Requested size: 452.9679pt x 239.2416pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 226--228
+Underfull \hbox (badness 10000) in paragraph at lines 232--234
 
  []
 
-[13 <./EJ7/tour3core.png> <./EJ7/waintin3core.jpg>]) [14]
-Overfull \hbox (50.16331pt too wide) in paragraph at lines 143--145
+[18 <./EJ7/tour3core.png> <./EJ7/waintin3core.jpg>]
+Underfull \hbox (badness 10000) in paragraph at lines 259--264
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 300--301
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 302--303
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 307--308
+
+ []
+
+[19]
+Underfull \hbox (badness 10000) in paragraph at lines 319--321
+
+ []
+
+<./EJ8_RR2/dif1corerr.png, id=101, 1030.85126pt x 217.81375pt>
+File: ./EJ8_RR2/dif1corerr.png Graphic file (type png)
+
+<use ./EJ8_RR2/dif1corerr.png>
+<./EJ8_RR2/dif1corerr2.png, id=102, 1030.85126pt x 217.81375pt>
+File: ./EJ8_RR2/dif1corerr2.png Graphic file (type png)
+
+<use ./EJ8_RR2/dif1corerr2.png>
+Underfull \hbox (badness 10000) in paragraph at lines 342--343
+
+ []
+
+<./EJ8_RR2/dif2corerr.png, id=103, 1030.85126pt x 217.81375pt>
+File: ./EJ8_RR2/dif2corerr.png Graphic file (type png)
+
+<use ./EJ8_RR2/dif2corerr.png>
+<./EJ8_RR2/dif2corerr2.png, id=104, 1030.85126pt x 217.81375pt>
+File: ./EJ8_RR2/dif2corerr2.png Graphic file (type png)
+
+<use ./EJ8_RR2/dif2corerr2.png> [20 <./EJ8_RR2/dif1corerr.png (PNG copy)> <./EJ
+8_RR2/dif1corerr2.png (PNG copy)> <./EJ8_RR2/dif2corerr.png (PNG copy)>]
+Underfull \hbox (badness 10000) in paragraph at lines 354--357
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 358--359
+
+ []
+
+<./EJ8_RR2/dif3corerr.png, id=108, 1030.85126pt x 217.81375pt>
+File: ./EJ8_RR2/dif3corerr.png Graphic file (type png)
+
+<use ./EJ8_RR2/dif3corerr.png>
+<./EJ8_RR2/dif3corerr2.png, id=109, 1030.85126pt x 217.81375pt>
+File: ./EJ8_RR2/dif3corerr2.png Graphic file (type png)
+
+<use ./EJ8_RR2/dif3corerr2.png>
+Underfull \hbox (badness 10000) in paragraph at lines 370--373
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 374--375
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 377--378
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 379--381
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 382--383
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 392--393
+
+ []
+
+<./EJ8_RR2/dif10corerr.png, id=110, 1030.85126pt x 247.92625pt>
+File: ./EJ8_RR2/dif10corerr.png Graphic file (type png)
+
+<use ./EJ8_RR2/dif10corerr.png> [21 <./EJ8_RR2/dif2corerr2.png (PNG copy)> <./E
+J8_RR2/dif3corerr.png (PNG copy)> <./EJ8_RR2/dif3corerr2.png (PNG copy)>]
+<./EJ8_RR2/dif10corerr2.png, id=114, 1030.85126pt x 247.92625pt>
+File: ./EJ8_RR2/dif10corerr2.png Graphic file (type png)
+
+<use ./EJ8_RR2/dif10corerr2.png>
+Underfull \hbox (badness 10000) in paragraph at lines 404--409
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 410--411
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 415--417
+
+ []
+
+<./EJ8_RR2/dif5corerr.png, id=115, 1030.85126pt x 247.92625pt>
+File: ./EJ8_RR2/dif5corerr.png Graphic file (type png)
+
+<use ./EJ8_RR2/dif5corerr.png>
+<./EJ8_RR2/dif5corerr2.png, id=116, 1030.85126pt x 247.92625pt>
+File: ./EJ8_RR2/dif5corerr2.png Graphic file (type png)
+
+<use ./EJ8_RR2/dif5corerr2.png>
+Underfull \vbox (badness 3088) has occurred while \output is active []
+
+ [22 <./EJ8_RR2/dif10corerr.png (PNG copy)> <./EJ8_RR2/dif10corerr2.png (PNG co
+py)> <./EJ8_RR2/dif5corerr.png (PNG copy)>]
+Underfull \hbox (badness 10000) in paragraph at lines 440--446
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 447--451
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 458--459
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 467--468
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 469--470
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 471--472
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 479--480
+
+ []
+
+<fixedej8a.png, id=120, 1030.85126pt x 308.15125pt>
+File: fixedej8a.png Graphic file (type png)
+ <use fixedej8a.png>
+Underfull \hbox (badness 10000) in paragraph at lines 486--487
+
+ []
+
+[23 <./EJ8_RR2/dif5corerr2.png (PNG copy)> <./fixedej8a.png (PNG copy)>]
+Underfull \hbox (badness 10000) in paragraph at lines 488--489
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 490--491
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 492--493
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 494--495
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 502--503
+
+ []
+
+<Dynamicej8b.png, id=124, 1030.85126pt x 308.15125pt>
+File: Dynamicej8b.png Graphic file (type png)
+ <use Dynamicej8b.png>
+Underfull \hbox (badness 10000) in paragraph at lines 509--513
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 514--518
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 519--520
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 532--534
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 535--536
+
+ []
+
+<Fixed8c.png, id=125, 1030.85126pt x 308.15125pt>
+File: Fixed8c.png Graphic file (type png)
+ <use Fixed8c.png> [24 <./Dynamicej8b.png (PNG copy)>] <Dynamic8c.png, id=129, 
+1030.85126pt x 308.15125pt>
+File: Dynamic8c.png Graphic file (type png)
+
+<use Dynamic8c.png>
+Underfull \hbox (badness 10000) in paragraph at lines 548--552
+
+ []
+
+) [25 <./Fixed8c.png (PNG copy)> <./Dynamic8c.png (PNG copy)>]
+Overfull \hbox (50.16331pt too wide) in paragraph at lines 144--146
 \OT1/cmr/m/n/10 (\OML/cmm/m/it/10 https \OT1/cmr/m/n/10 : \OML/cmm/m/it/10 ==ev
 a:fing:edu:uy=pluginfile:php=\OT1/cmr/m/n/10 75120\OML/cmm/m/it/10 =mod[]resour
 ce=content=\OT1/cmr/m/n/10 1\OML/cmm/m/it/10 =\OT1/cmr/m/n/10 6 \OMS/cmsy/m/n/1
@@ -669,30 +926,35 @@ ce=content=\OT1/cmr/m/n/10 1\OML/cmm/m/it/10 =\OT1/cmr/m/n/10 6 \OMS/cmsy/m/n/1
 /n/10 ^^@ \OML/cmm/m/it/10 Planificacion:pdf\OT1/cmr/m/n/10 )$ 
  []
 
-AED: lastpage setting LastPage [15] (./informe(1).aux) ) 
+AED: lastpage setting LastPage
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 13.07225pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[26] (./informe(1).aux) ) 
 Here is how much of TeX's memory you used:
- 2437 strings out of 495031
- 34531 string characters out of 6181530
- 101665 words of memory out of 5000000
- 5590 multiletter control sequences out of 15000+600000
- 5978 words of font info for 22 fonts, out of 8000000 for 9000
- 14 hyphenation exceptions out of 8191
- 37i,11n,43p,236b,336s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/font
-s/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pf
-b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on informe(1).pdf (15 pages, 1196083 bytes).
+ 1874 strings out of 495061
+ 26057 string characters out of 1182621
+ 84185 words of memory out of 3000000
+ 5012 multiletter control sequences out of 15000+50000
+ 5978 words of font info for 22 fonts, out of 3000000 for 9000
+ 28 hyphenation exceptions out of 8191
+ 28i,11n,43p,479b,295s stack positions out of 5000i,500n,10000p,200000b,50000s
+</usr/share/texmf-texlive/fonts/type1/public/amsfonts/
+cm/cmbx10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12.p
+fb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/sh
+are/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texmf-te
+xlive/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-texlive/fonts/
+type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-texlive/fonts/type1/public
+/amsfonts/cm/cmr17.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm
+/cmr7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsl10.pfb><
+/usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/
+texmf-texlive/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on informe(1).pdf (26 pages, 1436396 bytes).
 PDF statistics:
- 119 PDF objects out of 1000 (max. 8388607)
- 69 compressed objects within 1 object stream
+ 172 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 101 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 201 words of extra memory for PDF output out of 10000 (max. 10000000)
 

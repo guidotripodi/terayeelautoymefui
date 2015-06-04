@@ -2,7 +2,7 @@
 \subsection{Ejercicios}
 \begin{itemize}
  \item 
-\textbf{Ejercicio 3}  Completar la implementacion del scheduler Round-Robin implementando los
+\textbf{Ejercicio 3}  Completar la implementación del scheduler Round-Robin implementando los
 metodos de la clase SchedRR en los archivos sched rr.cpp y sched rr.h. La implementacion
 recibe como primer parametro la cantidad de nucleos y a continuacion los valores de sus
 respectivos quantums. Debe utilizar una unica cola global, permitiendo ası la migracion de
@@ -22,7 +22,7 @@ in a hard-real-time environment. Journal of the ACM (JACM) 20.1 (1973): 46-61.
 con esto?
 \item Explicar coloquialmente el significado del teorema 7.
 \end{enumerate}
-2. Disenar e implementar un scheduler basado en prioridades fijas y otro en prioridades
+2. Diseñar e implementar un scheduler basado en prioridades fijas y otro en prioridades
 dinamicas. Para eso complete las clases $SchedFixed$ y $SchedDynamic$ que se encuentran
 en los archivos $sched$\_$fixed.[h|cpp]$ y $sched$\_$dynamic.[h|cpp]$ respectivamente.
 \end{itemize}
@@ -31,12 +31,12 @@ en los archivos $sched$\_$fixed.[h|cpp]$ y $sched$\_$dynamic.[h|cpp]$ respectiva
 \subsection{Resultados y Conclusiones}
 
 \subsubsection[Resolución Ejercicio 3]{Ejercicio 3}
-Para desarrollar la implementacion del scheduler $Round-Robin$ y que este funcione de una forma correcta
+Para desarrollar la implementación del scheduler $Round-Robin$ y que este funcione de una forma correcta
 utilizamos una serie de estructuras puntuales. \\
 Las mismas son las siguientes:\\
 \begin{enumerate}
  \item Una cola global, la cual nombramos $q$, esta contiene los $PID$ de los procesos activos que no estan
- bloqueados y en el tope de la misma se encuentra el proximo proceso a correr. Esta cola,
+ bloqueados y en el tope de la misma se encuentra el próximo proceso a correr. Esta cola,
  fue desarrollada para que cuando se desaloje un proceso por finalizar su $quantum$ la misma pase al final de
  la cola y generando el ciclo acorde al comportamiento de este scheduler.
  \item Un vector denominado $cores$, este tiene en su elemento $i$ el pid correspondiente a
@@ -48,15 +48,15 @@ desde que fue cargado en el core.
 \item Una lista de $bloqueados$ esta tendra procesos que se bloquearon cuando estaban corriendo.
 \end{enumerate}
 
-De esta manera, con estas estructuras nos permiten determinar para cada tarea, cuando, y cuanto 
-de su quantum consumio de forma que podamos desalojarla correctamente.\\
+De esta manera, con estas estructuras nos permiten determinar para cada tarea, cuándo, y cuánto 
+de su quantum consumieron de forma que podamos desalojarla correctamente.\\
 
 A su vez, tomamos ciertas decisiones en esta implementación:
 \begin{itemize}
  \item Si una tarea se encuentra bloqueada cuando se produce el tick del reloj, esta misma es desalojada
-de la cola global, y agregada en un lista de bloqueados. A su vez, sera reseteado el quantum, se le
-dara inicio a la proxima tarea que se encuentre ready y cuando el sistema operativo, nos envie una
-señal de unblock, la tarea desalojada regresara al final de la cola global.
+de la cola global, y agregada en un lista de bloqueados. Además, sera reseteado el quantum, se le
+dará inicio a la próxima tarea que se encuentre ready y cuando el sistema operativo, nos envie una
+señal de unblock, la tarea desalojada regresará al final de la cola global.
 
 \end{itemize}
 
