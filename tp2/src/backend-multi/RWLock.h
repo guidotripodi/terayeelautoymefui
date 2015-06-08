@@ -11,6 +11,10 @@ class RWLock {
         void wunlock();
 
     private:
+        pthread_mutex_t turnstile;
+        pthread_cond_t room_empty;
+        pthread_mutex_t readers_mutex;
+        unsigned int readers;
         pthread_rwlock_t rwlock;
 };
 

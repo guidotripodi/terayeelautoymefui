@@ -1,44 +1,46 @@
 #include "RWLock.h"
 
 RWLock :: RWLock() {
+	pthread_mutex_init(&readers_mutex, 1);
+	pthread_mutex_init(&turnstile, 1);
+	pthread_cond_init(&room_empty, 1);
+	readers = 0;
+}
+
+RWLock :: ~RWLock() {
+	pthread_mutex_destroy(&readers_mutex);
+	pthread_mutex_destroy(&turnstile);
+	pthread_cond_destroy(&room_empty);
 }
 
 void RWLock :: rlock() {
-	/*
-	1 turnstile.wait()
-2 turnstile.signal()
-3
-4 readSwitch.lock(roomEmpty)
-5 # critical section for readers
-6 readSwitch.unlock(roomEmpty)*/
+	pthread_mutex_lock(&turnstile);
+	pthread_mutex_unlock(&turnstile);
 
+	pthread_mutex_lock(&readers_mutex);
+	readers++;
+	pthread_mutex_unlock(&readers_mutex);
 }
 
 void RWLock :: wlock() {
+	pthread_mutex_lock(&turnstile);
 
-/*	turnstile.wait()
-2 roomEmpty.wait()
-3 # critical section for writers
-4 turnstile.signal()
-5
-6 roomEmpty.signal()*/
+	pthread_mutex_lock(&readers_mutex);
+	while(readers != 0)
+		pthread_cond_wait(&room_empty, &readers_mutex);
+	pthread_mutex_unlock(&readers_mutex);
 }
 
 void RWLock :: runlock() {
-	/*def lock(self, semaphore):
-7 self.mutex.wait()
-8 self.counter += 1
-9 if self.counter == 1:
-10 semaphore.wait()
-11 self.mutex.signal()*/
+	pthread_mutex_lock(&readers_mutex);
+	readers--;
+	if (readers == 0) {
+		pthread_cond_signal(&room_empty);		
+	}
+	pthread_mutex_unlock(&readers_mutex);	
 }
 
 void RWLock :: wunlock() {
-/*def unlock(self, semaphore):
-14 self.mutex.wait()
-15 self.counter -= 1
-16 if self.counter == 0:
-17 semaphore.signal()
-18 self.mutex.signal()*/
+	pthread_mutex_unlock(&turnstile);
 }
 
