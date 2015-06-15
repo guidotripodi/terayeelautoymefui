@@ -28,6 +28,7 @@
 #define MSG_UPDATE 3
 #define MSG_INVALID 99
 
+#define NUM_THREADS 10
 
 int recibir(int s, char* buf);
 int enviar(int s, char* buf);

@@ -1,4 +1,4 @@
-#include "Backend_mono.h"
+#include "Backend_multi.h"
 
 
 using namespace std;
@@ -85,21 +85,36 @@ int main(int argc, const char* argv[]) {
 
     // aceptar conexiones entrantes.
     socket_size = sizeof(remoto);
+    pthread_t threads[NUM_THREADS];
+    struct thread_data td[NUM_THREADS];
+
+    RWLock *read_write_lock = new RWLock;
+    int i = 0;
     while (true) {
         if ((socketfd_cliente = accept(socket_servidor, (struct sockaddr*) &remoto, (socklen_t*) &socket_size)) == -1)
             cerr << "Error al aceptar conexion" << endl;
         else {
             close(socket_servidor);
-            atendedor_de_jugador(socketfd_cliente);
+
+            td[i].socket_cliente_struct = socketfd_cliente;
+            td[i].rw_lock = read_write_lock;
+            pthread_create(&threads[i], NULL, atendedor_de_jugador, (void *)&td[i]);
+            i++;
+            //atendedor_de_jugador(socketfd_cliente);
         }
     }
 
-
+    delete read_write_lock;
+    pthread_exit(NULL);
     return 0;
 }
 
 
-void atendedor_de_jugador(int socket_fd) {
+void *atendedor_de_jugador(void *threadarg) {
+    struct thread_data *my_data = (struct thread_data *) threadarg;
+
+    int socket_fd = my_data->socket_cliente_struct;
+
     // variables locales del jugador
     char nombre_jugador[21];
     list<Casillero> palabra_actual; // lista de letras de la palabra aún no confirmada
@@ -128,17 +143,28 @@ void atendedor_de_jugador(int socket_fd) {
             }
             // ficha contiene la nueva letra a colocar
             // verificar si es una posición válida del tablero
+
+            my_data->rw_lock->rlock();
             if (es_ficha_valida_en_palabra(ficha, palabra_actual)) {
+                my_data->rw_lock->runlock();
+
+                my_data->rw_lock->wlock();
                 palabra_actual.push_back(ficha);
                 tablero_letras[ficha.fila][ficha.columna] = ficha.letra;
+                my_data->rw_lock->wunlock(); 
+
                 // OK
                 if (enviar_ok(socket_fd) != 0) {
                     // se produjo un error al enviar. Cerramos todo.
                     terminar_servidor_de_jugador(socket_fd, palabra_actual);
                 }
-            }
-            else {
+            } else {
+                my_data->rw_lock->runlock();
+
+                my_data->rw_lock->wlock();
                 quitar_letras(palabra_actual);
+                my_data->rw_lock->wunlock(); 
+
                 // ERROR
                 if (enviar_error(socket_fd) != 0) {
                     // se produjo un error al enviar. Cerramos todo.
@@ -147,11 +173,13 @@ void atendedor_de_jugador(int socket_fd) {
             }
         }
         else if (comando == MSG_PALABRA) {
+            my_data->rw_lock->wlock(); 
             // las letras acumuladas conforman una palabra completa, escribirlas en el tablero de palabras y borrar las letras temporales
             for (list<Casillero>::const_iterator casillero = palabra_actual.begin(); casillero != palabra_actual.end(); casillero++) {
                 tablero_palabras[casillero->fila][casillero->columna] = casillero->letra;
             }
             palabra_actual.clear();
+            my_data->rw_lock->wunlock();
 
             if (enviar_ok(socket_fd) != 0) {
                 // se produjo un error al enviar. Cerramos todo.
@@ -159,10 +187,12 @@ void atendedor_de_jugador(int socket_fd) {
             }
         }
         else if (comando == MSG_UPDATE) {
+            my_data->rw_lock->rlock(); 
             if (enviar_tablero(socket_fd) != 0) {
                 // se produjo un error al enviar. Cerramos todo.
                 terminar_servidor_de_jugador(socket_fd, palabra_actual);
             }
+            my_data->rw_lock->runlock(); 
         }
         else if (comando == MSG_INVALID) {
             // no es un mensaje válido, hacer de cuenta que nunca llegó
@@ -173,6 +203,7 @@ void atendedor_de_jugador(int socket_fd) {
             terminar_servidor_de_jugador(socket_fd, palabra_actual);
         }
     }
+    pthread_exit(NULL);
 }
 
 

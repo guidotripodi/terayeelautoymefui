@@ -1,15 +1,22 @@
 #ifndef Backend_mono_h
 #define Backend_mono_h
 
-
+#include <pthread.h>
 #include "Encabezado.h"
 #include "Casillero.h"
 #include "Enviar_recibir.h"
+#include "RWLock.h"
 
 using namespace std;
+
+struct thread_data{
+   int  socket_cliente_struct;
+   RWLock *rw_lock;
+};
+
 bool cargar_int(const char* numero, unsigned int& n);
 
-void atendedor_de_jugador(int socket_fd);
+void *atendedor_de_jugador(void *threadarg);
 
 
 // mensajes recibidos por el server
