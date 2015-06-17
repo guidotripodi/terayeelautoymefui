@@ -1,5 +1,5 @@
-#ifndef Backend_mono_h
-#define Backend_mono_h
+#ifndef Backend_multi_h
+#define Backend_multi_h
 
 #include <pthread.h>
 #include "Encabezado.h"
@@ -11,7 +11,7 @@ using namespace std;
 
 struct thread_data{
    int  socket_cliente_struct;
-   RWLock *rw_lock;
+   RWLock rw_lock;
 };
 
 bool cargar_int(const char* numero, unsigned int& n);

@@ -1,9 +1,9 @@
 #include "RWLock.h"
 
 RWLock :: RWLock() {
-	pthread_mutex_init(&readers_mutex, 1);
-	pthread_mutex_init(&turnstile, 1);
-	pthread_cond_init(&room_empty, 1);
+	pthread_mutex_init(&readers_mutex, NULL);
+	pthread_mutex_init(&turnstile, NULL);
+	pthread_cond_init(&room_empty, NULL);
 	readers = 0;
 }
 
