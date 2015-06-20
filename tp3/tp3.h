@@ -23,7 +23,9 @@
 #define TAG_TERMINE           50    /* cli -> srv */
 #define TAG_REQUEST			  60	/* srv -> srv */
 #define TAG_REPLY			  70	/* srv -> srv */
-
+#define TAG_SIN_CLIENTE       60
+#define TAG_OTORGO_RECURSO    70
+#define TAG_PIDO_RECURSO      80
 
 /* Abreviaciones de constantes MPI que usaremos seguido */
 
@@ -56,7 +58,6 @@ typedef struct {
 /* Dos o tres variables que se usan por doquier */
 
 extern int cant_ranks, mi_rank, mi_nro, mi_rol, mi_char;
-
 extern void debug(const char* mensaje);
 
 #endif

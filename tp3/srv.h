@@ -3,6 +3,7 @@
 
 #include "tp3.h"
 
-void servidor(int mi_cliente);
 
+void servidor(int mi_cliente);
+extern int secuencia_maxima;
 #endif
