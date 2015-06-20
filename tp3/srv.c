@@ -89,6 +89,9 @@ void servidor(int mi_cliente)
             assert(origen == mi_cliente);
             debug("Mi cliente avisa que terminó");
             listo_para_salir = TRUE;
+            cantidad_servidores--;
+            /*CUANDO TERMINA EL CLIENTE EL SERVIDOR COMO Q SE VA Y EL OTRO QUEDA ESPERANDO UNA RESPUESTA
+            DE ESTE  INTENTE MANDAR REPLAY A TODOS CUANDO SE CIERRA PERO NO ME DEJA make*/
         }
         /*me habla un servidor */
         else if (tag == TAG_REPLY) {

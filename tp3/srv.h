@@ -6,4 +6,5 @@
 
 void servidor(int mi_cliente);
 extern int secuencia_maxima;
+
 #endif
