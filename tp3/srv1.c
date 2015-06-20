@@ -1,3 +1,5 @@
+
+
 #include "srv.h"
 
 /*
@@ -5,7 +7,6 @@
  *  cliente y no se lleva bien con los demás servidores.
  *
  */
-
 void servidor(int mi_cliente)
 {
     MPI_Status status; int origen, tag;
@@ -23,6 +24,7 @@ void servidor(int mi_cliente)
     
     n_ranks = n_ranks/2;
     mi_rank = mi_rank/2;
+    int clientes =  n_ranks;
     int faltan_responder[n_ranks];
     int i;
     for (i = 0; i < n_ranks; i++){
@@ -82,16 +84,16 @@ void servidor(int mi_cliente)
             assert(listo_para_salir == FALSE);
             listo_para_salir = TRUE;
             clientes--;
-            /*ACA HAY UN PROBLEMA SEGURAMENTE, PORQ CUANDO EL CLIENTE TERMINA EL SERVIDOR QUEDA AL PEDO
-            TUVE Q MANDARLE UNA SEÑAL DE REPLY A TODOS PORQ SINO QUEDAN LOOP DSP*/
             for (i = 0; i < n_ranks; i++){
                 if (i != mi_rank) {
-                    MPI_Send(NULL, 0, MPI_INT, i*2, TAG_REPLY, COMM_WORLD);
+                    MPI_Send(NULL, 0, MPI_INT, i*2, TAG_SIN_CLIENTE, COMM_WORLD);
                 }
             }
         }
 
         if (tag == TAG_REQUEST) {
+            if(buffer > secuencia_maxima) secuencia_maxima = buffer;
+            debug("Me pidieron el recurso");
             /*AGREGUE ESTE CASO, PORQ SE DABA QUE ESTABA TERMINANDO EL CLIENTE Y SE SACABA EL 
             PEDIDO LOCAL Y ENTRABA NI A LA PARTE VERDADERA NI A LA FALSA*/
             if(tengo_salida == TRUE){
@@ -102,21 +104,16 @@ void servidor(int mi_cliente)
             else if(!hay_pedido_local){
                 debug("Lo otorgo por que no lo necesito");
                 MPI_Send(NULL, 0, MPI_INT, origen, TAG_REPLY, COMM_WORLD);
-                }
+            }
                 else {
-                    if(buffer > secuencia_maxima) {
-                        secuencia_maxima = buffer;
-                    }
                     /* AGREGUE EL CASO DE SI LA SECUENCIA ES LA MISMA, COSA QUE PASABA AL AGREGAR
                     DOS SERVIDORES AL MISMO TIEMPO*/
                     if (buffer < mi_secuencia || (buffer == mi_secuencia && (origen/2) < mi_rank) ){
                         debug("Lo otorgo por que tiene mayor prioridad");
-                        //printf("Entra aca? %d\n",mi_rank);
                         MPI_Send(NULL, 0, MPI_INT, origen, TAG_REPLY, COMM_WORLD);
                     }
                     else {
-                        debug("Tiene menor prioridad, no se lo doy y guardo el pedido");
-                        //printf("Es menor? %d\n",mi_rank);
+                        debug("Tiene menor prioridad, no lo otorgo y guardo el pedido");
                         assert(faltan_responder[origen/2] == FALSE);
                         faltan_responder[origen/2] = TRUE;
                     }
@@ -133,7 +130,25 @@ void servidor(int mi_cliente)
                 MPI_Send(NULL, 0, MPI_INT, mi_cliente, TAG_OTORGADO, COMM_WORLD);
             }
         }
-             
+        
+        
+        if (tag == TAG_SIN_CLIENTE) {
+            clientes--;
+        }
+    }
+    
+    while(clientes > 0) {
+        MPI_Recv(&buffer, 1, MPI_INT, ANY_SOURCE, ANY_TAG, COMM_WORLD, &status);
+        origen = status.MPI_SOURCE;
+        tag = status.MPI_TAG;
+        
+        if (tag == TAG_REQUEST) {
+            debug("Otorgo por que ya no necesito el recurso, no tengo cliente");
+            MPI_Send(NULL, 0, MPI_INT, origen, TAG_REPLY, COMM_WORLD);
+        }        
+        else if (tag == TAG_SIN_CLIENTE) {
+            clientes--;
+        }
     }
     
 }

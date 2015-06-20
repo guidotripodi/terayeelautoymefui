@@ -8,7 +8,7 @@ EJECUTABLE = tp3
 
 all : $(EJECUTABLE) run
 
-tp3 : tp3.c srv.c
+tp3 : tp3.c srv1.c
 	$(MPICC) $(CFLAGS) -o tp3 tp3.c srv.c
 
 run : tp3
