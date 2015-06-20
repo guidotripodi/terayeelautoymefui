@@ -1,0 +1,12 @@
+PRUEBAS REALIZADAS
+AGREGAR >/dev/null para que solo salgan letras
+mpiexec -np 2 ./tp3 OK!
+mpiexec -np 2 ./tp3  a 5 0 100 OK!
+mpiexec -np 4 ./tp3  a 5 0 100  b 3 1000 100 OK!
+mpiexec -np 4 ./tp3  @ 4 0 0 OK!
+
+mpiexec -np 10 ./tp3  a 5 0 100  b 3 1000 100 c 3 1000 100 d 3 1000 100 e 3 1000 100 OK!
+mpiexec -np 12 ./tp3  a 5 0 100  b 3 1000 100 c 3 1000 100 d 3 1000 100 e 3 1000 100 f 3 1000 100 OK!
+
+mpiexec -np 12 ./tp3  a 5 200 100  b 3 1000 100 c 4 1000 100 d 7 1000 100 e 2 1000 100 f 3 500 1000 OK!
+mpiexec -np 12 ./tp3  a 5 25 105  b 3 102 23 c 4 1000 100 d 7 1000 100 e 2 1000 100 f 3 500 1000 OK!

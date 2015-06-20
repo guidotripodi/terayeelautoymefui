@@ -11,21 +11,23 @@ void servidor(int mi_cliente)
 {
     MPI_Status status; int origen, tag;
     int hay_pedido_local = FALSE;
-    int tengo_salida = FALSE;
     int listo_para_salir = FALSE;
+    MPI_Comm_rank(MPI_COMM_WORLD, &mi_rank);
+    MPI_Comm_size(MPI_COMM_WORLD, &n_ranks);
+    
+    /*VARIABLES DECLARADAS PARA CONEXION SRV SRV*/
+    int tengo_salida = FALSE;
     int mi_secuencia;
     int buffer;
     int secuencia_maxima = 0;
     int cantidad_servidores;
     int n_ranks, mi_rank;
-    
-    MPI_Comm_rank(MPI_COMM_WORLD, &mi_rank);
-    MPI_Comm_size(MPI_COMM_WORLD, &n_ranks);
-    
-    n_ranks = n_ranks/2;
-    mi_rank = mi_rank/2;
     int clientes =  n_ranks;
     int faltan_responder[n_ranks];
+
+    /*INICIALIZACION DE VARIABLES*/
+    mi_rank = mi_rank/2;
+    n_ranks = n_ranks/2;
     int i;
     for (i = 0; i < n_ranks; i++){
         faltan_responder[i] = FALSE;
@@ -36,24 +38,25 @@ void servidor(int mi_cliente)
         MPI_Recv(&buffer, 1, MPI_INT, ANY_SOURCE, ANY_TAG, COMM_WORLD, &status);
         origen = status.MPI_SOURCE;
         tag = status.MPI_TAG;
-        
+    
+    /*CONEXION SRV CLI*/    
         if (tag == TAG_PEDIDO) {
             assert(origen == mi_cliente);
-            debug("Mi cliente solicita acceso exclusivo");
-            assert(hay_pedido_local == FALSE);
             assert(tengo_salida == FALSE);
+            assert(hay_pedido_local == FALSE);
+            debug("Mi cliente solicita acceso exclusivo");
             hay_pedido_local = TRUE;
             mi_secuencia = secuencia_maxima + 1;
             cantidad_servidores = n_ranks -1;
             if (n_ranks == 1){
-                tengo_salida = TRUE;
                 debug("Dándole permiso");
+                tengo_salida = TRUE;
                 MPI_Send(NULL, 0, MPI_INT, mi_cliente, TAG_OTORGADO, COMM_WORLD);
             }
             else {
                 for (i = 0; i < n_ranks; i++){
-                    debug("Pido acceso a todos");
                     if (i != mi_rank){
+                       debug("Pido acceso a todos");
                         MPI_Send(&mi_secuencia, 1, MPI_INT, i*2, TAG_REQUEST, COMM_WORLD);
                     }
                 }
@@ -62,11 +65,11 @@ void servidor(int mi_cliente)
         
         else if (tag == TAG_LIBERO) {
             assert(origen == mi_cliente);
-            debug("Mi cliente libera su acceso exclusivo");
             assert(hay_pedido_local == TRUE);
             assert(tengo_salida == TRUE);
             hay_pedido_local = FALSE;
             tengo_salida = FALSE;
+            debug("Mi cliente libera su acceso exclusivo");
             for (i = 0; i < n_ranks; i++){
                 if ( faltan_responder[i] == TRUE ){
                     debug("Respondo pedidos guardados");
@@ -78,19 +81,19 @@ void servidor(int mi_cliente)
         
         else if (tag == TAG_TERMINE) {
             assert(origen == mi_cliente);
-            debug("Mi cliente avisa que terminó");
             assert(hay_pedido_local == FALSE);
             assert(tengo_salida == FALSE);
             assert(listo_para_salir == FALSE);
             listo_para_salir = TRUE;
             clientes--;
+            debug("Mi cliente avisa que terminó");
             for (i = 0; i < n_ranks; i++){
                 if (i != mi_rank) {
                     MPI_Send(NULL, 0, MPI_INT, i*2, TAG_SIN_CLIENTE, COMM_WORLD);
                 }
             }
         }
-
+        /*CONEXION SRV SRV*/
         if (tag == TAG_REQUEST) {
             if(buffer > secuencia_maxima) secuencia_maxima = buffer;
             debug("Me pidieron el recurso");
@@ -119,7 +122,6 @@ void servidor(int mi_cliente)
                     }
                 }
         }
-        
         if (tag == TAG_REPLY) {
             assert(tengo_salida == FALSE); //ESTE ES EL QUE AGREGUE
             assert(hay_pedido_local == TRUE);
@@ -130,13 +132,12 @@ void servidor(int mi_cliente)
                 MPI_Send(NULL, 0, MPI_INT, mi_cliente, TAG_OTORGADO, COMM_WORLD);
             }
         }
-        
-        
         if (tag == TAG_SIN_CLIENTE) {
             clientes--;
         }
     }
     /*ESTO LO HICE YA QUE AL NO TENER CLIENTE EL SERVER QUEDA AL PEDO Y NO OTORGA NADA*/
+
     while(clientes > 0) {
         MPI_Recv(&buffer, 1, MPI_INT, ANY_SOURCE, ANY_TAG, COMM_WORLD, &status);
         origen = status.MPI_SOURCE;
@@ -146,7 +147,8 @@ void servidor(int mi_cliente)
             debug("Otorgo por que ya no tengo cliente");
             MPI_Send(NULL, 0, MPI_INT, origen, TAG_REPLY, COMM_WORLD);
         }        
-        else if (tag == TAG_SIN_CLIENTE) {
+
+        if (tag == TAG_SIN_CLIENTE) {
             clientes--;
         }
     }

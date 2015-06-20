@@ -22,7 +22,7 @@
 #define TAG_LIBERO            40    /* cli -> srv */
 #define TAG_TERMINE           50    /* cli -> srv */
 #define TAG_REPLY			  60	/* srv -> srv */
-#define TAG_SIN_CLIENTE			  70	/* srv -> srv */
+#define TAG_SIN_CLIENTE		  70	/* srv -> srv */
 #define TAG_REQUEST			  80	/* srv -> srv */
 
 /* Abreviaciones de constantes MPI que usaremos seguido */
