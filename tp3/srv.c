@@ -34,7 +34,7 @@ void servidor(int mi_cliente)
         MPI_Recv(&buffer, 1, MPI_INT, ANY_SOURCE, ANY_TAG, COMM_WORLD, &status);
         origen = status.MPI_SOURCE;
         tag = status.MPI_TAG;
-        
+        /*COMUNICACION CLIENTE SERVER*/
         if (tag == TAG_PEDIDO) {
             assert(origen == mi_cliente);
             debug("Mi cliente solicita acceso exclusivo");
@@ -90,7 +90,7 @@ void servidor(int mi_cliente)
                 }
             }
         }
-
+        /*COMUNICACION SERVER SERVER*/
         if (tag == TAG_REQUEST) {
             /*AGREGUE ESTE CASO, PORQ SE DABA QUE ESTABA TERMINANDO EL CLIENTE Y SE SACABA EL 
             PEDIDO LOCAL Y ENTRABA NI A LA PARTE VERDADERA NI A LA FALSA*/
