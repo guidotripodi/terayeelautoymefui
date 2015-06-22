@@ -12,6 +12,7 @@ void servidor(int mi_cliente)
     MPI_Status status; int origen, tag;
     int hay_pedido_local = FALSE;
     int listo_para_salir = FALSE;
+    int n_ranks, mi_rank;
     MPI_Comm_rank(MPI_COMM_WORLD, &mi_rank);
     MPI_Comm_size(MPI_COMM_WORLD, &n_ranks);
     
@@ -21,7 +22,6 @@ void servidor(int mi_cliente)
     int buffer;
     int secuencia_maxima = 0;
     int cantidad_servidores;
-    int n_ranks, mi_rank;
     int clientes =  n_ranks;
     int faltan_responder[n_ranks];
 
@@ -84,7 +84,6 @@ void servidor(int mi_cliente)
             assert(hay_pedido_local == FALSE);
             assert(tengo_salida == FALSE);
             assert(listo_para_salir == FALSE);
-            listo_para_salir = TRUE;
             clientes--;
             debug("Mi cliente avisa que terminó");
             for (i = 0; i < n_ranks; i++){
@@ -135,9 +134,13 @@ void servidor(int mi_cliente)
         if (tag == TAG_SIN_CLIENTE) {
             clientes--;
         }
+
+        if (clientes == n_ranks) {
+            listo_para_salir = TRUE;
+        }
     }
     /*ESTO LO HICE YA QUE AL NO TENER CLIENTE EL SERVER QUEDA AL PEDO Y NO OTORGA NADA*/
-
+/*
     while(clientes > 0) {
         MPI_Recv(&buffer, 1, MPI_INT, ANY_SOURCE, ANY_TAG, COMM_WORLD, &status);
         origen = status.MPI_SOURCE;
@@ -151,6 +154,6 @@ void servidor(int mi_cliente)
         if (tag == TAG_SIN_CLIENTE) {
             clientes--;
         }
-    }
+    }*/
     
 }
