@@ -27,7 +27,7 @@ void servidor(int mi_cliente)
 
     /*INICIALIZACION DE VARIABLES*/
     mi_rank = mi_rank/2;
-    n_ranks = n_ranks/2;
+    n_ranks = n_ranks/2; //Esta se divide por dos ya que los servidores son solo los pares
     int i;
     for (i = 0; i < n_ranks; i++){
         faltan_responder[i] = FALSE;
@@ -48,6 +48,10 @@ void servidor(int mi_cliente)
             mi_secuencia = secuencia_maxima + 1;
             cantidad_servidores = n_ranks - 1;
 
+/*Una vez que el cliente solicita un pedido para uso de seccion critica se chequea si es el unico 
+cli-srv activo o no, si es el unico se le otorga permiso, si no lo es se envia una señal de 
+req a todos los servidores con el numero de secuencia */
+
             if (n_ranks == 1) {
                 debug("Dándole permiso");
                 tengo_salida = TRUE;
@@ -61,6 +65,9 @@ void servidor(int mi_cliente)
                 }
             }
         } else if (tag == TAG_LIBERO) {
+
+            /*Seccion cuando se liberan los recursos del cliente y se envia señales reply a todos
+            los servidores que solicitaron uso exclusivo */
             assert(origen == mi_cliente);
             assert(hay_pedido_local == TRUE);
             assert(tengo_salida == TRUE);
@@ -75,6 +82,8 @@ void servidor(int mi_cliente)
                 }
             }
         } else if (tag == TAG_TERMINE) {
+            /* Cuando finaliza el cliente se envia una señal de SIN_CLIENTE a los demas
+            servidores */
             assert(origen == mi_cliente);
             assert(hay_pedido_local == FALSE);
             assert(tengo_salida == FALSE);
@@ -90,11 +99,15 @@ void servidor(int mi_cliente)
 
         /*CONEXION SRV SRV*/
         if (tag == TAG_REQUEST) {
+            /*Si se recibe un tag del tipo request se chequea el valor de la secuencia,
+            y dependiendo si el servidor que recibio el req tiene el lock activo otorga o no
+            el pedido. En caso de no otorgarlo por tener hay_pedido_local activo, se 
+            chequea los valores de la secuencia y rank respectivo para ver la prioridad,
+            en caso de tener mayor prioridad se le otorgara por mas que tenga un pedido activo*/
             if(buffer > secuencia_maxima) secuencia_maxima = buffer;
             debug("Me pidieron el recurso");
 
-            /*AGREGUE ESTE CASO, PORQ SE DABA QUE ESTABA TERMINANDO EL CLIENTE Y SE SACABA EL
-            PEDIDO LOCAL Y ENTRABA NI A LA PARTE VERDADERA NI A LA FALSA*/
+           
             if (tengo_salida == TRUE){
                 debug("Tengo el lock, tiene que esperar, guardo el pedido");
                 assert(faltan_responder[origen/2] == FALSE);
@@ -103,8 +116,6 @@ void servidor(int mi_cliente)
                 debug("Lo otorgo por que no lo necesito");
                 MPI_Send(NULL, 0, MPI_INT, origen, TAG_REPLY, COMM_WORLD);
             } else {
-                /* AGREGUE EL CASO DE SI LA SECUENCIA ES LA MISMA, COSA QUE PASABA AL AGREGAR
-                DOS SERVIDORES AL MISMO TIEMPO*/
                 if (buffer < mi_secuencia || (buffer == mi_secuencia && (origen/2) < mi_rank) ) {
                     debug("Lo otorgo por que tiene mayor prioridad");
                     MPI_Send(NULL, 0, MPI_INT, origen, TAG_REPLY, COMM_WORLD);
@@ -115,7 +126,10 @@ void servidor(int mi_cliente)
                 }
             }
         } else if (tag == TAG_REPLY) {
-            assert(tengo_salida == FALSE); //ESTE ES EL QUE AGREGUE
+
+            /*Si se recibe un reply, se chequea la cantidad que ya se obtuvieron, en caso de
+            tener todos los reply de los srv se otorga el permiso al cliente*/
+            assert(tengo_salida == FALSE); 
             assert(hay_pedido_local == TRUE);
             cantidad_servidores --;
             if (cantidad_servidores == 0) {
@@ -126,7 +140,7 @@ void servidor(int mi_cliente)
         } else if (tag == TAG_SIN_CLIENTE) {
             clientes--;
         }
-
+        
         if (clientes == n_ranks) {
             listo_para_salir = TRUE;
         }
