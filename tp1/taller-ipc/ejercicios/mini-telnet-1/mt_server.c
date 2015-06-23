@@ -1,6 +1,6 @@
 #include "mt.h"
 
-int main(int argc, char* argv[]) 
+int main(int argc, char* argv[])
 {
 	int sock;
 	struct sockaddr_in name;
