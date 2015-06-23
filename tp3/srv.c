@@ -5,6 +5,11 @@
  *  cliente y no se lleva bien con los demás servidores.
  *
  */
+/*Por medio del paper An optimal algorithm for mutual exclusion in computer networks implementamos el 
+algoritmo correspondiente, basandonos en la implemntacion del cliente y servidor otorgada, modificamos
+la del servidor correspondiendonos al algoritmo del paper enunciado */
+
+
 
 void servidor(int mi_cliente)
 
