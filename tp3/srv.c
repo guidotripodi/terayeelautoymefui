@@ -23,7 +23,7 @@ void servidor(int mi_cliente)
     int secuencia_maxima = 0;
     int cantidad_servidores;
     int clientes =  n_ranks;
-    int faltan_responder[n_ranks];
+    int faltan_responder[n_ranks/2];
 
     /*INICIALIZACION DE VARIABLES*/
     mi_rank = mi_rank/2;
@@ -48,10 +48,9 @@ void servidor(int mi_cliente)
             mi_secuencia = secuencia_maxima + 1;
             cantidad_servidores = n_ranks - 1;
 
-/*Una vez que el cliente solicita un pedido para uso de seccion critica se chequea si es el unico 
-cli-srv activo o no, si es el unico se le otorga permiso, si no lo es se envia una señal de 
-req a todos los servidores con el numero de secuencia */
-
+            /*Una vez que el cliente solicita un pedido para uso de seccion critica se chequea si es el
+            unico cli-srv activo o no, si es el unico se le otorga permiso, si no lo es se envia una señal de
+            req a todos los servidores con el numero de secuencia */
             if (n_ranks == 1) {
                 debug("Dándole permiso");
                 tengo_salida = TRUE;
@@ -101,13 +100,13 @@ req a todos los servidores con el numero de secuencia */
         if (tag == TAG_REQUEST) {
             /*Si se recibe un tag del tipo request se chequea el valor de la secuencia,
             y dependiendo si el servidor que recibio el req tiene el lock activo otorga o no
-            el pedido. En caso de no otorgarlo por tener hay_pedido_local activo, se 
+            el pedido. En caso de no otorgarlo por tener hay_pedido_local activo, se
             chequea los valores de la secuencia y rank respectivo para ver la prioridad,
             en caso de tener mayor prioridad se le otorgara por mas que tenga un pedido activo*/
             if(buffer > secuencia_maxima) secuencia_maxima = buffer;
             debug("Me pidieron el recurso");
 
-           
+
             if (tengo_salida == TRUE){
                 debug("Tengo el lock, tiene que esperar, guardo el pedido");
                 assert(faltan_responder[origen/2] == FALSE);
@@ -129,7 +128,7 @@ req a todos los servidores con el numero de secuencia */
 
             /*Si se recibe un reply, se chequea la cantidad que ya se obtuvieron, en caso de
             tener todos los reply de los srv se otorga el permiso al cliente*/
-            assert(tengo_salida == FALSE); 
+            assert(tengo_salida == FALSE);
             assert(hay_pedido_local == TRUE);
             cantidad_servidores --;
             if (cantidad_servidores == 0) {
@@ -140,7 +139,7 @@ req a todos los servidores con el numero de secuencia */
         } else if (tag == TAG_SIN_CLIENTE) {
             clientes--;
         }
-        
+
         if (clientes == n_ranks) {
             listo_para_salir = TRUE;
         }
