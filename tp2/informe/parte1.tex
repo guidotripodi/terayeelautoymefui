@@ -17,7 +17,7 @@ Se utilizaron 3 Semaphores, los cuales son:\\
 \begin{itemize}
  \item roomEmpty
  \item turnstile
- \item readers\_mutex
+ \item readers$\_$mutex
 \end{itemize}
 
 Y ademas, un entero denominado $readers$\\
@@ -106,8 +106,8 @@ De aquí, nuestra implementación final fue:\\
 Inicialmente en nuestra implementación del WRITE LOCK, se realiza un lock del Semaphore $turnstile$ para que nadie pueda quitarle el turno, se realiza un
 lock del mutex vinculado al entero, y luego se ingresa a un ciclo siempre que $readers$ sea distinto de 0, esto se realiza
 para luego poder ejecutar la funcion $pthread\_cond\_wait$ para que esta misma tenga un funcionamiento correcto y seguro al
-chequear la condición sobre $room_empty$.\\
-Una vez que se salga del ciclo o no se ingrese al mismo se libera el mutex $readers_mutex$.\\
+chequear la condición sobre $room\_empty$.\\
+Una vez que se salga del ciclo o no se ingrese al mismo se libera el mutex $readers\_mutex$.\\
 
 Luego, la implementación del unlock fue:\\
 \begin{center}

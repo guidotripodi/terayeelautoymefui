@@ -35,8 +35,12 @@ Comenzando por la implementación de los lectores, el pseudocodigo del libro men
 
 De aquí nuestro código implementado fue el siguiente:\\
 
+\begin{center}
+            \textbf{READERS LOCK}     
+\end{center}
+
+ 
 \begin{verbatim}
-            READERS LOCK
             pthread_mutex_lock(&turnstile);
             pthread_mutex_unlock(&turnstile);
 
@@ -52,6 +56,11 @@ aumentará su cantidad en 1 para que de esta manera nadie pueda modificarlo, y l
 
 Luego, nuestro $READ$ $UNLOCK$ fue el siguiente:\\
 
+\begin{center}
+            \textbf{READERS UNLOCK}
+\end{center}
+
+ 
 \begin{verbatim}
             pthread_mutex_lock(&readers_mutex);
             readers--;
@@ -81,8 +90,12 @@ Continuando con el escritor, el pseudocodigo fue el siguiente:\\
 
 De aquí, nuestra implementación final fue:\\
 
+\begin{center}
+            \textbf{WRITERS LOCK}
+\end{center}
+
+ 
 \begin{verbatim}
-            WRITE LOCK
             pthread_mutex_lock(&turnstile);
             pthread_mutex_lock(&readers_mutex);
             while(readers != 0)
@@ -96,8 +109,12 @@ para luego poder ejecutar la funcion $pthread\_cond\_wait$ para que esta misma t
 chequear la condición sobre $room_empty$.\\
 Una vez que se salga del ciclo o no se ingrese al mismo se libera el mutex $readers_mutex$.\\
 
-Luego, la implementación del unlock fue:
+Luego, la implementación del unlock fue:\\
+\begin{center}
+           \textbf{WRITERS UNLOCK}
+\end{center}
 
+ 
 \begin{verbatim}
            pthread_mutex_unlock(&turnstile);
 \end{verbatim}
