@@ -16,7 +16,7 @@ struct thread_data{
 
 bool cargar_int(const char* numero, unsigned int& n);
 
-void *atendedor_de_jugador(void *threadarg);
+void *atendedor_de_jugador(void *socket_param);
 
 
 // mensajes recibidos por el server
